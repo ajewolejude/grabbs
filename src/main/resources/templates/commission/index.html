@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{'layouts/' + ${template}}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+
+<head>
+	<title>Dashboard | Skote - Admin & Dashboard Template</title>
+</head>
+<th:block layout:fragment="pagecss">
+
+</th:block>
+<body>
+
+	<!-- ============================================================== -->
+	<!-- Start right Content here -->
+	<!-- ============================================================== -->
+	<div layout:fragment="content">
+		<div class="main-content">
+
+			<div class="page-content">
+				<div class="container-fluid">
+
+					<!-- start page title -->
+					<div th:replace="page-title :: topnavbar(${title},${item},${subitem})"></div>
+					<!-- end page title -->
+
+
+					<div class="row">
+						<div class="col-xl-4">
+							<div class="card bg-primary bg-soft">
+								<div>
+									<div class="row">
+										<div class="col-7">
+											<div class="text-primary p-3">
+												<h5 class="text-primary">Welcome Back !</h5>
+												<p>Grabbs Plus Dashboard</p>
+
+												<ul class="ps-3 mb-0">
+													<li class="py-1">100 Trucks</li>
+													<li class="py-1">400 Tyres</li>
+												</ul>
+											</div>
+										</div>
+										<div class="col-5 align-self-end">
+											<img th:src="@{/assets/images/profile-img.png}" alt="" class="img-fluid">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-8">
+							<div class="row">
+								<div class="col-sm-4">
+									<div class="card">
+										<div class="card-body">
+											<div class="d-flex align-items-center mb-3">
+												<div class="avatar-xs me-3">
+													<span
+															class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-18">
+														<i class="bx bx-copy-alt"></i>
+													</span>
+												</div>
+												<h5 class="font-size-14 mb-0">Trucks</h5>
+											</div>
+											<div class="text-muted mt-4">
+												<h4>1,452 <i class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
+												<div class="d-flex">
+													<span class="badge badge-soft-success font-size-12"> + 0.2% </span>
+													<span class="ms-2 text-truncate">From previous month</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-4">
+									<div class="card">
+										<div class="card-body">
+											<div class="d-flex align-items-center mb-3">
+												<div class="avatar-xs me-3">
+													<span
+															class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-18">
+														<i class="bx bx-archive-in"></i>
+													</span>
+												</div>
+												<h5 class="font-size-14 mb-0">Tyre</h5>
+											</div>
+											<div class="text-muted mt-4">
+												<h4>452 <i class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
+												<div class="d-flex">
+													<span class="badge badge-soft-success font-size-12"> + 0.4% </span>
+													<span class="ms-2 text-truncate">From previous month</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-4">
+									<div class="card">
+										<div class="card-body">
+											<div class="d-flex align-items-center mb-3">
+												<div class="avatar-xs me-3">
+													<span
+															class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-18">
+														<i class="bx bx-purchase-tag-alt"></i>
+													</span>
+												</div>
+												<h5 class="font-size-14 mb-0">Users</h5>
+											</div>
+											<div class="text-muted mt-4">
+												<h4>10 <i class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
+
+												<div class="d-flex">
+													<span class="badge badge-soft-warning font-size-12"> 0% </span>
+													<span class="ms-2 text-truncate">From previous month</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- end row -->
+						</div>
+					</div>
+
+					<div class="row">
+
+						<div class="col-xl-4">
+							<div class="card">
+								<div class="card-body">
+									<h4 class="card-title mb-4">Decommissioned Tyres</h4>
+
+									<div id="bar_chart" data-colors='["--bs-success"]' class="apex-charts" dir="ltr">
+									</div>
+								</div>
+							</div>
+							<!--end card-->
+						</div> <!-- end col -->
+
+						<div class="col-xl-4">
+							<div class="card">
+								<div class="card-body">
+									<h4 class="card-title mb-4">Top Tyre Brands</h4>
+
+									<div class="text-center">
+										<div class="mb-4">
+											<i class="bx bx-map-pin text-primary display-4"></i>
+										</div>
+										<h3>150</h3>
+										<p>Michelin</p>
+									</div>
+
+									<div class="table-responsive mt-4">
+										<table class="table align-middle table-nowrap">
+											<tbody>
+											<tr>
+												<td style="width: 30%">
+													<p class="mb-0">Michelin</p>
+												</td>
+												<td style="width: 25%">
+													<h5 class="mb-0">150</h5>
+												</td>
+												<td>
+													<div class="progress bg-transparent progress-sm">
+														<div class="progress-bar bg-primary rounded"
+															 role="progressbar" style="width: 94%" aria-valuenow="94"
+															 aria-valuemin="0" aria-valuemax="100"></div>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<p class="mb-0">Bridgestone</p>
+												</td>
+												<td>
+													<h5 class="mb-0">86</h5>
+												</td>
+												<td>
+													<div class="progress bg-transparent progress-sm">
+														<div class="progress-bar bg-success rounded"
+															 role="progressbar" style="width: 82%" aria-valuenow="82"
+															 aria-valuemin="0" aria-valuemax="100"></div>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<p class="mb-0">Pirelli</p>
+												</td>
+												<td>
+													<h5 class="mb-0">60</h5>
+												</td>
+												<td>
+													<div class="progress bg-transparent progress-sm">
+														<div class="progress-bar bg-warning rounded"
+															 role="progressbar" style="width: 70%" aria-valuenow="70"
+															 aria-valuemin="0" aria-valuemax="100"></div>
+													</div>
+												</td>
+											</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-xl-4">
+							<div class="card">
+								<div class="card-body">
+									<h4 class="card-title mb-4">Tyre Analytics</h4>
+
+									<div>
+										<div id="donut-chart"
+											 data-colors='["--bs-primary", "--bs-success", "--bs-danger", "--bs-info"]'
+											 class="apex-charts"></div>
+									</div>
+
+									<div class="text-center text-muted">
+										<div class="row">
+											<div class="col-3">
+												<div class="mt-4">
+													<p class="mb-2 text-truncate"><i
+															class="mdi mdi-circle text-primary me-1"></i> Available </p>
+													<h5>150</h5>
+												</div>
+											</div>
+											<div class="col-3">
+												<div class="mt-4">
+													<p class="mb-2 text-truncate"><i
+															class="mdi mdi-circle text-success me-1"></i> Commissioned </p>
+													<h5>163</h5>
+												</div>
+											</div>
+											<div class="col-3">
+												<div class="mt-4">
+													<p class="mb-2 text-truncate"><i
+															class="mdi mdi-circle text-danger me-1"></i> Decommissioned </p>
+													<h5>32</h5>
+												</div>
+											</div>
+											<div class="col-3">
+												<div class="mt-4">
+													<p class="mb-2 text-truncate"><i
+															class="mdi mdi-circle text-info me-1"></i> Under Maintenance </p>
+													<h5>100</h5>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- end row -->
+
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-body border-bottom">
+									<div class="d-flex align-items-center">
+										<h5 class="mb-0 card-title flex-grow-1">Tyre List</h5>
+										<div class="flex-shrink-0">
+											<a type="button" class="btn btn-primary waves-effect waves-light"
+											   href="/tyre/add">Add New Tyre</a>
+										</div>
+									</div>
+								</div>
+								<div class="card-body">
+									<table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
+										<thead>
+										<tr>
+											<th>No</th>
+											<th>S/N</th>
+											<th>Brand</th>
+											<th>Model</th>
+											<th>Size</th>
+											<th>Date</th>
+											<th>Position</th>
+											<th>Odometer</th>
+											<th>Status</th>
+											<th>Action</th>
+										</tr>
+										</thead>
+										<tbody>
+										<!-- Use Thymeleaf to iterate over the tyres -->
+										<tr th:each="tyre, iterStat : ${tyres}">
+											<td th:text="${iterStat.count}"></td>
+											<td th:text="${tyre.serialNumber}"></td>
+											<td th:text="${tyre.brand}"></td>
+											<td th:text="${tyre.model}"></td>
+											<td th:text="${tyre.size}"></td>
+											<td th:text="${tyre.purchaseDate}"></td>
+											<td th:text="${tyre.position}"></td>
+											<td th:text="${tyre.odometer}"></td>
+											<td >
+												<span class="badge badge-soft-danger" th:if="${tyre.state == 'DECOMMISSIONED'}">DECOMMISSIONED</span>
+												<span class="badge badge-soft-info" th:if="${tyre.state == 'COMMISSIONED'}">COMMISSIONED</span>
+												<span class="badge badge-soft-warning" th:if="${tyre.state == 'UNDER MAINTENANCE'}">UNDER MAINTENANCE</span>
+												<span class="badge badge-soft-success" th:if="${tyre.state == 'AVAILABLE'}"> AVAILABLE</span>
+											</td>
+											<td>
+												<div class="btn-group">
+													<button class="btn btn-secondary dropdown-toggle" type="button"
+															id="defaultDropdown" data-bs-toggle="dropdown" data-bs-auto-close="true"
+															aria-expanded="false">
+														Actions <i class="mdi mdi-chevron-down"></i>
+													</button>
+													<ul class="dropdown-menu" aria-labelledby="defaultDropdown">
+														<li><a class="dropdown-item" th:if="${tyre.state == 'AVAILABLE'}" th:href="@{'commission/add/' + ${tyre.id}}">Commission</a></li>
+													</ul>
+												</div>
+
+											</td>
+										</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div> <!-- end col -->
+					</div>
+					<!--  end row -->
+
+				</div>
+				<!-- container-fluid -->
+			</div>
+			<!-- End Page-content -->
+			<!-- Start footer -->
+			<div th:replace="footer :: footer"></div>
+			<!-- end footer -->
+			
+		</div>
+	</div>
+	<!-- end main content-->
+
+	<!-- END layout-wrapper -->
+
+	<th:block layout:fragment="script">
+		<script th:src="@{/assets/libs/apexcharts/apexcharts.min.js}"></script>
+		<!-- dashboard init -->
+		<script th:src="@{/assets/js/pages/saas-dashboard.init.js}"></script>
+
+		<!-- apexcharts init -->
+		<script th:src="@{/assets/js/pages/apexcharts.init.js}"></script>
+	</th:block>
+
+</body>
+
+</html>

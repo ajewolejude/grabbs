@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{'layouts/' + ${template}}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<title th:text="${title} +' | Skote - Admin & Dashboard Template'"> </title>
+</head>
+<th:block layout:fragment="pagecss">
+	<!-- DataTables -->
+	<link th:href="@{/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css}" rel="stylesheet" type="text/css" />
+	<link th:href="@{/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css}" rel="stylesheet"
+		type="text/css" />
+
+	<!-- Responsive datatable examples -->
+	<link th:href="@{/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css}" rel="stylesheet"
+		type="text/css" />
+
+</th:block>
+
+<body>
+
+	<!-- ============================================================== -->
+	<!-- Start right Content here -->
+	<!-- ============================================================== -->
+	<div layout:fragment="content">
+		<div class="main-content">
+
+			<div class="page-content">
+				<div class="container-fluid">
+
+					<!-- start page title -->
+					<div th:replace="page-title :: topnavbar(${title},${item},${title})"></div>
+					<!-- end page title -->
+					<div class="row">
+						<div class="col-6 offset-3">
+							<div class="card">
+								<div class="card-body border-bottom">
+									<div class="d-flex align-items-center">
+										<h5 class="mb-0 card-title flex-grow-1">Truck Details</h5>
+										<!-- Edit button removed for view page -->
+									</div>
+								</div>
+								<div class="card-body">
+									<h4 class="card-title mb-8">Truck Information</h4>
+
+									<div class="table-responsive">
+										<table class="table table-nowrap mb-0">
+											<tbody>
+											<tr>
+												<th scope="row">Truck Type:</th>
+												<td th:text="${truck.truckType}" ></td>
+											</tr>
+											<tr>
+												<th scope="row">License Plate Number:</th>
+												<td th:text="${truck.licensePlateNumber}"></td>
+											</tr>
+											<tr>
+												<th scope="row">VIN:</th>
+												<td th:text="${truck.vin}"></td>
+											</tr>
+											<tr>
+												<th scope="row">Model:</th>
+												<td th:text="${truck.model}"></td>
+											</tr>
+											<tr>
+												<th scope="row">Brand:</th>
+												<td th:text="${truck.brand}"></td>
+											</tr>
+											<tr>
+												<th scope="row">Manufacture Date:</th>
+												<td th:text="${truck.manufactureDate}"></td>
+											</tr>
+											<tr>
+												<th scope="row">Purchase Date:</th>
+												<td th:text="${truck.purchaseDate}"></td>
+											</tr>
+											<tr>
+												<th scope="row">Odometer:</th>
+												<td th:text="${truck.odometer}"></td>
+											</tr>
+											<tr>
+												<th scope="row">Status:</th>
+												<td>
+													<span class="badge badge-soft-danger" th:if="${truck.state == 'DECOMMISSIONED'}">DECOMMISSIONED</span>
+													<span class="badge badge-soft-info" th:if="${truck.state == 'COMMISSIONED'}">COMMISSIONED</span>
+													<span class="badge badge-soft-warning" th:if="${truck.state == 'UNDER MAINTENANCE'}">UNDER MAINTENANCE</span>
+													<span class="badge badge-soft-success" th:if="${truck.state == 'AVAILABLE'}"> AVAILABLE</span>
+												</td>
+											</tr>
+											<tr>
+												<th scope="row">Comments:</th>
+												<td th:text="${truck.comments}"></td>
+											</tr>
+											<tr>
+												<th scope="row">Created Date:</th>
+												<td th:text="${#temporals.format(truck.createdDate, 'dd/MM/yyyy HH:mm')}"></td>
+											</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+					<!--  end row -->
+				</div>
+				<!-- container-fluid -->
+			</div>
+			<!-- End Page-content -->
+
+			<!-- Start footer -->
+			<div th:replace="footer :: footer"></div>
+			<!-- end footer -->
+
+		</div>
+	</div>
+	<!-- end main content-->
+
+	<!-- END layout-wrapper -->
+
+	<th:block layout:fragment="script">
+
+		<!-- Required datatable js -->
+		<script th:src="@{/assets/libs/datatables.net/js/jquery.dataTables.min.js}"></script>
+		<script th:src="@{/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js}"></script>
+		<!-- Buttons examples -->
+		<script th:src="@{/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js}"></script>
+		<script th:src="@{/assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js}"></script>
+		<script th:src="@{/assets/libs/jszip/jszip.min.js}"></script>
+		<script th:src="@{/assets/libs/pdfmake/build/pdfmake.min.js}"></script>
+		<script th:src="@{/assets/libs/pdfmake/build/vfs_fonts.js}"></script>
+		<script th:src="@{/assets/libs/datatables.net-buttons/js/buttons.html5.min.js}"></script>
+		<script th:src="@{/assets/libs/datatables.net-buttons/js/buttons.print.min.js}"></script>
+		<script th:src="@{/assets/libs/datatables.net-buttons/js/buttons.colVis.min.js}"></script>
+
+		<!-- Responsive examples -->
+		<script th:src="@{/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js}"></script>
+		<script th:src="@{/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js}"></script>
+
+		<!-- Datatable init js -->
+		<script th:src="@{/assets/js/pages/datatables.init.js}"></script>
+	</th:block>
+
+</body>

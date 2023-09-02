@@ -1,0 +1,43 @@
+<html xmlns="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+
+	<div th:replace="title-meta :: title-meta"></div>
+	<!-- Page CSS -->
+	<th:block layout:fragment="pagecss" />
+	<div th:replace="head-script :: head"></div>
+</head>
+
+<body data-sidebar="dark" data-layout-mode="light">
+	<div id="layout-wrapper">
+		<!-- Start Header -->
+		<div th:replace="header :: header"></div>
+		<!-- end Header -->
+		<div th:replace="sidebar :: sidebar"></div>
+
+		<section layout:fragment="content" th:remove="tag">
+
+		</section>
+	</div>
+
+	<!-- Content Section -->
+
+	<div th:replace="right-bar :: rightbar"></div>
+	<!-- /Right-bar -->
+
+	<!-- Right bar overlay-->
+	<div class="rightbar-overlay"></div>
+
+
+	<div th:replace="head-script :: script"></div>
+
+
+	<th:block layout:fragment="script" />
+	<!-- App js -->
+	<script th:src="@{/assets/js/app.js}"></script>
+
+
+
+</body>
+
+</html>

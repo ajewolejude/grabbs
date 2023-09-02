@@ -1,0 +1,40 @@
+<html xmlns="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<title th:text="${title} + ' | Skote - Admin & Dashboard Template'"></title>
+	<div th:replace="title-meta :: title-meta"></div>
+	<div th:replace="head-script :: head"></div>
+</head>
+
+<body data-topbar="dark" data-layout="horizontal" data-layout-size="boxed">
+	<div id="layout-wrapper">
+		<div th:replace="header :: header-horizontal"></div>
+		<div th:replace="topnavbar :: topnavbar"></div>
+		<section layout:fragment="content" th:remove="tag">
+
+		</section>
+	</div>
+
+	<!-- Content Section -->
+
+	<div th:replace="right-bar :: rightbar"></div>
+	<!-- /Right-bar -->
+
+	<!-- Right bar overlay-->
+	<div class="rightbar-overlay"></div>
+
+
+
+	<div th:replace="head-script :: script"></div>
+	<!-- apexcharts -->
+	<script th:src="@{/assets/libs/apexcharts/apexcharts.min.js}"></script>
+
+	<th:block layout:fragment="script" />
+	<!-- App js -->
+	<script th:src="@{/assets/js/app.js}"></script>
+
+
+
+</body>
+
+</html>
