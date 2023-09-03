@@ -1,6 +1,7 @@
 package com.example.grabbs.controller;
 
 import com.example.grabbs.model.Commission;
+import com.example.grabbs.model.Truck;
 import com.example.grabbs.model.Tyre;
 import com.example.grabbs.model.User;
 import com.example.grabbs.service.CommissionService;
@@ -10,13 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/commission")
@@ -28,23 +28,28 @@ public class CommissionController {
     @Autowired
     private UserServiceImpl userService;
 
+    @Autowired
+    private TyreService tyreService;
+
 
     @GetMapping("/")
     public String index(Model model) {
         //if(!userService.isUserAuthenticated()) return "login";
         List<Commission> commissions = commissionService.getAllCommissions();
-        List<User> users = userService.getAllUsers();
-        model.addAttribute("users", users);
         model.addAttribute("commissions", commissions);
         model.addAttribute("template", "layout");
-        model.addAttribute("title", "Dashboard");
-        model.addAttribute("item", "Dashboards");
+        model.addAttribute("title", "Tyre");
+        model.addAttribute("item", "Commissions");
         model.addAttribute("subitem", "Dashboard");
         return "commission/index";
     }
 
     @GetMapping("/add")
     public String createTyreForm(Model model) {
+        List<User> users = userService.getAllUsers();
+        List<Tyre> tyres = tyreService.findTyresByState("AVAILABLE");
+        model.addAttribute("tyres", tyres);
+        model.addAttribute("users", users);
         model.addAttribute("commission", new Commission());
         model.addAttribute("template", "layout");
         model.addAttribute("title", "Commission a new tyre");
@@ -55,13 +60,20 @@ public class CommissionController {
     @PostMapping("/create")
     public String createCommission(@ModelAttribute("commission") Commission commission, BindingResult result,
                                    Model model) {
-//        Commission existingCommission = commissionService.findTyreByTyreId(tyre.getSerialNumber());
-//        if(existingTyre != null && existingTyre.getSerialNumber() != null && !existingTyre.getSerialNumber().isEmpty()){
-//            result.rejectValue("serialNumber", null,
-//                    "There is already a tyre registered with the serial number");
-//        }
+        Tyre existingTyre = tyreService.findTyreById(commission.getTyre().getId()).get();
+        if(existingTyre != null && existingTyre.getSerialNumber() != null && !existingTyre.getSerialNumber().isEmpty()){
+            if(!Objects.equals(existingTyre.getState(), "AVAILABLE")){
+                result.rejectValue("tyre", null,
+                        "The tyre registered with the serial number is currently unavailable");
+            }
+
+        }
 
         if(result.hasErrors()){
+            List<User> users = userService.getAllUsers();
+            List<Tyre> tyres = tyreService.findTyresByState("AVAILABLE");
+            model.addAttribute("tyres", tyres);
+            model.addAttribute("users", users);
             model.addAttribute("commission", commission);
             model.addAttribute("template", "layout");
             model.addAttribute("title", "Commission a new tyre");
@@ -79,6 +91,25 @@ public class CommissionController {
         } catch (Exception e) {
             return "commission/add";
             //return new ResponseEntity<>("Error creating tyre", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+
+    @GetMapping("/view/{id}")
+    public String viewTruckPage(@PathVariable Long id, Model model) {
+        Optional<Commission> commissionOptional = commissionService.getCommissionById(id);
+
+        if (commissionOptional.isPresent()) {
+            Commission commission = commissionOptional.get();
+            model.addAttribute("commission", commission);
+            model.addAttribute("template", "layout");
+            model.addAttribute("title", "Commission");
+            model.addAttribute("item", "View");
+            return "commission/view";
+        } else {
+            // Handle case where truck with given ID is not found
+            return "redirect:/commission"; // Redirect to a truck list page or handle as appropriate
         }
 
     }

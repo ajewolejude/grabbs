@@ -164,7 +164,7 @@
 
 										<div class="mb-3">
 											<label for="comments" class="form-label">Comments</label>
-											<input type="text" class="form-control" id="comments" name="comments" th:field="*{comments}" placeholder="Enter comments">
+											<textarea type="text" class="form-control" id="comments" name="comments" th:field="*{comments}" placeholder="Enter comments"></textarea>
 											<p th:errors="*{comments}" class="text-danger" th:if="${#fields.hasErrors('comments')}"></p>
 										</div>
 

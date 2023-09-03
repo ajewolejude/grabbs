@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface TyreRepository extends JpaRepository<Tyre, Long> {
     Tyre findTyreBySerialNumber(String serialNumber);
     Tyre findTyreByTakId(String takId);
-    List<Tyre> findTyreByState(String state);
-
+    //List<Tyre> findTyreByState(String state);
+    List<Tyre> findTyresByState(String state);
     int countByCreatedDateBetween(LocalDateTime atStartOfDay, LocalDateTime atTime);
 }

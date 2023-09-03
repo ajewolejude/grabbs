@@ -29,7 +29,7 @@ public class Commission {
     private String reasonForCommissioning;
 
     @Column(nullable = false)
-    private LocalDate dateOfCommissioning;
+    private String dateOfCommissioning;
 
     private double odometer;
 
@@ -40,6 +40,8 @@ public class Commission {
 
     @Column(nullable = false)
     private String approvalStatus;
+
+    private String initialComments;
 
     private String approvalComments;
 

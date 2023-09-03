@@ -33,6 +33,7 @@
 					<div th:replace="page-title :: topnavbar(${title},${item},${title})"></div>
 					<!-- end page title -->
 
+					<!--  end row -->
 					<div class="row">
 						<div class="col-6 offset-3">
 							<div class="card">
@@ -58,18 +59,29 @@
 										<!-- Add Commission form fields here -->
 										<!-- Replace 'truck' fields with 'commission' fields -->
 
+
+										<div class="mb-3">
+											<label for="tyre" class="form-label">Tyre</label>
+											<select class="form-select" id="tyre" name="tyre.id" required>
+												<option value="" selected disabled>Select a tyre</option>
+												<option th:each="tyre : ${tyres}" th:value="${tyre.id}" th:text="${tyre.serialNumber}"></option>
+											</select>
+											<p th:errors="*{tyre.id}" class="text-danger" th:if="${#fields.hasErrors('tyre.id')}"></p>
+										</div>
+
 										<div class="mb-3">
 											<label for="reasonForCommissioning" class="form-label">Reason for Commissioning</label>
-											<textarea type="text" class="form-control" id="reasonForCommissioning" name="reasonForCommissioning" th:field="*{reasonForCommissioning}" placeholder="Enter reason for commissioning" required/>
+											<textarea type="text" class="form-control" id="reasonForCommissioning" name="reasonForCommissioning" th:field="*{reasonForCommissioning}" placeholder="Enter reason for commissioning" required></textarea>
 											<p th:errors="*{reasonForCommissioning}" class="text-danger" th:if="${#fields.hasErrors('reasonForCommissioning')}"></p>
 										</div>
 
 
 										<div class="mb-3">
 											<label for="dateOfCommissioning" class="form-label">Commissioning Date</label>
-											<input type="date" class="form-control" id="dateOfCommissioning" name="manufactureDate" th:field="*{dateOfCommissioning}" placeholder="Enter commissioning date" required>
+											<input type="date" class="form-control" id="dateOfCommissioning" name="dateOfCommissioning" th:field="*{dateOfCommissioning}" placeholder="Enter commissioning date" required>
 											<p th:errors="*{dateOfCommissioning}" class="text-danger" th:if="${#fields.hasErrors('dateOfCommissioning')}"></p>
 										</div>
+
 
 										<div class="mb-3">
 											<label for="odometer" class="form-label">Odometer</label>
@@ -81,11 +93,18 @@
 											<label for="responsibleOfficer" class="form-label">Responsible Officer</label>
 											<select class="form-select" id="responsibleOfficer" name="responsibleOfficer" required>
 												<option value="" selected disabled>Select an officer</option>
-												<option th:each="user : ${users}" th:value="${user.id}" th:text="${user.name}"></option>
+												<option th:each="user : ${users}" th:value="${user.email}" th:text="${user.email}"></option>
 												<!-- Add more popular truck types as needed -->
 											</select>
-											<p th:errors="*{truckType}" class="text-danger" th:if="${#fields.hasErrors('truckType')}"></p>
+											<p th:errors="*{responsibleOfficer}" class="text-danger" th:if="${#fields.hasErrors('responsibleOfficer')}"></p>
 										</div>
+
+										<div class="mb-3">
+											<label for="initialComments" class="form-label">Comments</label>
+											<textarea type="text"  class="form-control" id="initialComments" name="initialComments" th:field="*{initialComments}" placeholder="Enter comments"></textarea>
+											<p th:errors="*{initialComments}" class="text-danger" th:if="${#fields.hasErrors('initialComments')}"></p>
+										</div>
+
 
 										<!-- Add other Commission fields here -->
 
@@ -100,132 +119,14 @@
 
 
 
-					<div class="row">
-						<div class="col-6 offset-3">
-							<div class="card">
-								<div class="card-body border-bottom">
-									<div class="d-flex align-items-center">
-										<h5 class="mb-0 card-title flex-grow-1">Truck Details</h5>
-										<div class="flex-shrink-0">
-											<a type="button" class="btn btn-primary waves-effect waves-light"
-											   href="/truck/" >Truck List</a>
-										</div>
-									</div>
-								</div>
-								<div class="card-body">
-									<form class="needs-validation" method="post" role="form" th:action="@{/truck/create}" th:object="${truck}">
-										<div th:if="${param.success}">
-											<div class="alert alert-info alert-dismissible fade show" role="alert">
-												You have successfully added a new truck!
-												<button type="button" class="btn-close" data-bs-dismiss="alert"
-														aria-label="Close"></button>
-											</div>
-										</div>
-
-										<div class="mb-3">
-											<label for="truckType" class="form-label">Truck Type</label>
-											<select class="form-select" id="truckType" name="truckType" required>
-												<option value="" selected disabled>Select a truck type</option>
-												<option value="Pickup Truck">Pickup Truck</option>
-												<option value="Semi-Truck">Semi-Truck</option>
-												<option value="Flatbed Truck">Flatbed Truck</option>
-												<option value="Dump Truck">Dump Truck</option>
-												<!-- Add more popular truck types as needed -->
-											</select>
-											<p th:errors="*{truckType}" class="text-danger" th:if="${#fields.hasErrors('truckType')}"></p>
-										</div>
-
-										<div class="mb-3">
-											<label for="licensePlateNumber" class="form-label">License Plate Number</label>
-											<input type="text" class="form-control" id="licensePlateNumber" name="licensePlateNumber" th:field="*{licensePlateNumber}" placeholder="Enter license plate number" required>
-											<p th:errors="*{licensePlateNumber}" class="text-danger" th:if="${#fields.hasErrors('licensePlateNumber')}"></p>
-										</div>
-
-										<div class="mb-3">
-											<label for="vin" class="form-label">Vehicle Identification Number (VIN)</label>
-											<input type="text" class="form-control" id="vin" name="vin" th:field="*{vin}" placeholder="Enter Vehicle Identification Number (VIN)" required>
-											<p th:errors="*{vin}" class="text-danger" th:if="${#fields.hasErrors('vin')}"></p>
-										</div>
-
-										<div class="mb-3">
-											<label for="brand" class="form-label">Brand</label>
-											<select class="form-select" id="brand" name="brand" required>
-												<option value="" selected disabled>Select a truck brand</option>
-												<option value="Ford">Ford</option>
-												<option value="Chevrolet">Chevrolet</option>
-												<option value="Toyota">Toyota</option>
-												<option value="Dodge">Dodge</option>
-												<!-- Add more popular truck makes as needed -->
-											</select>
-											<p th:errors="*{brand}" class="text-danger" th:if="${#fields.hasErrors('brand')}"></p>
-										</div>
-
-										<div class="mb-3">
-											<label for="model" class="form-label">Model</label>
-											<input type="text" class="form-control" id="model" name="model" th:field="*{model}" placeholder="Enter license plate number" required>
-											<p th:errors="*{model}" class="text-danger" th:if="${#fields.hasErrors('model')}"></p>
-										</div>
-
-
-										<div class="mb-3">
-											<label for="purchaseDate" class="form-label">Purchase Date</label>
-											<input type="date" class="form-control" id="purchaseDate" name="manufactureDate" th:field="*{purchaseDate}" placeholder="Enter purchase date" required>
-											<p th:errors="*{purchaseDate}" class="text-danger" th:if="${#fields.hasErrors('purchaseDate')}"></p>
-										</div>
-
-										<div class="mb-3">
-											<label for="manufactureDate" class="form-label">Manufacture Date</label>
-											<input type="date" class="form-control" id="manufactureDate" name="manufactureDate" th:field="*{manufactureDate}" placeholder="Enter manufacture date" required>
-											<p th:errors="*{manufactureDate}" class="text-danger" th:if="${#fields.hasErrors('manufactureDate')}"></p>
-										</div>
-
-										<div class="mb-3">
-											<label for="odometer" class="form-label">Odometer</label>
-											<input type="number" min="0" class="form-control" id="odometer" name="odometer" th:field="*{odometer}" placeholder="Enter odometer reading" required>
-											<p th:errors="*{odometer}" class="text-danger" th:if="${#fields.hasErrors('odometer')}"></p>
-										</div>
-
-										<div class="mb-3">
-											<label for="state" class="form-label">Status</label>
-											<select class="form-select" id="state" name="state" required>
-												<option value="" selected disabled>Select a truck status</option>
-												<option value="AVAILABLE">AVAILABLE</option>
-												<option value="COMMISSIONED">COMMISSIONED</option>
-												<option value="UNDER MAINTENANCE">UNDER MAINTENANCE</option>
-												<option value="DECOMMISSIONED">DECOMMISSIONED</option>
-											</select>
-											<p th:errors="*{state}" class="text-danger" th:if="${#fields.hasErrors('state')}"></p>
-										</div>
-
-										<div class="mb-3">
-											<label for="comments" class="form-label">Comments</label>
-											<input type="text" class="form-control" id="comments" name="comments" th:field="*{comments}" placeholder="Enter comments">
-											<p th:errors="*{comments}" class="text-danger" th:if="${#fields.hasErrors('comments')}"></p>
-										</div>
-
-
-
-										<!-- Add more fields for other properties -->
-										<!-- For example, VIN, Make, Model, Brand, Year, Odometer, etc. -->
-
-										<div class="mt-4 d-grid">
-											<button class="btn btn-primary waves-effect waves-light" type="submit">Add Truck</button>
-										</div>
-									</form>
-								</div>
-							</div>
-						</div> <!-- end col -->
-					</div>
-					<!--  end row -->
-
 					<!-- start file upload -->
 					<div class="row">
 						<div class="col-6 offset-3">
 							<div class="card">
 								<div class="card-body">
 
-									<h4 class="card-title">Truck Files</h4>
-									<p class="card-title-desc">You can upload all the files relating to this truck here...
+									<h4 class="card-title">Commission Files</h4>
+									<p class="card-title-desc">You can upload all the files relating to this commission here...
 									</p>
 
 									<div>

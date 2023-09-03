@@ -36,8 +36,9 @@ public class TyreService {
         return tyreRepository.findTyreBySerialNumber(serialNumber);
     }
 
-    public List<Tyre> findTyreByState(String state) {
-        return tyreRepository.findTyreByState(state);
+
+    public List<Tyre> findTyresByState(String state) {
+        return tyreRepository.findTyresByState(state);
     }
 
     public Tyre save(Tyre tyre) {

@@ -1,7 +1,7 @@
 package com.example.grabbs.service;
 
 import com.example.grabbs.model.Commission;
-import com.example.grabbs.model.Truck;
+import com.example.grabbs.model.Tyre;
 import com.example.grabbs.repository.CommissionRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +16,22 @@ public class CommissionService {
     @Autowired
     private final CommissionRepository commissionRepository;
 
-    public CommissionService(CommissionRepository commissionRepository) {
+    @Autowired
+    private final TyreService tyreService;
+
+    public CommissionService(CommissionRepository commissionRepository, TyreService tyreService) {
         this.commissionRepository = commissionRepository;
+        this.tyreService = tyreService;
     }
 
-    public Commission save(Commission commission) {
+    public Commission save(Commission commission) throws NotFoundException {
+        Tyre existingTyre = tyreService.findTyreById(commission.getTyre().getId()).get();
+        // Step 2: Update the state attribute
+        existingTyre.setState("COMMISSIONED");
+        // Step 3: Save the updated entity back to the database
+        tyreService.update(existingTyre);
+        commission.setTyre(existingTyre);
+        commission.setApprovalStatus("SUBMITTED");
         return commissionRepository.save(commission);
     }
 

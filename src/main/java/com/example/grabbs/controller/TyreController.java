@@ -161,7 +161,7 @@ public class TyreController {
 
         try {
             // Save the tyre entity to the database
-            tyreService.save(tyre);
+            tyreService.update(tyre);
             return "redirect:/tyre/edit/" + tyre.getId() + "?success";
         } catch (Exception e) {
             return "tyre/edit";

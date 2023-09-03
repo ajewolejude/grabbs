@@ -4,32 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b1b659cc-eec6-4571-ae2c-557dcc39955b" name="Changes" comment="fixing code and working on commissions">
+    <list default="true" id="b1b659cc-eec6-4571-ae2c-557dcc39955b" name="Changes" comment="finish workspace">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/commission/view.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/grabbs/controller/CommissionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/grabbs/controller/CommissionController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/grabbs/controller/TruckController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/grabbs/controller/TruckController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/grabbs/controller/TyreController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/grabbs/controller/TyreController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/grabbs/model/Commission.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/grabbs/model/Commission.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/grabbs/model/Truck.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/grabbs/model/Truck.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/grabbs/model/Tyre.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/grabbs/model/Tyre.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/grabbs/repository/TruckRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/grabbs/repository/TruckRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/grabbs/repository/TyreRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/grabbs/repository/TyreRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/grabbs/service/CommissionService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/grabbs/service/CommissionService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/grabbs/service/TruckService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/grabbs/service/TruckService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/grabbs/service/TyreService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/grabbs/service/TyreService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/commission/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/commission/add.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/commission/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/commission/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/truck/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/truck/add.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/truck/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/truck/edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/truck/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/truck/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/truck/view.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/truck/view.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/tyre/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/tyre/add.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/tyre/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/tyre/edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/tyre/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/tyre/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/tyre/view.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/tyre/view.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.example.grabbs.GrabbsApplicationTests.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.example.grabbs.GrabbsApplicationTests.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.example.grabbs.GrabbsApplicationTests.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.example.grabbs.GrabbsApplicationTests.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/CommissionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/CommissionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/TyreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/TyreController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/model/Commission.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/model/Commission.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/repository/TyreRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/repository/TyreRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/service/CommissionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/service/CommissionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/service/TyreService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/service/TyreService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/commission/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/commission/add.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/commission/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/commission/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/truck/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/truck/add.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/truck/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/truck/edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/tyre/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/tyre/add.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/tyre/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/tyre/edit.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +73,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/templates/commission" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -97,8 +86,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/resources" />
       <recent name="$PROJECT_DIR$/src/main/resources/templates/commission" />
+      <recent name="$PROJECT_DIR$/src/main/resources" />
       <recent name="$PROJECT_DIR$/src/main/resources/templates/truck" />
       <recent name="$PROJECT_DIR$/src/main/resources/templates/tyre" />
       <recent name="$PROJECT_DIR$/src/main/resources/static/assets/images" />
@@ -166,7 +155,7 @@
       <workItem from="1692364527857" duration="7566000" />
       <workItem from="1692711407142" duration="35304000" />
       <workItem from="1693488905929" duration="17538000" />
-      <workItem from="1693755490451" duration="1654000" />
+      <workItem from="1693755490451" duration="13215000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1693668088733</created>
@@ -203,7 +192,14 @@
       <option name="project" value="LOCAL" />
       <updated>1693755407690</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="finish workspace">
+      <created>1693763691367</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1693763691367</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -235,7 +231,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit" />
     <MESSAGE value="fixing code and working on commissions" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing code and working on commissions" />
+    <MESSAGE value="finish workspace" />
+    <option name="LAST_COMMIT_MESSAGE" value="finish workspace" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -394,6 +391,56 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/TruckController.java</url>
           <line>119</line>
           <option name="timeStamp" value="53" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/CommissionController.java</url>
+          <line>77</line>
+          <option name="timeStamp" value="54" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/CommissionController.java</url>
+          <line>71</line>
+          <option name="timeStamp" value="55" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/CommissionController.java</url>
+          <line>85</line>
+          <option name="timeStamp" value="56" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/CommissionController.java</url>
+          <line>91</line>
+          <option name="timeStamp" value="57" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/service/CommissionService.java</url>
+          <line>34</line>
+          <option name="timeStamp" value="58" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/service/CommissionService.java</url>
+          <line>31</line>
+          <option name="timeStamp" value="59" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/service/CommissionService.java</url>
+          <line>32</line>
+          <option name="timeStamp" value="60" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/service/CommissionService.java</url>
+          <line>29</line>
+          <option name="timeStamp" value="61" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/CommissionController.java</url>
+          <line>37</line>
+          <option name="timeStamp" value="62" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/CommissionController.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="63" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
