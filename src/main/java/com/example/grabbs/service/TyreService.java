@@ -58,6 +58,7 @@ public class TyreService {
         existingTyre.setPurchasePrice(tyre.getPurchasePrice());
         existingTyre.setPosition(tyre.getPosition());
         existingTyre.setOdometer(tyre.getOdometer());
+        existingTyre.setTakId(tyre.getTakId());
         existingTyre.setCommissioningDate(tyre.getCommissioningDate());
         existingTyre.setDecommissioningDate(tyre.getDecommissioningDate());
         existingTyre.setComments(tyre.getComments());
@@ -74,5 +75,8 @@ public class TyreService {
 
     public int countTyresCreatedBetween(LocalDate startDate, LocalDate endDate) {
         return tyreRepository.countByCreatedDateBetween(startDate.atStartOfDay(), endDate.atTime(LocalTime.MAX));
+    }
+    public Tyre findTyreByTakId(String takId) {
+        return tyreRepository.findTyreByTakId(takId);
     }
 }

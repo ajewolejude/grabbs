@@ -32,6 +32,9 @@ public class Truck
     private String vin;
 
     @Column(nullable=false)
+    private String takId;
+
+    @Column(nullable=false)
     private String model;
 
     @Column(nullable=false)

@@ -56,12 +56,16 @@ public class TruckController {
     @PostMapping("/create")
     public String createTruck(@Valid @ModelAttribute("truck") Truck truck, BindingResult result,
                                               Model model) {
-        Truck existingTruck = truckService.findTruckByVin(truck.getVin());
-
-
-        if(existingTruck != null && existingTruck.getVin() != null && !existingTruck.getVin().isEmpty()){
+        Truck existingTruckByVin = truckService.findTruckByVin(truck.getVin());
+        if(existingTruckByVin != null && existingTruckByVin.getVin() != null && !existingTruckByVin.getVin().isEmpty()){
             result.rejectValue("vin", null,
                     "There is already a truck registered with the vin");
+        }
+
+        Truck existingTruckByTakId = truckService.findTruckByTakId(truck.getTakId());
+        if(existingTruckByTakId != null && existingTruckByTakId.getTakId() != null && !existingTruckByTakId.getTakId().isEmpty()){
+            result.rejectValue("takId", null,
+                    "There is already a truck registered with the tak id");
         }
 
         if(result.hasErrors()){
@@ -130,6 +134,15 @@ public class TruckController {
             if (!Objects.equals(existingTruck.getId(), truck.getId())){
                 result.rejectValue("vin", null,
                         "There is already a truck registered with the vin");
+            }
+        }
+
+
+        Truck existingTruckByTakId = truckService.findTruckByTakId(truck.getTakId());
+        if(existingTruckByTakId != null && existingTruckByTakId.getTakId() != null && !existingTruckByTakId.getTakId().isEmpty()){
+            if (!Objects.equals(existingTruckByTakId.getId(), truck.getId())){
+                result.rejectValue("takId", null,
+                        "There is already a truck registered with the tak id");
             }
         }
 

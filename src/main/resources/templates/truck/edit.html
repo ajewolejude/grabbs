@@ -45,7 +45,7 @@
 									</div>
 								</div>
 								<div class="card-body">
-									<form class="needs-validation" method="post" role="form" th:action="@{/truck/create}" th:object="${truck}">
+									<form class="needs-validation" method="post" role="form" th:action="@{/truck/update}" th:object="${truck}">
 										<div th:if="${param.success}">
 											<div class="alert alert-info alert-dismissible fade show" role="alert">
 												You have successfully updated this truck!
@@ -60,7 +60,7 @@
 
 										<div class="mb-3">
 											<label for="truckType" class="form-label">Truck Type</label>
-											<select class="form-select" id="truckType" name="truckType" required>
+											<select class="form-select" id="truckType" name="truckType" th:field="*{truckType}" required>
 												<option value="" selected disabled>Select a truck type</option>
 												<option value="Pickup Truck">Pickup Truck</option>
 												<option value="Semi-Truck">Semi-Truck</option>
@@ -84,8 +84,14 @@
 										</div>
 
 										<div class="mb-3">
+											<label for="takId" class="form-label">TAK ID</label>
+											<input type="text" class="form-control" id="takId" name="takId" th:field="*{takId}" placeholder="Enter TAK Identification Number" required>
+											<p th:errors="*{takId}" class="text-danger" th:if="${#fields.hasErrors('takId')}"></p>
+										</div>
+
+										<div class="mb-3">
 											<label for="brand" class="form-label">Brand</label>
-											<select class="form-select" id="brand" name="brand" required>
+											<select class="form-select" id="brand" name="brand" th:field="*{brand}"required>
 												<option value="" selected disabled>Select a truck brand</option>
 												<option value="Ford">Ford</option>
 												<option value="Chevrolet">Chevrolet</option>
@@ -123,7 +129,7 @@
 
 										<div class="mb-3">
 											<label for="state" class="form-label">Status</label>
-											<select class="form-select" id="state" name="state" required>
+											<select class="form-select" id="state" name="state" th:field="*{state}" required>
 												<option value="" selected disabled>Select a truck status</option>
 												<option value="AVAILABLE">AVAILABLE</option>
 												<option value="COMMISSIONED">COMMISSIONED</option>
@@ -145,7 +151,7 @@
 										<!-- For example, VIN, Make, Model, Brand, Year, Odometer, etc. -->
 
 										<div class="mt-4 d-grid">
-											<button class="btn btn-primary waves-effect waves-light" type="submit">Add Truck</button>
+											<button class="btn btn-primary waves-effect waves-light" type="submit">Edit Truck</button>
 										</div>
 									</form>
 								</div>

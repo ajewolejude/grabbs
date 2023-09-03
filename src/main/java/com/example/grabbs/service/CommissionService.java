@@ -20,7 +20,7 @@ public class CommissionService {
         this.commissionRepository = commissionRepository;
     }
 
-    public Commission saveCommission(Commission commission) {
+    public Commission save(Commission commission) {
         return commissionRepository.save(commission);
     }
 
@@ -34,15 +34,14 @@ public class CommissionService {
 
     public Commission update( Commission commission) throws NotFoundException {
         Commission existingCommission = commissionRepository.findById(commission.getId())
-                .orElseThrow(() -> new NotFoundException("Tyre not found with id: " + commission.getId()));
+                .orElseThrow(() -> new NotFoundException("Commission not found with id: " + commission.getId()));
 ;
         existingCommission.setApprovalComments(commission.getApprovalComments());
 // Update properties of existingCommission with values from commission
         existingCommission.setTyre(commission.getTyre());
         existingCommission.setReasonForCommissioning(commission.getReasonForCommissioning());
-        existingCommission.setDecommissioningRequestId(commission.getDecommissioningRequestId());
         existingCommission.setDateOfCommissioning(commission.getDateOfCommissioning());
-        existingCommission.setMileage(commission.getMileage());
+        existingCommission.setOdometer(commission.getOdometer());
         existingCommission.setConditionReport(commission.getConditionReport());
         existingCommission.setResponsibleOfficer(commission.getResponsibleOfficer());
         existingCommission.setApprovalStatus(commission.getApprovalStatus());

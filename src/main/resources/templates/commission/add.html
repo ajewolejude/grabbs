@@ -32,6 +32,74 @@
 					<!-- start page title -->
 					<div th:replace="page-title :: topnavbar(${title},${item},${title})"></div>
 					<!-- end page title -->
+
+					<div class="row">
+						<div class="col-6 offset-3">
+							<div class="card">
+								<div class="card-body border-bottom">
+									<div class="d-flex align-items-center">
+										<h5 class="mb-0 card-title flex-grow-1">Commission a Tyre</h5>
+										<div class="flex-shrink-0">
+											<a type="button" class="btn btn-primary waves-effect waves-light"
+											   href="/tyre/" >Tyre List</a>
+										</div>
+									</div>
+								</div>
+								<div class="card-body">
+									<form class="needs-validation" method="post" role="form" th:action="@{/commission/create}" th:object="${commission}">
+										<div th:if="${param.success}">
+											<div class="alert alert-info alert-dismissible fade show" role="alert">
+												You have successfully added a new commission!
+												<button type="button" class="btn-close" data-bs-dismiss="alert"
+														aria-label="Close"></button>
+											</div>
+										</div>
+
+										<!-- Add Commission form fields here -->
+										<!-- Replace 'truck' fields with 'commission' fields -->
+
+										<div class="mb-3">
+											<label for="reasonForCommissioning" class="form-label">Reason for Commissioning</label>
+											<textarea type="text" class="form-control" id="reasonForCommissioning" name="reasonForCommissioning" th:field="*{reasonForCommissioning}" placeholder="Enter reason for commissioning" required/>
+											<p th:errors="*{reasonForCommissioning}" class="text-danger" th:if="${#fields.hasErrors('reasonForCommissioning')}"></p>
+										</div>
+
+
+										<div class="mb-3">
+											<label for="dateOfCommissioning" class="form-label">Commissioning Date</label>
+											<input type="date" class="form-control" id="dateOfCommissioning" name="manufactureDate" th:field="*{dateOfCommissioning}" placeholder="Enter commissioning date" required>
+											<p th:errors="*{dateOfCommissioning}" class="text-danger" th:if="${#fields.hasErrors('dateOfCommissioning')}"></p>
+										</div>
+
+										<div class="mb-3">
+											<label for="odometer" class="form-label">Odometer</label>
+											<input type="number" min="0" class="form-control" id="odometer" name="odometer" th:field="*{odometer}" placeholder="Enter odometer reading" required>
+											<p th:errors="*{odometer}" class="text-danger" th:if="${#fields.hasErrors('odometer')}"></p>
+										</div>
+
+										<div class="mb-3">
+											<label for="responsibleOfficer" class="form-label">Responsible Officer</label>
+											<select class="form-select" id="responsibleOfficer" name="responsibleOfficer" required>
+												<option value="" selected disabled>Select an officer</option>
+												<option th:each="user : ${users}" th:value="${user.id}" th:text="${user.name}"></option>
+												<!-- Add more popular truck types as needed -->
+											</select>
+											<p th:errors="*{truckType}" class="text-danger" th:if="${#fields.hasErrors('truckType')}"></p>
+										</div>
+
+										<!-- Add other Commission fields here -->
+
+										<div class="mt-4 d-grid">
+											<button class="btn btn-primary waves-effect waves-light" type="submit">Commission Tyre</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
 					<div class="row">
 						<div class="col-6 offset-3">
 							<div class="card">

@@ -28,12 +28,10 @@ public class Commission {
     @Column(nullable = false)
     private String reasonForCommissioning;
 
-    private Long decommissioningRequestId;
-
     @Column(nullable = false)
     private LocalDate dateOfCommissioning;
 
-    private double mileage;
+    private double odometer;
 
     private String conditionReport;
 

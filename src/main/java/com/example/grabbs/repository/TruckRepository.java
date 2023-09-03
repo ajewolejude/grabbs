@@ -9,5 +9,7 @@ public interface TruckRepository extends JpaRepository<Truck, Long> {
 
     Truck findTruckByVin(String vin);
 
+    Truck findTruckByTakId(String takId);
+
     int countTrucksByCreatedDateBetween(LocalDateTime atStartOfDay, LocalDateTime atTime);
 }

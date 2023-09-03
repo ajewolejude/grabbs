@@ -53,13 +53,20 @@ public class TyreController {
     @PostMapping("/create")
     public String createTyre(@Valid @ModelAttribute("tyre") Tyre tyre, BindingResult result,
                                               Model model) {
-        Tyre existingTyre = tyreService.findTyreBySerialNumber(tyre.getSerialNumber());
+        Tyre existingTyreByVin = tyreService.findTyreBySerialNumber(tyre.getSerialNumber());
 
 
-        if(existingTyre != null && existingTyre.getSerialNumber() != null && !existingTyre.getSerialNumber().isEmpty()){
+        if(existingTyreByVin != null && existingTyreByVin.getSerialNumber() != null && !existingTyreByVin.getSerialNumber().isEmpty()){
             result.rejectValue("serialNumber", null,
                     "There is already a tyre registered with the serial number");
         }
+
+        Tyre existingTyreByTakId = tyreService.findTyreByTakId(tyre.getTakId());
+        if(existingTyreByTakId != null && existingTyreByTakId.getTakId() != null && !existingTyreByTakId.getTakId().isEmpty()){
+            result.rejectValue("takId", null,
+                    "There is already a tyre registered with the tak id");
+        }
+
 
         if(result.hasErrors()){
             model.addAttribute("tyre", tyre);
@@ -122,15 +129,27 @@ public class TyreController {
                              Model model) throws NotFoundException {
         tyreService.update(tyre);
 
-        Tyre existingTyre = tyreService.findTyreBySerialNumber(tyre.getSerialNumber());
+        Tyre existingTyreByVin = tyreService.findTyreBySerialNumber(tyre.getSerialNumber());
 
 
-        if(existingTyre != null && existingTyre.getSerialNumber() != null && !existingTyre.getSerialNumber().isEmpty()){
-            if (!Objects.equals(existingTyre.getId(), tyre.getId())){
+        if(existingTyreByVin != null && existingTyreByVin.getSerialNumber() != null && !existingTyreByVin.getSerialNumber().isEmpty()){
+            if (!Objects.equals(existingTyreByVin.getId(), tyre.getId())){
                 result.rejectValue("serialNumber", null,
                         "There is already a tyre registered with the serial number");
             }
         }
+
+
+
+        Tyre existingTyreByTakId = tyreService.findTyreByTakId(tyre.getTakId());
+        if(existingTyreByTakId != null && existingTyreByTakId.getSerialNumber() != null && !existingTyreByTakId.getSerialNumber().isEmpty()){
+            if (!Objects.equals(existingTyreByTakId.getId(), tyre.getId())){
+                result.rejectValue("takId", null,
+                        "There is already a tyre registered with the tak id");
+            }
+        }
+
+
 
         if(result.hasErrors()){
             model.addAttribute("tyre", tyre);

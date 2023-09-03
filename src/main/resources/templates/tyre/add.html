@@ -60,6 +60,14 @@
 											<p th:errors="*{serialNumber}" class="text-danger" th:if="${#fields.hasErrors('serialNumber')}"></p>
 										</div>
 
+
+										<div class="mb-3">
+											<label for="takId" class="form-label">TAK ID</label>
+											<input type="text" class="form-control" id="takId" name="vin" th:field="*{takId}" placeholder="Enter TAK Identification Number" required>
+											<p th:errors="*{takId}" class="text-danger" th:if="${#fields.hasErrors('takId')}"></p>
+										</div>
+
+
 										<div class="mb-3">
 											<label for="brand" class="form-label">Brand</label>
 											<select class="form-select" id="brand" name="brand" required>

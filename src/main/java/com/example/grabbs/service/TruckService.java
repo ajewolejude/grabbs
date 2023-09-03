@@ -58,6 +58,7 @@ public class TruckService{
         existingTruck.setManufactureDate(truck.getManufactureDate());
         existingTruck.setPurchaseDate(truck.getPurchaseDate());
         existingTruck.setOdometer(truck.getOdometer());
+        existingTruck.setTakId(truck.getTakId());
         existingTruck.setState(truck.getState());
         existingTruck.setComments(truck.getComments());
 
@@ -74,5 +75,9 @@ public class TruckService{
 
     public int countTrucksCreatedBetween(LocalDate startDate, LocalDate endDate) {
         return truckRepository.countTrucksByCreatedDateBetween(startDate.atStartOfDay(), endDate.atTime(LocalTime.MAX));
+    }
+
+    public Truck findTruckByTakId(String takId) {
+        return truckRepository.findTruckByTakId(takId);
     }
 }

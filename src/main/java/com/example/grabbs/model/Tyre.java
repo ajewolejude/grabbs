@@ -26,6 +26,9 @@ public class Tyre {
     @Column(nullable = false)
     private String serialNumber;
 
+    @Column(nullable=false)
+    private String takId;
+
     @Column(nullable = false)
     private String brand;
 

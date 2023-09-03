@@ -47,6 +47,7 @@
 										<tr>
 											<th>No</th>
 											<th>S/N</th>
+											<th>TAK ID</th>
 											<th>Brand</th>
 											<th>Model</th>
 											<th>Size</th>
@@ -62,6 +63,7 @@
 										<tr th:each="tyre, iterStat : ${tyres}">
 											<td th:text="${iterStat.count}"></td>
 											<td th:text="${tyre.serialNumber}"></td>
+											<td th:text="${tyre.takId}"></td>
 											<td th:text="${tyre.brand}"></td>
 											<td th:text="${tyre.model}"></td>
 											<td th:text="${tyre.size}"></td>
