@@ -1,4 +1,4 @@
-<html xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:sec="http://www.w3.org/1999/xhtml"  lang="en" xmlns:th="http://www.thymeleaf.org" >
 
 <body>
 	<div th:fragment="sidebar" th:remove="tag">
@@ -12,35 +12,35 @@
 						<li class="menu-title" key="t-menu">Menu</li>
 
 
-						<li sec:authorize="hasRole('ROLE_ADMIN')">
+						<li>
 							<a href="/" class="waves-effect">
 								<i class="bx bx-home-circle"></i>
 								<span key="t-chat">Dashboard</span>
 							</a>
 						</li>
 
-						<li sec:authorize="hasRole('ROLE_ADMIN')">
+						<li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_HOO')">
 							<a href="/user/" class="waves-effect">
 								<i class="bx bx-user-circle"></i>
 								<span key="t-chat">Users</span>
 							</a>
 						</li>
 
-						<li sec:authorize="hasRole('ROLE_ADMIN')">
+						<li>
 							<a href="/truck/" class="waves-effect">
 								<i class="bx bxs-truck"></i>
 								<span key="t-chat">Truck</span>
 							</a>
 						</li>
 
-						<li sec:authorize="hasRole('ROLE_ADMIN')">
+						<li >
 							<a href="/tyre/" class="waves-effect">
 								<i class="bx bxs-up-arrow-circle"></i>
 								<span key="t-chat">Tyre</span>
 							</a>
 						</li>
 
-						<li sec:authorize="hasRole('ROLE_ADMIN')">
+						<li >
 							<a href="/commission/" class="waves-effect">
 								<i class="mdi mdi-truck-check"></i>
 								<span key="t-chat">Commission</span>
@@ -49,7 +49,7 @@
 
 
 
-						<li sec:authorize="hasRole('ROLE_ADMIN')">
+						<li>
 							<a href="/decommission/" class="waves-effect">
 								<i class="mdi mdi-truck-trailer"></i>
 								<span key="t-chat">Decommission</span>

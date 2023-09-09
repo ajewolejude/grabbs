@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -64,5 +65,8 @@ public class Tyre {
 
     @Column(nullable=false)
     private LocalDateTime createdDate;
+
+    @Transient
+    String file;
 
 }

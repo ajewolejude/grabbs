@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{'layouts/' + ${template}}"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 
 <head>
@@ -36,8 +36,8 @@
 												<p>Grabbs Plus Dashboard</p>
 
 												<ul class="ps-3 mb-0">
-													<li class="py-1">100 Trucks</li>
-													<li class="py-1">400 Tyres</li>
+													<li class="py-1">10 Approved Commission</li>
+													<li class="py-1">40 Submitted Commission</li>
 												</ul>
 											</div>
 										</div>
@@ -60,10 +60,10 @@
 														<i class="bx bx-copy-alt"></i>
 													</span>
 												</div>
-												<h5 class="font-size-14 mb-0">Trucks</h5>
+												<h5 class="font-size-14 mb-0">Submitted</h5>
 											</div>
 											<div class="text-muted mt-4">
-												<h4>1,452 <i class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
+												<h4>10 <i class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
 												<div class="d-flex">
 													<span class="badge badge-soft-success font-size-12"> + 0.2% </span>
 													<span class="ms-2 text-truncate">From previous month</span>
@@ -83,10 +83,10 @@
 														<i class="bx bx-archive-in"></i>
 													</span>
 												</div>
-												<h5 class="font-size-14 mb-0">Tyre</h5>
+												<h5 class="font-size-14 mb-0">Approved</h5>
 											</div>
 											<div class="text-muted mt-4">
-												<h4>452 <i class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
+												<h4>10 <i class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
 												<div class="d-flex">
 													<span class="badge badge-soft-success font-size-12"> + 0.4% </span>
 													<span class="ms-2 text-truncate">From previous month</span>
@@ -106,15 +106,12 @@
 														<i class="bx bx-purchase-tag-alt"></i>
 													</span>
 												</div>
-												<h5 class="font-size-14 mb-0">Users</h5>
+												<h5 class="font-size-14 mb-0">Completed</h5>
 											</div>
 											<div class="text-muted mt-4">
-												<h4>10 <i class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
+												<h4>4 <i class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
 
-												<div class="d-flex">
-													<span class="badge badge-soft-warning font-size-12"> 0% </span>
-													<span class="ms-2 text-truncate">From previous month</span>
-												</div>
+
 											</div>
 										</div>
 									</div>
@@ -123,137 +120,6 @@
 							<!-- end row -->
 						</div>
 					</div>
-
-					<div class="row">
-
-						<div class="col-xl-4">
-							<div class="card">
-								<div class="card-body">
-									<h4 class="card-title mb-4">Decommissioned Tyres</h4>
-
-									<div id="bar_chart" data-colors='["--bs-success"]' class="apex-charts" dir="ltr">
-									</div>
-								</div>
-							</div>
-							<!--end card-->
-						</div> <!-- end col -->
-
-						<div class="col-xl-4">
-							<div class="card">
-								<div class="card-body">
-									<h4 class="card-title mb-4">Top Tyre Brands</h4>
-
-									<div class="text-center">
-										<div class="mb-4">
-											<i class="bx bx-map-pin text-primary display-4"></i>
-										</div>
-										<h3>150</h3>
-										<p>Michelin</p>
-									</div>
-
-									<div class="table-responsive mt-4">
-										<table class="table align-middle table-nowrap">
-											<tbody>
-											<tr>
-												<td style="width: 30%">
-													<p class="mb-0">Michelin</p>
-												</td>
-												<td style="width: 25%">
-													<h5 class="mb-0">150</h5>
-												</td>
-												<td>
-													<div class="progress bg-transparent progress-sm">
-														<div class="progress-bar bg-primary rounded"
-															 role="progressbar" style="width: 94%" aria-valuenow="94"
-															 aria-valuemin="0" aria-valuemax="100"></div>
-													</div>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<p class="mb-0">Bridgestone</p>
-												</td>
-												<td>
-													<h5 class="mb-0">86</h5>
-												</td>
-												<td>
-													<div class="progress bg-transparent progress-sm">
-														<div class="progress-bar bg-success rounded"
-															 role="progressbar" style="width: 82%" aria-valuenow="82"
-															 aria-valuemin="0" aria-valuemax="100"></div>
-													</div>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<p class="mb-0">Pirelli</p>
-												</td>
-												<td>
-													<h5 class="mb-0">60</h5>
-												</td>
-												<td>
-													<div class="progress bg-transparent progress-sm">
-														<div class="progress-bar bg-warning rounded"
-															 role="progressbar" style="width: 70%" aria-valuenow="70"
-															 aria-valuemin="0" aria-valuemax="100"></div>
-													</div>
-												</td>
-											</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-xl-4">
-							<div class="card">
-								<div class="card-body">
-									<h4 class="card-title mb-4">Tyre Analytics</h4>
-
-									<div>
-										<div id="donut-chart"
-											 data-colors='["--bs-primary", "--bs-success", "--bs-danger", "--bs-info"]'
-											 class="apex-charts"></div>
-									</div>
-
-									<div class="text-center text-muted">
-										<div class="row">
-											<div class="col-3">
-												<div class="mt-4">
-													<p class="mb-2 text-truncate"><i
-															class="mdi mdi-circle text-primary me-1"></i> Available </p>
-													<h5>150</h5>
-												</div>
-											</div>
-											<div class="col-3">
-												<div class="mt-4">
-													<p class="mb-2 text-truncate"><i
-															class="mdi mdi-circle text-success me-1"></i> Commissioned </p>
-													<h5>163</h5>
-												</div>
-											</div>
-											<div class="col-3">
-												<div class="mt-4">
-													<p class="mb-2 text-truncate"><i
-															class="mdi mdi-circle text-danger me-1"></i> Decommissioned </p>
-													<h5>32</h5>
-												</div>
-											</div>
-											<div class="col-3">
-												<div class="mt-4">
-													<p class="mb-2 text-truncate"><i
-															class="mdi mdi-circle text-info me-1"></i> Under Maintenance </p>
-													<h5>100</h5>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- end row -->
 
 					<div class="row">
 						<div class="col-12">
@@ -268,11 +134,33 @@
 									</div>
 								</div>
 								<div class="card-body">
+									<div th:if="${param.approved}">
+										<div class="alert alert-info alert-dismissible fade show" role="alert">
+											You have successfully approved a commission request!
+											<button type="button" class="btn-close" data-bs-dismiss="alert"
+													aria-label="Close"></button>
+										</div>
+									</div>
+									<div th:if="${param.completed}">
+										<div class="alert alert-info alert-dismissible fade show" role="alert">
+											You have successfully Completed a commission request!
+											<button type="button" class="btn-close" data-bs-dismiss="alert"
+													aria-label="Close"></button>
+										</div>
+									</div>
+									<div th:if="${param.canceled}">
+										<div class="alert alert-info alert-dismissible fade show" role="alert">
+											You have successfully cancelled a commission request!
+											<button type="button" class="btn-close" data-bs-dismiss="alert"
+													aria-label="Close"></button>
+										</div>
+									</div>
 									<table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
 										<thead>
 										<tr>
 											<th>No</th>
 											<th>Tyre</th>
+											<th>Truck</th>
 											<th>Officer</th>
 											<th>Commission Date</th>
 											<th>Odometer</th>
@@ -284,30 +172,18 @@
 										<!-- Use Thymeleaf to iterate over the tyres -->
 										<tr th:each="commission, iterStat : ${commissions}">
 											<td th:text="${iterStat.count}"></td>
-											<td th:text="${commission.tyre.serialNumber}"></td>
+											<td th:text="${commission.truck.takId}"></td>
+											<td th:text="${commission.tyre.takId}"></td>
 											<td th:text="${commission.responsibleOfficer}"></td>
 											<td th:text="${commission.dateOfCommissioning}"></td>
 											<td th:text="${commission.odometer}"></td>
 											<td >
-												<span class="badge badge-soft-danger" th:if="${commission.approvalStatus == 'DECOMMISSIONED'}">DECOMMISSIONED</span>
-												<span class="badge badge-soft-info" th:if="${commission.approvalStatus == 'SUBMITTED'}">SUBMITTED</span>
-												<span class="badge badge-soft-warning" th:if="${commission.approvalStatus == 'UNDER MAINTENANCE'}">UNDER MAINTENANCE</span>
-												<span class="badge badge-soft-success" th:if="${commission.approvalStatus == 'AVAILABLE'}"> AVAILABLE</span>
+												<span class="badge badge-soft-danger" th:if="${commission.state == 'CANCELLED'}">CANCELLED</span>
+												<span class="badge  badge-soft-warning" th:if="${commission.state == 'SUBMITTED'}">SUBMITTED</span>
+												<span class="badge badge-soft-info" th:if="${commission.state == 'COMPLETED'}">COMPLETED</span>
+												<span class="badge badge-soft-success" th:if="${commission.state == 'APPROVED'}"> APPROVED</span>
 											</td>
-											<td>
-												<div class="btn-group">
-													<button class="btn btn-secondary dropdown-toggle" type="button"
-															id="defaultDropdown" data-bs-toggle="dropdown" data-bs-auto-close="true"
-															aria-expanded="false">
-														Actions <i class="mdi mdi-chevron-down"></i>
-													</button>
-													<ul class="dropdown-menu" aria-labelledby="defaultDropdown">
-														<li><a class="dropdown-item" th:if="${tyre.state == 'AVAILABLE'}" th:href="@{'commission/add/' + ${tyre.id}}">Commission</a></li>
-													</ul>
-												</div>
-
-											</td>
-											<td>
+											<td th:if="${commission.state != 'CANCELLED'}">
 												<div class="btn-group">
 													<button class="btn btn-secondary dropdown-toggle" type="button"
 															id="defaultDropdown" data-bs-toggle="dropdown" data-bs-auto-close="true"
@@ -316,13 +192,18 @@
 													</button>
 													<ul class="dropdown-menu" aria-labelledby="defaultDropdown">
 														<li><a class="dropdown-item"  th:href="@{'/commission/view/' + ${commission.id}}">View</a></li>
-														<li><a class="dropdown-item"  th:href="@{'/commission/edit/' + ${commission.id}}">Edit</a></li>
-														<div class="dropdown-divider"></div>
-														<li><a class="dropdown-item" th:href="@{'/commission/delete/' + ${commission.id}}">Delete</a></li>
+														<li sec:authorize="hasAnyRole('ADMIN','HOO')">
+															<a class="dropdown-item" th:if="${commission.state == 'SUBMITTED'}" th:href="@{'approve/' + ${commission.id}}">Approve</a>
+															<a class="dropdown-item" th:if="${commission.state == 'APPROVED'}" th:href="@{'complete/' + ${commission.id}}">Complete</a>
+														</li>
+
+														<li><a class="dropdown-item"  th:href="@{'cancel/' + ${commission.id}}">Cancel</a></li>
+
 													</ul>
 												</div>
 
 											</td>
+
 										</tr>
 										</tbody>
 									</table>
@@ -353,6 +234,10 @@
 
 		<!-- apexcharts init -->
 		<script th:src="@{/assets/js/pages/apexcharts.init.js}"></script>
+
+
+		<!-- Datatable init js -->
+		<script th:src="@{/assets/js/pages/datatables.init.js}"></script>
 	</th:block>
 
 </body>

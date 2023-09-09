@@ -44,7 +44,8 @@
 									</div>
 								</div>
 								<div class="card-body">
-									<form class="needs-validation" method="post" role="form" th:action="@{/tyre/create}" th:object="${tyre}">
+									<form class="needs-validation" method="post" role="form" th:action="@{/tyre/create}" th:object="${tyre}"
+										  enctype="multipart/form-data">
 										<div th:if="${param.success}">
 											<div class="alert alert-info alert-dismissible fade show" role="alert">
 												You have successfully added a new tyre!
@@ -53,6 +54,10 @@
 											</div>
 										</div>
 
+
+										<div th:if="${param.error}">
+											<div class="alert alert-danger">Invalid Email or Password</div>
+										</div>
 
 										<div class="mb-3">
 											<label for="serialNumber" class="form-label">Serial Number</label>
@@ -165,6 +170,35 @@
 											<p th:errors="*{comments}" class="text-danger" th:if="${#fields.hasErrors('comments')}"></p>
 										</div>
 
+										<br>
+										<hr style="height:1px;border-width:0;color:gray;background-color:gray">
+										<br>
+										<h4 class="card-title">Tyre Files</h4>
+										<p class="card-title-desc">You can upload all the files relating to this tyre here...
+										</p>
+
+										<div class="mb-3">
+											<input id="files" type="file" name="files" multiple="multiple" />
+											<p th:errors="*{file}" class="text-danger" th:if="${#fields.hasErrors('file')}"></p>
+										</div>
+<!--										<div class="mb-3">-->
+<!--											<div class="input-group">-->
+<!--												<div class="input-group-prepend">-->
+<!--													<span class="input-group-text" id="inputGroupFileAddon01">Upload</span>-->
+<!--												</div>-->
+<!--												<div class="custom-file">-->
+<!--													<input id="files" type="file" name="files" multiple="multiple"  class="custom-file-input" -->
+<!--														   aria-describedby="inputGroupFileAddon01">-->
+<!--													<label class="custom-file-label" for="files">Choose file</label>-->
+<!--													<p th:errors="*{files}" class="text-danger" th:if="${#fields.hasErrors('files')}"/>-->
+<!--												</div>-->
+<!--											</div>-->
+<!--										</div>-->
+
+
+
+
+
 
 
 										<!-- Add more fields for other properties -->
@@ -180,40 +214,6 @@
 					</div>
 					<!--  end row -->
 
-					<!-- start file upload -->
-					<div class="row">
-						<div class="col-6 offset-3">
-							<div class="card">
-								<div class="card-body">
-
-									<h4 class="card-title">Tyre Files</h4>
-									<p class="card-title-desc">You can upload all the files relating to this tyre here...
-									</p>
-
-									<div>
-										<form action="#" class="dropzone">
-											<div class="fallback">
-												<input name="file" type="file" multiple="multiple">
-											</div>
-											<div class="dz-message needsclick">
-												<div class="mb-3">
-													<i class="display-4 text-muted bx bxs-cloud-upload"></i>
-												</div>
-
-												<h4>Drop files here or click to upload.</h4>
-											</div>
-										</form>
-									</div>
-
-									<div class="text-center mt-4">
-										<button type="button" class="btn btn-primary waves-effect waves-light">Upload</button>
-									</div>
-								</div>
-							</div>
-						</div> <!-- end col -->
-					</div>
-					<!--  end file upload -->
-				</div>
 				<!-- container-fluid -->
 			</div>
 			<!-- End Page-content -->
@@ -250,6 +250,62 @@
 		<script th:src="@{/assets/js/pages/datatables.init.js}"></script>
 		<!-- Plugins js -->
 		<script th:src="@{/assets/libs/dropzone/min/dropzone.min.js}"></script>
+		<script>
+			$(document).ready(function () {
+				$('#myDropzone').submit(function (e) {
+					e.preventDefault(); // Prevent the default form submission
+
+					var formData = new FormData();
+					var files = $('#fileInput')[0].files; // Get selected files from file input
+
+					for (var i = 0; i < files.length; i++) {
+						formData.append('files', files[i]); // Use 'files' as the parameter name
+					}
+
+					// Optionally, you can add other form data fields if needed
+					formData.append('kind', 'tyre'); // Add 'kind' field
+
+					$.ajax({
+						type: 'POST',
+						url: '/api/upload',
+						data: formData,
+						processData: false,
+						contentType: false,
+						success: function (data) {
+							// Handle success response
+							displayUploadResults(data);
+						},
+						error: function (error) {
+							// Handle error response
+							console.log("error: ", error);
+							console.error(error);
+						}
+					});
+				});
+
+				function displayUploadResults(data) {
+					var resultsDiv = $('#uploadResults');
+					resultsDiv.empty(); // Clear previous results
+
+					if (data.length > 0) {
+						resultsDiv.append('<p>Uploaded files:</p>');
+						var ul = $('<ul>');
+
+						$.each(data, function (index, fileName) {
+							ul.append($('<li>').text(fileName));
+						});
+
+						resultsDiv.append(ul);
+					} else {
+						resultsDiv.append('<p>No files uploaded.</p>');
+					}
+				}
+			});
+
+
+		</script>
+
+
 	</th:block>
 
 </body>

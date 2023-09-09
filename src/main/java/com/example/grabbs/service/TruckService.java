@@ -80,4 +80,6 @@ public class TruckService{
     public Truck findTruckByTakId(String takId) {
         return truckRepository.findTruckByTakId(takId);
     }
+
+
 }

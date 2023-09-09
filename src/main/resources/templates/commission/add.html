@@ -42,7 +42,7 @@
 										<h5 class="mb-0 card-title flex-grow-1">Commission a Tyre</h5>
 										<div class="flex-shrink-0">
 											<a type="button" class="btn btn-primary waves-effect waves-light"
-											   href="/tyre/" >Tyre List</a>
+											   href="/commission/" >Commission List</a>
 										</div>
 									</div>
 								</div>
@@ -64,9 +64,19 @@
 											<label for="tyre" class="form-label">Tyre</label>
 											<select class="form-select" id="tyre" name="tyre.id" required>
 												<option value="" selected disabled>Select a tyre</option>
-												<option th:each="tyre : ${tyres}" th:value="${tyre.id}" th:text="${tyre.serialNumber}"></option>
+												<option th:each="tyre : ${tyres}" th:value="${tyre.id}" th:text="${tyre.takId}"></option>
 											</select>
 											<p th:errors="*{tyre.id}" class="text-danger" th:if="${#fields.hasErrors('tyre.id')}"></p>
+										</div>
+
+
+										<div class="mb-3">
+											<label for="truck" class="form-label">Truck</label>
+											<select class="form-select" id="truck" name="truck.id" required>
+												<option value="" selected disabled>Select a truck</option>
+												<option th:each="truck : ${trucks}" th:value="${truck.id}" th:text="${truck.takId}"></option>
+											</select>
+											<p th:errors="*{truck.id}" class="text-danger" th:if="${#fields.hasErrors('truck.id')}"></p>
 										</div>
 
 										<div class="mb-3">
@@ -109,7 +119,7 @@
 										<!-- Add other Commission fields here -->
 
 										<div class="mt-4 d-grid">
-											<button class="btn btn-primary waves-effect waves-light" type="submit">Commission Tyre</button>
+											<button class="btn btn-primary waves-effect waves-light" type="submit">Submit Commission</button>
 										</div>
 									</form>
 								</div>

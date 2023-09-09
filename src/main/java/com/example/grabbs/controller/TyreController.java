@@ -1,7 +1,9 @@
 package com.example.grabbs.controller;
 
+import com.example.grabbs.model.Attachment;
 import com.example.grabbs.model.Truck;
 import com.example.grabbs.model.Tyre;
+import com.example.grabbs.service.AttachmentService;
 import com.example.grabbs.service.TyreService;
 import com.example.grabbs.service.UserServiceImpl;
 import javassist.NotFoundException;
@@ -10,9 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -27,6 +32,9 @@ public class TyreController {
 
     @Autowired
     private TyreService tyreService;
+
+    @Autowired
+    private AttachmentService attachmentService;
 
 
     @GetMapping("/")
@@ -51,24 +59,24 @@ public class TyreController {
     }
 
     @PostMapping("/create")
-    public String createTyre(@Valid @ModelAttribute("tyre") Tyre tyre, BindingResult result,
-                                              Model model) {
+    public String createTyre(@Valid @ModelAttribute("tyre") Tyre tyre, @RequestParam("files") List<MultipartFile> files, BindingResult result,
+                             Model model) {
         Tyre existingTyreByVin = tyreService.findTyreBySerialNumber(tyre.getSerialNumber());
 
 
-        if(existingTyreByVin != null && existingTyreByVin.getSerialNumber() != null && !existingTyreByVin.getSerialNumber().isEmpty()){
+        if (existingTyreByVin != null && existingTyreByVin.getSerialNumber() != null && !existingTyreByVin.getSerialNumber().isEmpty()) {
             result.rejectValue("serialNumber", null,
                     "There is already a tyre registered with the serial number");
         }
 
         Tyre existingTyreByTakId = tyreService.findTyreByTakId(tyre.getTakId());
-        if(existingTyreByTakId != null && existingTyreByTakId.getTakId() != null && !existingTyreByTakId.getTakId().isEmpty()){
+        if (existingTyreByTakId != null && existingTyreByTakId.getTakId() != null && !existingTyreByTakId.getTakId().isEmpty()) {
             result.rejectValue("takId", null,
                     "There is already a tyre registered with the tak id");
         }
 
 
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             model.addAttribute("tyre", tyre);
             model.addAttribute("template", "layout");
             model.addAttribute("title", "Add new Tyre");
@@ -82,6 +90,21 @@ public class TyreController {
 
             // Save the tyre entity to the database
             tyreService.save(tyre);
+            Tyre savedTyre = tyreService.findTyreBySerialNumber(tyre.getSerialNumber());
+            if (!files.isEmpty()) {
+                List<Attachment> uploadedFiles = new ArrayList<>();
+                for (MultipartFile file : files) {
+                    try {
+                        Attachment uploadedFile = attachmentService.uploadFile(file, "tyre", savedTyre.getId());
+                        uploadedFiles.add(uploadedFile);
+                    } catch (IOException e) {
+                        // Handle file upload error.
+                        result.rejectValue("file", null,
+                                "Failed to upload one or more files.");
+                    }
+                }
+
+            }
             return "redirect:/tyre/add?success";
         } catch (Exception e) {
             return "tyre/add";
@@ -90,12 +113,14 @@ public class TyreController {
     }
 
     @GetMapping("/view/{id}")
-    public String viewTruckPage(@PathVariable Long id, Model model) {
+    public String viewTyrePage(@PathVariable Long id, Model model) {
         Optional<Tyre> tyreOptional = tyreService.findTyreById(id);
+        List<Attachment> attachments = attachmentService.findAttachmentsById(id);
 
         if (tyreOptional.isPresent()) {
             Tyre tyre = tyreOptional.get();
             model.addAttribute("tyre", tyre);
+            model.addAttribute("attachments", attachments);
             model.addAttribute("template", "layout");
             model.addAttribute("title", "Tyre");
             model.addAttribute("item", "View");
@@ -125,33 +150,31 @@ public class TyreController {
 
 
     @PostMapping("/update")
-    public String updateTyre(@ModelAttribute Tyre tyre,BindingResult result,
+    public String updateTyre(@ModelAttribute Tyre tyre, BindingResult result,
                              Model model) throws NotFoundException {
         tyreService.update(tyre);
 
         Tyre existingTyreByVin = tyreService.findTyreBySerialNumber(tyre.getSerialNumber());
 
 
-        if(existingTyreByVin != null && existingTyreByVin.getSerialNumber() != null && !existingTyreByVin.getSerialNumber().isEmpty()){
-            if (!Objects.equals(existingTyreByVin.getId(), tyre.getId())){
+        if (existingTyreByVin != null && existingTyreByVin.getSerialNumber() != null && !existingTyreByVin.getSerialNumber().isEmpty()) {
+            if (!Objects.equals(existingTyreByVin.getId(), tyre.getId())) {
                 result.rejectValue("serialNumber", null,
                         "There is already a tyre registered with the serial number");
             }
         }
 
 
-
         Tyre existingTyreByTakId = tyreService.findTyreByTakId(tyre.getTakId());
-        if(existingTyreByTakId != null && existingTyreByTakId.getSerialNumber() != null && !existingTyreByTakId.getSerialNumber().isEmpty()){
-            if (!Objects.equals(existingTyreByTakId.getId(), tyre.getId())){
+        if (existingTyreByTakId != null && existingTyreByTakId.getSerialNumber() != null && !existingTyreByTakId.getSerialNumber().isEmpty()) {
+            if (!Objects.equals(existingTyreByTakId.getId(), tyre.getId())) {
                 result.rejectValue("takId", null,
                         "There is already a tyre registered with the tak id");
             }
         }
 
 
-
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             model.addAttribute("tyre", tyre);
             model.addAttribute("template", "layout");
             model.addAttribute("title", "Tyre");

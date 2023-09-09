@@ -25,6 +25,10 @@ public class Commission {
     @JoinColumn(name = "tyre_id", nullable = false)
     private Tyre tyre;
 
+    @ManyToOne
+    @JoinColumn(name = "truck_id", nullable = false)
+    private Truck truck;
+
     @Column(nullable = false)
     private String reasonForCommissioning;
 
@@ -39,12 +43,20 @@ public class Commission {
     private String responsibleOfficer;
 
     @Column(nullable = false)
-    private String approvalStatus;
+    private String state;
 
     private String initialComments;
 
     private String approvalComments;
 
+    private String completionComments;
+
     @Column(nullable=false)
     private LocalDateTime createdDate;
+
+    private LocalDateTime approvalDate;
+
+    private LocalDateTime completionDate;
+
+    private LocalDateTime cancellationDate;
 }

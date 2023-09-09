@@ -17,10 +17,13 @@ public class DashboardController {
 	@Autowired
 	private TyreService tyreService;
 
+	@Autowired
+	private UserServiceImpl userService;
+
 
 	@GetMapping("/")
 	public String index(Model model) {
-		//if(!userService.isUserAuthenticated()) return "login";
+		//\\if(!userService.isUserAuthenticated()) return "login";
 		List<Tyre> tyres = tyreService.getAllTyres();
 		model.addAttribute("tyres", tyres);
 		model.addAttribute("template", "layout");

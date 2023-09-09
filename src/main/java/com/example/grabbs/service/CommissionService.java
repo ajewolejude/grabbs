@@ -1,6 +1,7 @@
 package com.example.grabbs.service;
 
 import com.example.grabbs.model.Commission;
+import com.example.grabbs.model.Truck;
 import com.example.grabbs.model.Tyre;
 import com.example.grabbs.repository.CommissionRepository;
 import javassist.NotFoundException;
@@ -18,20 +19,25 @@ public class CommissionService {
 
     @Autowired
     private final TyreService tyreService;
+    @Autowired
+    private final TruckService truckService;
 
-    public CommissionService(CommissionRepository commissionRepository, TyreService tyreService) {
+    public CommissionService(CommissionRepository commissionRepository, TyreService tyreService, TruckService truckService) {
         this.commissionRepository = commissionRepository;
         this.tyreService = tyreService;
+        this.truckService = truckService;
     }
 
     public Commission save(Commission commission) throws NotFoundException {
         Tyre existingTyre = tyreService.findTyreById(commission.getTyre().getId()).get();
+        Truck existingTruck = truckService.getTruckById(commission.getTruck().getId()).get();
         // Step 2: Update the state attribute
         existingTyre.setState("COMMISSIONED");
         // Step 3: Save the updated entity back to the database
         tyreService.update(existingTyre);
         commission.setTyre(existingTyre);
-        commission.setApprovalStatus("SUBMITTED");
+        commission.setTruck(existingTruck);
+        commission.setState("SUBMITTED");
         return commissionRepository.save(commission);
     }
 
@@ -55,7 +61,7 @@ public class CommissionService {
         existingCommission.setOdometer(commission.getOdometer());
         existingCommission.setConditionReport(commission.getConditionReport());
         existingCommission.setResponsibleOfficer(commission.getResponsibleOfficer());
-        existingCommission.setApprovalStatus(commission.getApprovalStatus());
+        existingCommission.setState(commission.getState());
         existingCommission.setApprovalComments(commission.getApprovalComments());
 
         commissionRepository.save(existingCommission);
@@ -63,4 +69,21 @@ public class CommissionService {
         return commissionRepository.save(existingCommission);
     }
 
+    public void approve(Commission commission) {
+        commission.setState("APPROVED");
+        commissionRepository.save(commission);
+    }
+    public void complete(Commission commission) {
+        commission.setState("COMPLETED");
+        commissionRepository.save(commission);
+    }
+
+    public void cancel(Commission commission) throws NotFoundException {
+        Tyre existingTyre = tyreService.findTyreById(commission.getTyre().getId()).get();
+        existingTyre.setState("AVAILABLE");
+        // Step 3: Save the updated entity back to the database
+        tyreService.update(existingTyre);
+        commission.setState("CANCELLED");
+        commissionRepository.save(commission);
+    }
 }

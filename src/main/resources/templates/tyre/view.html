@@ -104,10 +104,10 @@
 											<tr>
 												<th scope="row">State:</th>
 												<td>
-													<span class="badge badge-soft-danger" th:if="${truck.state == 'DECOMMISSIONED'}">DECOMMISSIONED</span>
-													<span class="badge badge-soft-info" th:if="${truck.state == 'COMMISSIONED'}">COMMISSIONED</span>
-													<span class="badge badge-soft-warning" th:if="${truck.state == 'UNDER MAINTENANCE'}">UNDER MAINTENANCE</span>
-													<span class="badge badge-soft-success" th:if="${truck.state == 'AVAILABLE'}"> AVAILABLE</span>
+													<span class="badge badge-soft-danger" th:if="${tyre.state == 'DECOMMISSIONED'}">DECOMMISSIONED</span>
+													<span class="badge badge-soft-info" th:if="${tyre.state == 'COMMISSIONED'}">COMMISSIONED</span>
+													<span class="badge badge-soft-warning" th:if="${tyre.state == 'UNDER MAINTENANCE'}">UNDER MAINTENANCE</span>
+													<span class="badge badge-soft-success" th:if="${tyre.state == 'AVAILABLE'}"> AVAILABLE</span>
 												</td>
 											</tr>
 											<tr>
@@ -117,6 +117,70 @@
 											</tbody>
 										</table>
 									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-6 offset-3">
+							<div class="card">
+								<div class="card-body border-bottom">
+									<div class="d-flex align-items-center">
+										<h5 class="mb-0 card-title flex-grow-1">Tyre Attachments</h5>
+									</div>
+								</div>
+								<div class="card-body">
+									<h4 class="card-title mb-8">Attachments</h4>
+
+									<div th:if="${attachments.size() > 0}">
+										<table class="table table-hover">
+											<thead class="thead-light">
+											<tr>
+												<th scope="col">File Name</th>
+												<th scope="col">Link</th>
+												<th scope="col">Actions</th>
+											</tr>
+											</thead>
+											<tbody>
+											<tr th:each="file : ${attachments}">
+												<td>[[${file.filename}]]</td>
+												<td><a th:href="@{'/api/files/download/' + ${file.cloudinaryPublicId}}">Download</a></td>
+												<td>
+													<a th:href="@{'/api/files/delete/' + ${file.id}}" id="btnDelete"
+													   title="Delete this file" class="fa-regular fa-trash-can icon-dark btn-delete"> Delete</a>
+												</td>
+											</tr>
+											</tbody>
+										</table>
+									</div>
+
+									<div th:unless="${attachments.size() > 0}">
+										<span>No files found.</span>
+									</div>
+								</div>
+
+								<div class="modal fade text-center" id="confirmModal">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title">Delete Confirmation</h5>
+												<button type="button" class="close" data-dismiss="modal">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+
+											<div class="modal-body">
+												<span id="confirmText"></span>
+											</div>
+
+											<div class="modal-footer">
+												<a type="button" id="yesBtn" class="btn btn-danger">Yes</a>
+												<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+											</div>
+										</div>
+									</div>
+								</div>
 								</div>
 							</div>
 						</div>
