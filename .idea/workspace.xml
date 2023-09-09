@@ -4,33 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b1b659cc-eec6-4571-ae2c-557dcc39955b" name="Changes" comment="finish commission">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/AttachmentController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/model/Attachment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/model/UploadModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/repository/AttachmentRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/service/AttachmentService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/commission/approve.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/commission/complete.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/configuration/SpringSecurity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/configuration/SpringSecurity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/CommissionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/CommissionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/DashboardController.java" afterDir="false" />
+    <list default="true" id="b1b659cc-eec6-4571-ae2c-557dcc39955b" name="Changes" comment="finished commission">
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/TyreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/TyreController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/model/Commission.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/model/Commission.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/model/Tyre.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/model/Tyre.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/service/CommissionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/service/CommissionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/service/TruckService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/service/TruckService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/commission/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/commission/add.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/commission/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/commission/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/commission/view.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/commission/view.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/head-script.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/head-script.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/sidebar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/tyre/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/tyre/add.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/tyre/view.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/tyre/view.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/user/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/user/profile.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,7 +142,7 @@
       <workItem from="1692364527857" duration="7566000" />
       <workItem from="1692711407142" duration="35304000" />
       <workItem from="1693488905929" duration="17538000" />
-      <workItem from="1693755490451" duration="49722000" />
+      <workItem from="1693755490451" duration="50523000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1693668088733</created>
@@ -218,7 +193,14 @@
       <option name="project" value="LOCAL" />
       <updated>1693779641988</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="finished commission">
+      <created>1694269976388</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1694269976388</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -252,7 +234,8 @@
     <MESSAGE value="fixing code and working on commissions" />
     <MESSAGE value="finish workspace" />
     <MESSAGE value="finish commission" />
-    <option name="LAST_COMMIT_MESSAGE" value="finish commission" />
+    <MESSAGE value="finished commission" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished commission" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -561,6 +544,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/DashboardController.java</url>
           <line>26</line>
           <option name="timeStamp" value="128" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/TyreController.java</url>
+          <line>83</line>
+          <option name="timeStamp" value="130" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

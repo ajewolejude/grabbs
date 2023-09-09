@@ -91,20 +91,20 @@ public class TyreController {
             // Save the tyre entity to the database
             tyreService.save(tyre);
             Tyre savedTyre = tyreService.findTyreBySerialNumber(tyre.getSerialNumber());
-            if (!files.isEmpty()) {
-                List<Attachment> uploadedFiles = new ArrayList<>();
-                for (MultipartFile file : files) {
-                    try {
-                        Attachment uploadedFile = attachmentService.uploadFile(file, "tyre", savedTyre.getId());
-                        uploadedFiles.add(uploadedFile);
-                    } catch (IOException e) {
-                        // Handle file upload error.
-                        result.rejectValue("file", null,
-                                "Failed to upload one or more files.");
-                    }
-                }
-
-            }
+//            if (!files.isEmpty()) {
+//                List<Attachment> uploadedFiles = new ArrayList<>();
+//                for (MultipartFile file : files) {
+//                    try {
+//                        Attachment uploadedFile = attachmentService.uploadFile(file, "tyre", savedTyre.getId());
+//                        uploadedFiles.add(uploadedFile);
+//                    } catch (IOException e) {
+//                        // Handle file upload error.
+//                        result.rejectValue("file", null,
+//                                "Failed to upload one or more files.");
+//                    }
+//                }
+//
+//            }
             return "redirect:/tyre/add?success";
         } catch (Exception e) {
             return "tyre/add";

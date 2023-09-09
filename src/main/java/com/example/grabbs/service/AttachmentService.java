@@ -34,9 +34,9 @@ public class AttachmentService {
     @Autowired
     public AttachmentService(AttachmentRepository attachmentRepository) {
         cloudinary = new Cloudinary(ObjectUtils.asMap(
-                "cloud_name", "dr3e4hcby",
-                "api_key", "134968433492292",
-                "api_secret", "GGICDatGtbncFaV7qz7gUQJGHQ4",
+                "cloud_name", "jhhjhjjhjh",
+                "api_key", "1349jv,vjh,hjbjh68433492292",
+                "api_secret", "bjhbjhbjhj",
                 "secure", true));
         this.attachmentRepository = attachmentRepository;
     }
