@@ -5,41 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b1b659cc-eec6-4571-ae2c-557dcc39955b" name="Changes" comment="fix create tyre">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/configuration/AwsS3ClientConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/DecommissionController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/ProcureController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/model/Decommission.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/repository/DecommissionRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/service/DecommissionService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/service/S3BucketStorageService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/assets/js/deletefile.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/decommission/add.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/decommission/approve.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/decommission/complete.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/decommission/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/decommission/view.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/procure/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/procure/view.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/AttachmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/AttachmentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/TyreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/TyreController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/model/Attachment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/model/Attachment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/repository/AttachmentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/repository/AttachmentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/repository/CommissionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/repository/CommissionRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/repository/TyreRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/repository/TyreRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/service/AttachmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/service/AttachmentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/service/CommissionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/service/CommissionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/service/TyreService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/service/TyreService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/assets/js/pages/datatables.init.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/assets/js/pages/datatables.init.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/commission/approve.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/commission/approve.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/head-script.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/head-script.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/sidebar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/tyre/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/tyre/add.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/tyre/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/tyre/edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/tyre/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/tyre/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/tyre/view.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/tyre/view.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,7 +149,7 @@
       <workItem from="1694512298129" duration="597000" />
       <workItem from="1695215704996" duration="23375000" />
       <workItem from="1695282166853" duration="69000" />
-      <workItem from="1695284412118" duration="7047000" />
+      <workItem from="1695284412118" duration="7715000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1693668088733</created>
@@ -247,7 +214,14 @@
       <option name="project" value="LOCAL" />
       <updated>1694270974420</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="fix create tyre">
+      <created>1695307667553</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1695307667553</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
