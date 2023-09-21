@@ -89,11 +89,11 @@
 												<th scope="row">Odometer:</th>
 												<td th:text="${tyre.odometer}"></td>
 											</tr>
-											<tr th:if="${tyre.state == 'COMMISSIONING'}">
+											<tr>
 												<th scope="row">Commissioning Date:</th>
 												<td th:text="${tyre.commissioningDate}"></td>
 											</tr>
-											<tr th:if="${tyre.state == 'DECOMMISSIONED'}">
+											<tr>
 												<th scope="row">Decommissioning Date:</th>
 												<td th:text="${tyre.decommissioningDate}"></td>
 											</tr>
@@ -135,13 +135,6 @@
 								</div>
 								<div class="card-body">
 									<h4 class="card-title mb-8">Attachments</h4>
-									<div id="success-message" style="display: none;">
-										<div class="alert alert-info alert-dismissible fade show" role="alert">
-											You have successfully deleted a file!
-											<button type="button" class="btn-close" data-bs-dismiss="alert"
-													aria-label="Close"></button>
-										</div>
-									</div>
 
 									<div th:if="${attachments.size() > 0}">
 										<table class="table table-hover">
@@ -157,8 +150,8 @@
 												<td>[[${file.filename}]]</td>
 												<td><a th:href="@{'/api/files/download/' + ${file.keyName}}">Download</a></td>
 												<td>
-													<button onclick="deleteFile(${file.id});" id="btnDelete"
-													   title="Delete this file" class="fa-regular fa-trash-can icon-dark btn-delete"> Delete</button>
+													<a th:href="@{'/api/files/delete/' + ${file.id}}" id="btnDelete"
+													   title="Delete this file" class="fa-regular fa-trash-can icon-dark btn-delete"> Delete</a>
 												</td>
 											</tr>
 											</tbody>
@@ -235,26 +228,6 @@
 
 		<!-- Datatable init js -->
 		<script th:src="@{/assets/js/pages/datatables.init.js}"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-		<script>
-			function deleteFile(id){
-				alert('aded');
-				$.ajax({
-					url: '/api/files/delete/'+id,
-					method: 'DELETE',
-					success: function () {
-						alert('record has been deleted');
-						location.reload();
-					},
-					error: function (error) {
-						alert(error);
-					}
-				})
-			}
-
-		</script>
 	</th:block>
 
 </body>

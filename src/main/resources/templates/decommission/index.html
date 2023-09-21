@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{'layouts/' + ${template}}"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+
+<head>
+	<title>Dashboard | Skote - Admin & Dashboard Template</title>
+</head>
+<th:block layout:fragment="pagecss">
+
+</th:block>
+<body>
+
+	<!-- ============================================================== -->
+	<!-- Start right Content here -->
+	<!-- ============================================================== -->
+	<div layout:fragment="content">
+		<div class="main-content">
+
+			<div class="page-content">
+				<div class="container-fluid">
+
+					<!-- start page title -->
+					<div th:replace="page-title :: topnavbar(${title},${item},${subitem})"></div>
+					<!-- end page title -->
+
+
+					<div class="row">
+						<div class="col-xl-4">
+							<div class="card bg-primary bg-soft">
+								<div>
+									<div class="row">
+										<div class="col-7">
+											<div class="text-primary p-3">
+												<h5 class="text-primary">Welcome Back !</h5>
+												<p>Grabbs Plus Dashboard</p>
+
+												<ul class="ps-3 mb-0">
+													<li class="py-1">10 Approved Decommission</li>
+													<li class="py-1">40 Submitted Decommission</li>
+												</ul>
+											</div>
+										</div>
+										<div class="col-5 align-self-end">
+											<img th:src="@{/assets/images/profile-img.png}" alt="" class="img-fluid">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-8">
+							<div class="row">
+								<div class="col-sm-4">
+									<div class="card">
+										<div class="card-body">
+											<div class="d-flex align-items-center mb-3">
+												<div class="avatar-xs me-3">
+													<span
+															class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-18">
+														<i class="bx bx-copy-alt"></i>
+													</span>
+												</div>
+												<h5 class="font-size-14 mb-0">Submitted</h5>
+											</div>
+											<div class="text-muted mt-4">
+												<h4>10 <i class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
+												<div class="d-flex">
+													<span class="badge badge-soft-success font-size-12"> + 0.2% </span>
+													<span class="ms-2 text-truncate">From previous month</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-4">
+									<div class="card">
+										<div class="card-body">
+											<div class="d-flex align-items-center mb-3">
+												<div class="avatar-xs me-3">
+													<span
+															class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-18">
+														<i class="bx bx-archive-in"></i>
+													</span>
+												</div>
+												<h5 class="font-size-14 mb-0">Approved</h5>
+											</div>
+											<div class="text-muted mt-4">
+												<h4>10 <i class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
+												<div class="d-flex">
+													<span class="badge badge-soft-success font-size-12"> + 0.4% </span>
+													<span class="ms-2 text-truncate">From previous month</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-4">
+									<div class="card">
+										<div class="card-body">
+											<div class="d-flex align-items-center mb-3">
+												<div class="avatar-xs me-3">
+													<span
+															class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-18">
+														<i class="bx bx-purchase-tag-alt"></i>
+													</span>
+												</div>
+												<h5 class="font-size-14 mb-0">Completed</h5>
+											</div>
+											<div class="text-muted mt-4">
+												<h4>4 <i class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
+
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- end row -->
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-body border-bottom">
+									<div class="d-flex align-items-center">
+										<h5 class="mb-0 card-title flex-grow-1">Decommission Request List</h5>
+										<div class="flex-shrink-0">
+											<a type="button" class="btn btn-primary waves-effect waves-light"
+											   href="/decommission/add">Decommission a new tyre</a>
+										</div>
+									</div>
+								</div>
+								<div class="card-body">
+									<div th:if="${param.approved}">
+										<div class="alert alert-info alert-dismissible fade show" role="alert">
+											You have successfully approved a decommission request!
+											<button type="button" class="btn-close" data-bs-dismiss="alert"
+													aria-label="Close"></button>
+										</div>
+									</div>
+									<div th:if="${param.completed}">
+										<div class="alert alert-info alert-dismissible fade show" role="alert">
+											You have successfully Completed a decommission request!
+											<button type="button" class="btn-close" data-bs-dismiss="alert"
+													aria-label="Close"></button>
+										</div>
+									</div>
+									<div th:if="${param.canceled}">
+										<div class="alert alert-info alert-dismissible fade show" role="alert">
+											You have successfully cancelled a decommission request!
+											<button type="button" class="btn-close" data-bs-dismiss="alert"
+													aria-label="Close"></button>
+										</div>
+									</div>
+									<table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
+										<thead>
+										<tr>
+											<th>No</th>
+											<th>Tyre</th>
+											<th>Truck</th>
+											<th>Officer</th>
+											<th>Decommission Date</th>
+											<th>Odometer</th>
+											<th>Status</th>
+											<th>Action</th>
+										</tr>
+										</thead>
+										<tbody>
+										<!-- Use Thymeleaf to iterate over the tyres -->
+										<tr th:each="decommission, iterStat : ${decommissions}">
+											<td th:text="${iterStat.count}"></td>
+											<td th:text="${decommission.truck.takId}"></td>
+											<td th:text="${decommission.tyre.takId}"></td>
+											<td th:text="${decommission.responsibleOfficer}"></td>
+											<td th:text="${decommission.dateOfDecommissioning}"></td>
+											<td th:text="${decommission.odometer}"></td>
+											<td >
+												<span class="badge badge-soft-danger" th:if="${decommission.state == 'CANCELLED'}">CANCELLED</span>
+												<span class="badge  badge-soft-warning" th:if="${decommission.state == 'SUBMITTED'}">SUBMITTED</span>
+												<span class="badge badge-soft-info" th:if="${decommission.state == 'COMPLETED'}">COMPLETED</span>
+												<span class="badge badge-soft-success" th:if="${decommission.state == 'APPROVED'}"> APPROVED</span>
+											</td>
+											<td th:if="${decommission.state != 'CANCELLED'}">
+												<div class="btn-group">
+													<button class="btn btn-secondary dropdown-toggle" type="button"
+															id="defaultDropdown" data-bs-toggle="dropdown" data-bs-auto-close="true"
+															aria-expanded="false">
+														Actions <i class="mdi mdi-chevron-down"></i>
+													</button>
+													<ul class="dropdown-menu" aria-labelledby="defaultDropdown">
+														<li><a class="dropdown-item"  th:href="@{'/decommission/view/' + ${decommission.id}}">View</a></li>
+														<li sec:authorize="hasAnyRole('ADMIN','HOO')">
+															<a class="dropdown-item" th:if="${decommission.state == 'SUBMITTED'}" th:href="@{'approve/' + ${decommission.id}}">Approve</a>
+															<a class="dropdown-item" th:if="${decommission.state == 'APPROVED'}" th:href="@{'complete/' + ${decommission.id}}">Complete</a>
+														</li>
+
+														<li><a class="dropdown-item"  th:href="@{'cancel/' + ${decommission.id}}">Cancel</a></li>
+
+													</ul>
+												</div>
+
+											</td>
+
+										</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div> <!-- end col -->
+					</div>
+					<!--  end row -->
+
+
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-body border-bottom">
+									<div class="d-flex align-items-center">
+										<h5 class="mb-0 card-title flex-grow-1">Decommissioned Tyres</h5>
+									</div>
+								</div>
+								<div class="card-body">
+									<table id="datatable-buttons-1" class="table table-bordered dt-responsive nowrap w-100">
+										<thead>
+										<tr>
+											<th>No</th>
+											<th>S/N</th>
+											<th>TAK ID</th>
+											<th>Brand</th>
+											<th>Model</th>
+											<th>Size</th>
+											<th>Date</th>
+											<th>Position</th>
+											<th>Odometer</th>
+											<th>Status</th>
+											<th>Action</th>
+										</tr>
+										</thead>
+										<tbody>
+										<!-- Use Thymeleaf to iterate over the tyres -->
+										<tr th:each="tyre, iterStat : ${decommissionedTyres}">
+											<td th:text="${iterStat.count}"></td>
+											<td th:text="${tyre.serialNumber}"></td>
+											<td th:text="${tyre.takId}"></td>
+											<td th:text="${tyre.brand}"></td>
+											<td th:text="${tyre.model}"></td>
+											<td th:text="${tyre.size}"></td>
+											<td th:text="${tyre.purchaseDate}"></td>
+											<td th:text="${tyre.position}"></td>
+											<td th:text="${tyre.odometer}"></td>
+											<td >
+												<span class="badge badge-soft-danger" th:if="${tyre.state == 'DECOMMISSIONED'}">DECOMMISSIONED</span>
+												<span class="badge badge-soft-primary" th:if="${tyre.state == 'COMMISSIONING'}">COMMISSIONING</span>
+												<span class="badge badge-soft-info" th:if="${tyre.state == 'COMMISSIONED'}">COMMISSIONED</span>
+												<span class="badge badge-soft-dark" th:if="${tyre.state == 'DECOMMISSIONING'}">DECOMMISSIONING</span>
+												<span class="badge badge-soft-warning" th:if="${tyre.state == 'UNDER MAINTENANCE'}">UNDER MAINTENANCE</span>
+												<span class="badge badge-soft-success" th:if="${tyre.state == 'AVAILABLE'}">AVAILABLE</span>
+												<span class="badge badge-soft-secondary" th:if="${tyre.state == 'TO PROCURE'}">TO PROCURE</span>
+											</td>
+											<td>
+												<div class="btn-group">
+													<button class="btn btn-secondary dropdown-toggle" type="button"
+															id="defaultDropdown" data-bs-toggle="dropdown" data-bs-auto-close="true"
+															aria-expanded="false">
+														Actions <i class="mdi mdi-chevron-down"></i>
+													</button>
+													<ul class="dropdown-menu" aria-labelledby="defaultDropdown">
+														<li><a class="dropdown-item"  th:href="@{'/tyre/view/' + ${tyre.id}}">View</a></li>
+														<li><a class="dropdown-item"  th:href="@{'/tyre/edit/' + ${tyre.id}}">Edit</a></li>
+														<div class="dropdown-divider"></div>
+														<li><a class="dropdown-item" th:href="@{'/tyre/delete/' + ${tyre.id}}">Delete</a></li>
+													</ul>
+												</div>
+
+											</td>
+										</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div> <!-- end col -->
+					</div>
+					<!--  end row -->
+
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-body border-bottom">
+									<div class="d-flex align-items-center">
+										<h5 class="mb-0 card-title flex-grow-1">Commissioned Tyres</h5>
+									</div>
+								</div>
+								<div class="card-body">
+									<table id="datatable-buttons-2" class="table table-bordered dt-responsive nowrap w-100">
+										<thead>
+										<tr>
+											<th>No</th>
+											<th>S/N</th>
+											<th>TAK ID</th>
+											<th>Brand</th>
+											<th>Model</th>
+											<th>Size</th>
+											<th>Date</th>
+											<th>Position</th>
+											<th>Odometer</th>
+											<th>Status</th>
+											<th>Action</th>
+										</tr>
+										</thead>
+										<tbody>
+										<!-- Use Thymeleaf to iterate over the tyres -->
+										<tr th:each="tyre, iterStat : ${commissionedTyres}">
+											<td th:text="${iterStat.count}"></td>
+											<td th:text="${tyre.serialNumber}"></td>
+											<td th:text="${tyre.takId}"></td>
+											<td th:text="${tyre.brand}"></td>
+											<td th:text="${tyre.model}"></td>
+											<td th:text="${tyre.size}"></td>
+											<td th:text="${tyre.purchaseDate}"></td>
+											<td th:text="${tyre.position}"></td>
+											<td th:text="${tyre.odometer}"></td>
+											<td >
+												<span class="badge badge-soft-danger" th:if="${tyre.state == 'DECOMMISSIONED'}">DECOMMISSIONED</span>
+												<span class="badge badge-soft-primary" th:if="${tyre.state == 'COMMISSIONING'}">COMMISSIONING</span>
+												<span class="badge badge-soft-info" th:if="${tyre.state == 'COMMISSIONED'}">COMMISSIONED</span>
+												<span class="badge badge-soft-dark" th:if="${tyre.state == 'DECOMMISSIONING'}">DECOMMISSIONING</span>
+												<span class="badge badge-soft-warning" th:if="${tyre.state == 'UNDER MAINTENANCE'}">UNDER MAINTENANCE</span>
+												<span class="badge badge-soft-success" th:if="${tyre.state == 'AVAILABLE'}">AVAILABLE</span>
+												<span class="badge badge-soft-secondary" th:if="${tyre.state == 'TO PROCURE'}">TO PROCURE</span>
+											</td>
+											<td>
+												<div class="btn-group">
+													<button class="btn btn-secondary dropdown-toggle" type="button"
+															id="defaultDropdown" data-bs-toggle="dropdown" data-bs-auto-close="true"
+															aria-expanded="false">
+														Actions <i class="mdi mdi-chevron-down"></i>
+													</button>
+													<ul class="dropdown-menu" aria-labelledby="defaultDropdown">
+														<li><a class="dropdown-item"  th:href="@{'/tyre/view/' + ${tyre.id}}">View</a></li>
+														<li><a class="dropdown-item"  th:href="@{'/decommission/add/' + ${tyre.id}}">Decommission</a></li>
+													</ul>
+												</div>
+
+											</td>
+										</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div> <!-- end col -->
+					</div>
+					<!--  end row -->
+
+				</div>
+				<!-- container-fluid -->
+			</div>
+			<!-- End Page-content -->
+			<!-- Start footer -->
+			<div th:replace="footer :: footer"></div>
+			<!-- end footer -->
+			
+		</div>
+	</div>
+	<!-- end main content-->
+
+	<!-- END layout-wrapper -->
+
+	<th:block layout:fragment="script">
+		<script th:src="@{/assets/libs/apexcharts/apexcharts.min.js}"></script>
+		<!-- dashboard init -->
+		<script th:src="@{/assets/js/pages/saas-dashboard.init.js}"></script>
+
+		<!-- apexcharts init -->
+		<script th:src="@{/assets/js/pages/apexcharts.init.js}"></script>
+
+
+		<!-- Required datatable js -->
+		<script th:src="@{/assets/libs/datatables.net/js/jquery.dataTables.min.js}"></script>
+		<script th:src="@{/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js}"></script>
+		<!-- Buttons examples -->
+		<script th:src="@{/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js}"></script>
+		<script th:src="@{/assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js}"></script>
+		<script th:src="@{/assets/libs/jszip/jszip.min.js}"></script>
+		<script th:src="@{/assets/libs/pdfmake/build/pdfmake.min.js}"></script>
+		<script th:src="@{/assets/libs/pdfmake/build/vfs_fonts.js}"></script>
+		<script th:src="@{/assets/libs/datatables.net-buttons/js/buttons.html5.min.js}"></script>
+		<script th:src="@{/assets/libs/datatables.net-buttons/js/buttons.print.min.js}"></script>
+		<script th:src="@{/assets/libs/datatables.net-buttons/js/buttons.colVis.min.js}"></script>
+
+		<!-- Responsive examples -->
+		<script th:src="@{/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js}"></script>
+		<script th:src="@{/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js}"></script>
+
+		<!-- Datatable init js -->
+		<script th:src="@{/assets/js/pages/datatables.init.js}"></script>
+	</th:block>
+
+</body>
+
+</html>

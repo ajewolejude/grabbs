@@ -80,4 +80,9 @@ public class TyreService {
     public Tyre findTyreByTakId(String takId) {
         return tyreRepository.findTyreByTakId(takId);
     }
+
+    public List<Tyre> getTyresByState(String state) {
+        return tyreRepository.getTyresByState(state);
+    }
+
 }

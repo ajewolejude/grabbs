@@ -296,9 +296,12 @@
 											<td th:text="${tyre.odometer}"></td>
 											<td >
 												<span class="badge badge-soft-danger" th:if="${tyre.state == 'DECOMMISSIONED'}">DECOMMISSIONED</span>
+												<span class="badge badge-soft-primary" th:if="${tyre.state == 'COMMISSIONING'}">COMMISSIONING</span>
 												<span class="badge badge-soft-info" th:if="${tyre.state == 'COMMISSIONED'}">COMMISSIONED</span>
+												<span class="badge badge-soft-dark" th:if="${tyre.state == 'DECOMMISSIONING'}">DECOMMISSIONING</span>
 												<span class="badge badge-soft-warning" th:if="${tyre.state == 'UNDER MAINTENANCE'}">UNDER MAINTENANCE</span>
-												<span class="badge badge-soft-success" th:if="${tyre.state == 'AVAILABLE'}"> AVAILABLE</span>
+												<span class="badge badge-soft-success" th:if="${tyre.state == 'AVAILABLE'}">AVAILABLE</span>
+												<span class="badge badge-soft-secondary" th:if="${tyre.state == 'TO PROCURE'}">TO PROCURE</span>
 											</td>
 											<td>
 												<div class="btn-group">

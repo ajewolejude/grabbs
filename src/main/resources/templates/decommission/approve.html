@@ -37,8 +37,8 @@
 						<div class="col-xl-12">
 							<div class="card">
 								<div class="card-body">
-									<h5 class="card-title">Commission Submitted, Waiting for Approval</h5>
-									<p class="card-title-desc">This commission has been submitted and is currently waiting for approval of the Head of Operations</p>
+									<h5 class="card-title">Decommission Submitted, Waiting for Approval</h5>
+									<p class="card-title-desc">This decommission has been submitted and is currently waiting for approval of the Head of Operations</p>
 
 									<div class="mt-5">
 										<div class="position-relative m-3">
@@ -67,15 +67,15 @@
 							<div class="card">
 								<div class="card-body border-bottom">
 									<div class="d-flex align-items-center">
-										<h5 class="mb-0 card-title flex-grow-1">Approve Commission</h5>
+										<h5 class="mb-0 card-title flex-grow-1">Approve Decommission</h5>
 										<div class="flex-shrink-0">
 											<a type="button" class="btn btn-primary waves-effect waves-light"
-											   href="/commission/" >Commission List</a>
+											   href="/decommission/" >Decommission List</a>
 										</div>
 									</div>
 								</div>
 								<div class="card-body">
-									<form class="needs-validation" method="post" role="form" th:action="@{/commission/approve}" th:object="${commission}">
+									<form class="needs-validation" method="post" role="form" th:action="@{/decommission/approve}" th:object="${decommission}">
 
 										<div class="mb-3">
 											<input hidden type="text" class="form-control" id="id" name="id" th:field="*{id}" required>
@@ -86,45 +86,32 @@
 												<tbody>
 												<tr>
 													<th scope="row">Tyre:</th>
-													<td th:text="${commission.tyre.takId}"></td>
+													<td th:text="${decommission.tyre.takId}"></td>
 												</tr>
 												<tr>
 													<th scope="row">Truck:</th>
-													<td th:text="${commission.truck.takId}"></td>
+													<td th:text="${decommission.truck.takId}"></td>
 												</tr>
 												<tr>
-													<th scope="row">Reason for Commissioning:</th>
-													<td th:text="${commission.reasonForCommissioning}"></td>
+													<th scope="row">Reason for Decommissioning:</th>
+													<td th:text="${decommission.reasonForDecommissioning}"></td>
 												</tr>
 												<tr>
-													<th scope="row">Commissioning Date:</th>
-													<td th:text="${commission.dateOfCommissioning}"></td>
+													<th scope="row">Decommissioning Date:</th>
+													<td th:text="${decommission.dateOfDecommissioning}"></td>
 												</tr>
 												<tr>
 													<th scope="row">Odometer:</th>
-													<td th:text="${commission.odometer}"></td>
+													<td th:text="${decommission.odometer}"></td>
 												</tr>
 												<tr>
-													<th scope="row">Responsible Officer:</th>
-													<td th:text="${commission.responsibleOfficer}"></td>
-												</tr>
-												<tr>
-													<th scope="row">Initial Comments:</th>
-													<td th:text="${commission.initialComments}"></td>
-												</tr>
-												<tr>
-													<th scope="row">Status:</th>
-													<td>
-														<span class="badge badge-soft-danger" th:if="${commission.state == 'CANCELLED'}">CANCELLED</span>
-														<span class="badge  badge-soft-warning" th:if="${commission.state == 'SUBMITTED'}">SUBMITTED</span>
-														<span class="badge badge-soft-info" th:if="${commission.state == 'COMPLETED'}">COMPLETED</span>
-														<span class="badge badge-soft-success" th:if="${commission.state == 'APPROVED'}"> APPROVED</span>
-													</td>
+													<th scope="row">Decommissioning Officer:</th>
+													<td th:text="${decommission.responsibleOfficer}"></td>
 												</tr>
 
 												<tr>
 													<th scope="row">Created Date:</th>
-													<td th:text="${#temporals.format(commission.createdDate, 'yyyy-MM-dd')}"></td>
+													<td th:text="${#temporals.format(decommission.createdDate, 'yyyy-MM-dd')}"></td>
 												</tr>
 												</tbody>
 											</table>

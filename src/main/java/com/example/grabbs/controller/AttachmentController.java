@@ -4,20 +4,28 @@ import com.example.grabbs.model.Attachment;
 import com.example.grabbs.model.Tyre;
 import com.example.grabbs.service.AttachmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/files")
 public class AttachmentController {
 
     private final AttachmentService attachmentService;
@@ -92,19 +100,62 @@ public class AttachmentController {
 //
 //    }
 
-    @GetMapping("/files/download/{cloudinaryPublicId}")
-    public ResponseEntity<Object> downloadFile(@PathVariable String cloudinaryPublicId) {
-        try {
-            // Generate a secure URL for downloading the file
-            // Generate a secure URL for downloading the file
-            URL downloadUrl = attachmentService.downloadFile(cloudinaryPublicId);
+    @GetMapping("/download/{keyName}")
+    public ResponseEntity<Object> downloadFile(@PathVariable String keyName) {
+        InputStream downloadInputStream = attachmentService.downloadFile(keyName);
 
-            // You can redirect the user to the download URL or send it as a response
-            return ResponseEntity.status(HttpStatus.FOUND).location(downloadUrl.toURI()).build();
-        } catch (IOException | RuntimeException | URISyntaxException e) {
-            // Handle exceptions appropriately (e.g., log errors)
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error while downloading file");
+        if (downloadInputStream != null) {
+
+            // Determine the content type based on the file extension (as you did)
+            Attachment attachment = attachmentService.findAttachmentsByKeyName(keyName);
+            MediaType mediaType = contentType(attachment.getFilename());
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(mediaType);
+            headers.setContentDispositionFormData("attachment", keyName);
+
+            InputStreamResource resource = new InputStreamResource(downloadInputStream);
+
+
+            return ResponseEntity.ok()
+                    .headers(headers)
+                    .body(resource);
+        } else {
+            // Handle the case where the file wasn't found
+            // You can return an error page or a response as needed
+            return ResponseEntity.notFound().build();
         }
     }
+
+    private MediaType contentType(String filename) {
+        String[] fileArrSplit = filename.split("\\.");
+        String fileExtension = fileArrSplit[fileArrSplit.length - 1].toLowerCase(); // Convert to lowercase for case-insensitive comparison
+
+        switch (fileExtension) {
+            case "txt":
+                return MediaType.TEXT_PLAIN;
+            case "png":
+                return MediaType.IMAGE_PNG;
+            case "jpg":
+            case "jpeg":
+                return MediaType.IMAGE_JPEG;
+            case "pdf":
+                return MediaType.APPLICATION_PDF;
+            default:
+                return MediaType.APPLICATION_OCTET_STREAM;
+        }
+    }
+
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteFile(@PathVariable Long id) throws IOException {
+        Optional<Attachment> attachment = attachmentService.findById(id);
+        if (attachment.isPresent()) {
+            attachmentService.deleteFile(attachment.get());
+            return ResponseEntity.ok("File deleted!");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
 }

@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{'layouts/' + ${template}}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<title th:text="${title} +' | Skote - Admin & Dashboard Template'"> </title>
+</head>
+<th:block layout:fragment="pagecss">
+	<!-- DataTables -->
+	<link th:href="@{/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css}" rel="stylesheet" type="text/css" />
+	<link th:href="@{/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css}" rel="stylesheet"
+		type="text/css" />
+
+	<!-- Responsive datatable examples -->
+	<link th:href="@{/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css}" rel="stylesheet"
+		type="text/css" />
+
+	<!-- Plugins css -->
+	<link th:href="@{/assets/libs/dropzone/min/dropzone.min.css}" rel="stylesheet" type="text/css" />
+
+</th:block>
+
+<body>
+
+	<!-- ============================================================== -->
+	<!-- Start right Content here -->
+	<!-- ============================================================== -->
+	<div layout:fragment="content">
+		<div class="main-content">
+			<div class="page-content">
+				<div class="container-fluid">
+					<!-- start page title -->
+					<div th:replace="page-title :: topnavbar(${title},${item},${title})"></div>
+					<!-- end page title -->
+
+					<!--  end row -->
+					<div class="row">
+						<div class="col-6 offset-3">
+							<div class="card">
+								<div class="card-body border-bottom">
+									<div class="d-flex align-items-center">
+										<h5 class="mb-0 card-title flex-grow-1">Decommission a Tyre</h5>
+										<div class="flex-shrink-0">
+											<a type="button" class="btn btn-primary waves-effect waves-light"
+											   href="/decommission/" >Decommission List</a>
+										</div>
+									</div>
+								</div>
+								<div class="card-body">
+									<form class="needs-validation" method="post" role="form" th:action="@{/decommission/create}" th:object="${decommission}">
+										<div th:if="${param.success}">
+											<div class="alert alert-info alert-dismissible fade show" role="alert">
+												You have successfully added a new decommission!
+												<button type="button" class="btn-close" data-bs-dismiss="alert"
+														aria-label="Close"></button>
+											</div>
+										</div>
+
+										<!-- Add Decommission form fields here -->
+										<!-- Replace 'truck' fields with 'decommission' fields -->
+
+
+
+<!--										<div class="mb-3">-->
+<!--											<input  type="text" class="form-control" id="id" name="id" th:field="*{id}" required>-->
+<!--										</div>-->
+
+										<div class="table-responsive">
+											<table class="table table-nowrap mb-0">
+												<tbody>
+												<tr>
+													<th scope="row">Tyre:</th>
+													<td th:text="${commission.tyre.takId}"></td>
+												</tr>
+												<tr>
+													<th scope="row">Truck:</th>
+													<td th:text="${commission.truck.takId}"></td>
+												</tr>
+												<tr>
+													<th scope="row">Reason for Commissioning:</th>
+													<td th:text="${commission.reasonForCommissioning}"></td>
+												</tr>
+												<tr>
+													<th scope="row">Commissioning Date:</th>
+													<td th:text="${commission.dateOfCommissioning}"></td>
+												</tr>
+												<tr>
+													<th scope="row">Odometer:</th>
+													<td th:text="${commission.odometer}"></td>
+												</tr>
+												<tr>
+													<th scope="row">Commissioning Officer:</th>
+													<td th:text="${commission.responsibleOfficer}"></td>
+												</tr>
+
+												<tr>
+													<th scope="row">Created Date:</th>
+													<td th:text="${#temporals.format(commission.createdDate, 'yyyy-MM-dd')}"></td>
+												</tr>
+												</tbody>
+											</table>
+										</div>
+										<hr>
+										<br>
+
+										<div class="mb-3">
+											<input hidden type="text" min="0" class="form-control" id="tyreId" name="tyreId" th:field="*{tyre.id}"  required>
+										</div>
+
+										<div class="mb-3">
+											<input hidden type="text" min="0" class="form-control" id="truckId" name="truckId" th:field="*{truck.id}"  required>
+										</div>
+
+										<div class="mb-3">
+											<label for="reasonForDecommissioning" class="form-label">Reason for Decommissioning</label>
+											<textarea type="text" class="form-control" id="reasonForDecommissioning" name="reasonForDecommissioning" th:field="*{reasonForDecommissioning}" placeholder="Enter reason for decommissioning" required></textarea>
+											<p th:errors="*{reasonForDecommissioning}" class="text-danger" th:if="${#fields.hasErrors('reasonForDecommissioning')}"></p>
+										</div>
+
+
+										<div class="mb-3">
+											<label for="dateOfDecommissioning" class="form-label">Decommissioning Date</label>
+											<input type="date" class="form-control" id="dateOfDecommissioning" name="dateOfDecommissioning" th:field="*{dateOfDecommissioning}" placeholder="Enter decommissioning date" required>
+											<p th:errors="*{dateOfDecommissioning}" class="text-danger" th:if="${#fields.hasErrors('dateOfDecommissioning')}"></p>
+										</div>
+
+
+										<div class="mb-3">
+											<label for="odometer" class="form-label">Odometer</label>
+											<input type="number" min="0" class="form-control" id="odometer" name="odometer" th:field="*{odometer}" placeholder="Enter odometer reading" required>
+											<p th:errors="*{odometer}" class="text-danger" th:if="${#fields.hasErrors('odometer')}"></p>
+										</div>
+
+										<div class="mb-3">
+											<label for="responsibleOfficer" class="form-label">Responsible Officer</label>
+											<select class="form-select" id="responsibleOfficer" name="responsibleOfficer" required>
+												<option value="" selected disabled>Select an officer</option>
+												<option th:each="user : ${users}" th:value="${user.email}" th:text="${user.email}"></option>
+												<!-- Add more popular truck types as needed -->
+											</select>
+											<p th:errors="*{responsibleOfficer}" class="text-danger" th:if="${#fields.hasErrors('responsibleOfficer')}"></p>
+										</div>
+
+										<div class="mb-3">
+											<label for="initialComments" class="form-label">Comments</label>
+											<textarea type="text"  class="form-control" id="initialComments" name="initialComments" th:field="*{initialComments}" placeholder="Enter comments"></textarea>
+											<p th:errors="*{initialComments}" class="text-danger" th:if="${#fields.hasErrors('initialComments')}"></p>
+										</div>
+
+
+										<!-- Add other Decommission fields here -->
+
+										<div class="mt-4 d-grid">
+											<button class="btn btn-primary waves-effect waves-light" type="submit">Submit Decommission</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+					<!-- start file upload -->
+					<div class="row">
+						<div class="col-6 offset-3">
+							<div class="card">
+								<div class="card-body">
+
+									<h4 class="card-title">Decommission Files</h4>
+									<p class="card-title-desc">You can upload all the files relating to this decommission here...
+									</p>
+
+									<div>
+										<form action="#" class="dropzone">
+											<div class="fallback">
+												<input name="file" type="file" multiple="multiple">
+											</div>
+											<div class="dz-message needsclick">
+												<div class="mb-3">
+													<i class="display-4 text-muted bx bxs-cloud-upload"></i>
+												</div>
+
+												<h4>Drop files here or click to upload.</h4>
+											</div>
+										</form>
+									</div>
+
+									<div class="text-center mt-4">
+										<button type="button" class="btn btn-primary waves-effect waves-light">Upload</button>
+									</div>
+								</div>
+							</div>
+						</div> <!-- end col -->
+					</div>
+					<!--  end file upload -->
+				</div>
+				<!-- container-fluid -->
+			</div>
+			<!-- End Page-content -->
+			<!-- Start footer -->
+			<div th:replace="footer :: footer"></div>
+			<!-- end footer -->
+		</div>
+	</div>
+
+	<!-- end main content-->
+
+	<!-- END layout-wrapper -->
+
+	<th:block layout:fragment="script">
+
+		<!-- Required datatable js -->
+		<script th:src="@{/assets/libs/datatables.net/js/jquery.dataTables.min.js}"></script>
+		<script th:src="@{/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js}"></script>
+		<!-- Buttons examples -->
+		<script th:src="@{/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js}"></script>
+		<script th:src="@{/assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js}"></script>
+		<script th:src="@{/assets/libs/jszip/jszip.min.js}"></script>
+		<script th:src="@{/assets/libs/pdfmake/build/pdfmake.min.js}"></script>
+		<script th:src="@{/assets/libs/pdfmake/build/vfs_fonts.js}"></script>
+		<script th:src="@{/assets/libs/datatables.net-buttons/js/buttons.html5.min.js}"></script>
+		<script th:src="@{/assets/libs/datatables.net-buttons/js/buttons.print.min.js}"></script>
+		<script th:src="@{/assets/libs/datatables.net-buttons/js/buttons.colVis.min.js}"></script>
+
+		<!-- Responsive examples -->
+		<script th:src="@{/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js}"></script>
+		<script th:src="@{/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js}"></script>
+
+		<!-- Datatable init js -->
+		<script th:src="@{/assets/js/pages/datatables.init.js}"></script>
+		<!-- Plugins js -->
+		<script th:src="@{/assets/libs/dropzone/min/dropzone.min.js}"></script>
+	</th:block>
+
+</body>

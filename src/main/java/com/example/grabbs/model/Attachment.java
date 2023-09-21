@@ -20,7 +20,8 @@ public class Attachment {
     private Long id;
 
     private String filename;
-    private String cloudinaryPublicId;
+    private String keyName;
+    private String publicUrl;
     private String kind;
     private Long kindId;
 
