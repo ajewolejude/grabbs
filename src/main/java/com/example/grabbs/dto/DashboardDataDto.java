@@ -21,6 +21,9 @@ public class DashboardDataDto {
     private Long numberOfUsers;
     private Double userIncreasePercentage;
     private List<Truck> decommissionedTruckBrands;
+    private int[] seriesData;
+    private String[] categories;
+    private int[] seriesDataAnalytics;
 
     // Getters and setters...
 }

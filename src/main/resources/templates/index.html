@@ -36,8 +36,8 @@
 												<p>Grabbs Plus Dashboard</p>
 
 												<ul class="ps-3 mb-0">
-													<li class="py-1">100 Trucks</li>
-													<li class="py-1">400 Tyres</li>
+													<li class="py-1" id="noOfTruck">100 Trucks</li>
+													<li class="py-1" id="noOfTyre">400 Tyres</li>
 												</ul>
 											</div>
 										</div>
@@ -223,28 +223,28 @@
 												<div class="mt-4">
 													<p class="mb-2 text-truncate"><i
 															class="mdi mdi-circle text-primary me-1"></i> Available </p>
-													<h5>150</h5>
+													<h5 id="noOfAvailable">150</h5>
 												</div>
 											</div>
 											<div class="col-3">
 												<div class="mt-4">
 													<p class="mb-2 text-truncate"><i
 															class="mdi mdi-circle text-success me-1"></i> Commissioned </p>
-													<h5>163</h5>
+													<h5 id="noOfCommissioned">163</h5>
 												</div>
 											</div>
 											<div class="col-3">
 												<div class="mt-4">
 													<p class="mb-2 text-truncate"><i
 															class="mdi mdi-circle text-danger me-1"></i> Decommissioned </p>
-													<h5>32</h5>
+													<h5 id="noOfDecommissioned">32</h5>
 												</div>
 											</div>
 											<div class="col-3">
 												<div class="mt-4">
 													<p class="mb-2 text-truncate"><i
 															class="mdi mdi-circle text-info me-1"></i> Under Maintenance </p>
-													<h5>100</h5>
+													<h5 id="noOfUnderMaintenance">100</h5>
 												</div>
 											</div>
 										</div>
@@ -343,14 +343,33 @@
 	<!-- END layout-wrapper -->
 
 	<th:block layout:fragment="script">
-		<script th:src="@{/assets/libs/apexcharts/apexcharts.min.js}"></script>
-		<!-- dashboard init -->
-		<script th:src="@{/assets/js/pages/saas-dashboard.init.js}"></script>
 
-		<!-- apexcharts init -->
-		<script th:src="@{/assets/js/pages/apexcharts.init.js}"></script>
 
 		<script th:inline="javascript">
+
+			function getChartColorsArray(e) {
+				if (null !== document.getElementById(e)) {
+					var t = document.getElementById(e).getAttribute("data-colors");
+					if (t) return (t = JSON.parse(t)).map(function(e) {
+						var t = e.replace(" ", "");
+						if (-1 === t.indexOf(",")) {
+							var r = getComputedStyle(document.documentElement).getPropertyValue(t);
+							return r || t
+						}
+						var o = e.split(",");
+						return 2 != o.length ? t : "rgba(" + getComputedStyle(document.documentElement).getPropertyValue(o[0]) + "," + o[1] + ")"
+					});
+					console.warn("data-colors Attribute not found on:", e)
+				}
+			}
+
+			// // Assuming you have received data from the backend like this:
+			// var responseData = {
+			// 	categories: ["Continental", "GoodYear", "CEAT", "Toyo Tires"],
+			// 	seriesData: [4, 5, 6, 7]
+			// };
+
+
 			$(document).ready(function() {
 				$.ajax({
 					url: '/dashboard-rest/data',
@@ -358,10 +377,67 @@
 					success: function(data) {
 						// Update the frontend with fetched data
 						$('#numberOfTrucks').text(data.numberOfTrucks);
+						$('#noOfTruck').text(data.numberOfTrucks + " Trucks");
+						$('#noOfTyre').text(data.numberOfTyres + " Tyres");
 						$('#truckIncreasePercentage').text(" +" + data.truckIncreasePercentage + "% ");
 						$('#numberOfTyres').text(data.numberOfTyres);
 						$('#tyreIncreasePercentage').text(" +" + data.tyreIncreasePercentage + "% ");
+						$('#noOfUnderMaintenance').text(data.seriesDataAnalytics[3]);
+						$('#noOfAvailable').text(data.seriesDataAnalytics[0]);
+						$('#noOfDecommissioned').text(data.seriesDataAnalytics[2]);
+						$('#noOfCommissioned').text(data.seriesDataAnalytics[1]);
 						// Update other data...
+
+						var barChartColors = getChartColorsArray("bar_chart");
+						barChartColors && (options = {
+							chart: {
+								height: 350,
+								type: "bar",
+								toolbar: {
+									show: !1
+								}
+							},
+							plotOptions: {
+								bar: {
+									horizontal: !0
+								}
+							},
+							dataLabels: {
+								enabled: !1
+							},
+							series: [{
+								data: data.seriesData
+							}],
+							colors: barChartColors,
+							grid: {
+								borderColor: "#f1f1f1"
+							},
+							xaxis: {
+								categories: data.categories
+							}
+						}, (chart = new ApexCharts(document.querySelector("#bar_chart"), options)).render());
+
+						var options, chart, donutchartColors = getChartColorsArray("donut-chart");
+						donutchartColors && (options = {
+							series: data.seriesDataAnalytics,
+							chart: {
+								type: "donut",
+								height: 262
+							},
+							labels: ["Available", "Commissioned", "Decommissioned", "Under Maintenance"],
+							colors: donutchartColors,
+							legend: {
+								show: !1
+							},
+							plotOptions: {
+								pie: {
+									donut: {
+										size: "70%"
+									}
+								}
+							}
+						}, (chart = new ApexCharts(document.querySelector("#donut-chart"), options)).render());
+
 					},
 					error: function(error) {
 						console.error(error);
@@ -369,6 +445,13 @@
 				});
 			});
 		</script>
+		<script th:src="@{/assets/libs/apexcharts/apexcharts.min.js}"></script>
+		<!-- dashboard init -->
+		<script th:src="@{/assets/js/pages/saas-dashboard.init.js}"></script>
+
+		<!-- apexcharts init -->
+		<script th:src="@{/assets/js/pages/apexcharts.init.js}"></script>
+
 	</th:block>
 
 </body>

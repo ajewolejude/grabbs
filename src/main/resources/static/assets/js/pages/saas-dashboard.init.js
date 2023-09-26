@@ -40,26 +40,26 @@ linechartBasicColors && (options = {
         width: 3
     }
 }, (chart = new ApexCharts(document.querySelector("#line-chart"), options)).render());
-var options, chart, donutchartColors = getChartColorsArray("donut-chart");
-donutchartColors && (options = {
-    series: [150, 163, 32, 100],
-    chart: {
-        type: "donut",
-        height: 262
-    },
-    labels: ["Available", "Commissioned", "Decommissioned", "Under Maintenance"],
-    colors: donutchartColors,
-    legend: {
-        show: !1
-    },
-    plotOptions: {
-        pie: {
-            donut: {
-                size: "70%"
-            }
-        }
-    }
-}, (chart = new ApexCharts(document.querySelector("#donut-chart"), options)).render());
+// var options, chart, donutchartColors = getChartColorsArray("donut-chart");
+// donutchartColors && (options = {
+//     series: [150, 163, 32, 100],
+//     chart: {
+//         type: "donut",
+//         height: 262
+//     },
+//     labels: ["Available", "Commissioned", "Decommissioned", "Under Maintenance"],
+//     colors: donutchartColors,
+//     legend: {
+//         show: !1
+//     },
+//     plotOptions: {
+//         pie: {
+//             donut: {
+//                 size: "70%"
+//             }
+//         }
+//     }
+// }, (chart = new ApexCharts(document.querySelector("#donut-chart"), options)).render());
 var radialoptions1, radialchart1, radialChartColors = getChartColorsArray("radialchart-1");
 radialChartColors && (radialoptions1 = {
     series: [37],

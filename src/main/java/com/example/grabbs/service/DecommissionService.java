@@ -8,6 +8,7 @@ import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -89,5 +90,9 @@ public class DecommissionService {
         tyreService.update(existingTyre);
         decommission.setState("CANCELLED");
         decommissionRepository.save(decommission);
+    }
+
+    public List<Decommission> getByState(String state) {
+        return decommissionRepository.getByState(state);
     }
 }

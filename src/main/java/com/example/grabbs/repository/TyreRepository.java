@@ -17,4 +17,6 @@ public interface TyreRepository extends JpaRepository<Tyre, Long> {
     int countByCreatedDateBetween(LocalDateTime atStartOfDay, LocalDateTime atTime);
 
     List<Tyre> getTyresByState(String state);
+
+    List<Tyre> findByStateOrderByBrandDesc(String state);
 }

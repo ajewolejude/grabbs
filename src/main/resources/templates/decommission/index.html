@@ -26,99 +26,88 @@
 
 
 					<div class="row">
-						<div class="col-xl-4">
-							<div class="card bg-primary bg-soft">
-								<div>
-									<div class="row">
-										<div class="col-7">
-											<div class="text-primary p-3">
-												<h5 class="text-primary">Welcome Back !</h5>
-												<p>Grabbs Plus Dashboard</p>
-
-												<ul class="ps-3 mb-0">
-													<li class="py-1">10 Approved Decommission</li>
-													<li class="py-1">40 Submitted Decommission</li>
-												</ul>
-											</div>
-										</div>
-										<div class="col-5 align-self-end">
-											<img th:src="@{/assets/images/profile-img.png}" alt="" class="img-fluid">
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-8">
-							<div class="row">
-								<div class="col-sm-4">
-									<div class="card">
-										<div class="card-body">
-											<div class="d-flex align-items-center mb-3">
-												<div class="avatar-xs me-3">
+						<div class="col-sm-3">
+							<div class="card">
+								<div class="card-body">
+									<div class="d-flex align-items-center mb-3">
+										<div class="avatar-xs me-3">
 													<span
 															class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-18">
 														<i class="bx bx-copy-alt"></i>
 													</span>
-												</div>
-												<h5 class="font-size-14 mb-0">Submitted</h5>
-											</div>
-											<div class="text-muted mt-4">
-												<h4>10 <i class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
-												<div class="d-flex">
-													<span class="badge badge-soft-success font-size-12"> + 0.2% </span>
-													<span class="ms-2 text-truncate">From previous month</span>
-												</div>
-											</div>
 										</div>
+										<h5 class="font-size-14 mb-0">Submitted</h5>
+									</div>
+									<div class="text-muted mt-4">
+										<span id="numberOfSubmitted">10</span>
 									</div>
 								</div>
+							</div>
+						</div>
 
-								<div class="col-sm-4">
-									<div class="card">
-										<div class="card-body">
-											<div class="d-flex align-items-center mb-3">
-												<div class="avatar-xs me-3">
+						<div class="col-sm-3">
+							<div class="card">
+								<div class="card-body">
+									<div class="d-flex align-items-center mb-3">
+										<div class="avatar-xs me-3">
 													<span
 															class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-18">
 														<i class="bx bx-archive-in"></i>
 													</span>
-												</div>
-												<h5 class="font-size-14 mb-0">Approved</h5>
-											</div>
-											<div class="text-muted mt-4">
-												<h4>10 <i class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
-												<div class="d-flex">
-													<span class="badge badge-soft-success font-size-12"> + 0.4% </span>
-													<span class="ms-2 text-truncate">From previous month</span>
-												</div>
-											</div>
 										</div>
+										<h5 class="font-size-14 mb-0">Approved</h5>
+									</div>
+									<div class="text-muted mt-4">
+										<span id="numberOfApproved">10</span>
+
 									</div>
 								</div>
+							</div>
+						</div>
 
-								<div class="col-sm-4">
-									<div class="card">
-										<div class="card-body">
-											<div class="d-flex align-items-center mb-3">
-												<div class="avatar-xs me-3">
+						<div class="col-sm-3">
+							<div class="card">
+								<div class="card-body">
+									<div class="d-flex align-items-center mb-3">
+										<div class="avatar-xs me-3">
 													<span
 															class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-18">
 														<i class="bx bx-purchase-tag-alt"></i>
 													</span>
-												</div>
-												<h5 class="font-size-14 mb-0">Completed</h5>
-											</div>
-											<div class="text-muted mt-4">
-												<h4>4 <i class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
-
-
-											</div>
 										</div>
+										<h5 class="font-size-14 mb-0">Completed</h5>
+									</div>
+									<div class="text-muted mt-4">
+										<span id="numberOfCompleted" >4</span>
+
+
 									</div>
 								</div>
 							</div>
-							<!-- end row -->
 						</div>
+						<div class="col-sm-3">
+							<div class="card">
+								<div class="card-body">
+									<div class="d-flex align-items-center mb-3">
+										<div class="avatar-xs me-3">
+													<span
+															class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-18">
+														<i class="bx bx-purchase-tag-alt"></i>
+													</span>
+										</div>
+										<h5 class="font-size-14 mb-0">Cancelled</h5>
+									</div>
+									<div class="text-muted mt-4">
+										<span id="numberOfCancelled" >4</span>
+
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+							<!-- end row -->
+
 					</div>
 
 					<div class="row">
@@ -396,6 +385,27 @@
 
 		<!-- Datatable init js -->
 		<script th:src="@{/assets/js/pages/datatables.init.js}"></script>
+
+
+		<script th:inline="javascript">
+			$(document).ready(function() {
+				$.ajax({
+					url: '/dashboard-rest/commission',
+					type: 'GET',
+					success: function(data) {
+						// Update the frontend with fetched data
+						$('#numberOfSubmitted').text(data.numberOfSubmitted + " decommission requests submitted");
+						$('#numberOfApproved').text(data.numberOfApproved + " decommission requests approved");
+						$('#numberOfCancelled').text(data.numberOfCancelled + " decommission requests cancelled");
+						$('#numberOfCompleted').text(data.numberOfCompleted + " decommission requests completed");
+						// Update other data...
+					},
+					error: function(error) {
+						console.error(error);
+					}
+				});
+			});
+		</script>
 	</th:block>
 
 </body>

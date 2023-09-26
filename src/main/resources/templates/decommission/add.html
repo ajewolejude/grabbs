@@ -110,11 +110,17 @@
 										<div class="mb-3">
 											<input hidden type="text" min="0" class="form-control" id="truckId" name="truckId" th:field="*{truck.id}"  required>
 										</div>
-
+										
 										<div class="mb-3">
-											<label for="reasonForDecommissioning" class="form-label">Reason for Decommissioning</label>
-											<textarea type="text" class="form-control" id="reasonForDecommissioning" name="reasonForDecommissioning" th:field="*{reasonForDecommissioning}" placeholder="Enter reason for decommissioning" required></textarea>
-											<p th:errors="*{reasonForDecommissioning}" class="text-danger" th:if="${#fields.hasErrors('reasonForDecommissioning')}"></p>
+										<label for="reasonForDecommissioning" class="form-label">Reason for Decommissioning</label>
+										<select class="form-select" id="reasonForDecommissioning" name="reasonForDecommissioning" required>
+											<option value="" selected disabled>Select a reason</option>
+											<option value="Burst">Burst</option>
+											<option value="Stolen">Stolen</option>
+											<option value="Wear & Tear">Wear & Tear</option>
+											<option value="Pirelli">Others</option>
+										</select>
+										<p th:errors="*{reasonForDecommissioning}" class="text-danger" th:if="${#fields.hasErrors('reasonForDecommissioning')}"></p>
 										</div>
 
 

@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface CommissionRepository extends JpaRepository<Commission, Long> {
     List<Commission> getByTyreIdAndStateOrderByCreatedDateDesc(Long id, String state);
+
+    List<Commission> getByState(String state);
     // You can add custom query methods here if needed
 }

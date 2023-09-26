@@ -85,4 +85,7 @@ public class TyreService {
         return tyreRepository.getTyresByState(state);
     }
 
+    public List<Tyre> findByStateOrderByBrandDesc(String state) {
+        return tyreRepository.findByStateOrderByBrandDesc(state);
+    }
 }

@@ -362,34 +362,8 @@ columnChartDatalabelColors && (options = {
         }
     }
 }, (chart = new ApexCharts(document.querySelector("#column_chart_datalabel"), options)).render());
-var barChartColors = getChartColorsArray("bar_chart");
-barChartColors && (options = {
-    chart: {
-        height: 350,
-        type: "bar",
-        toolbar: {
-            show: !1
-        }
-    },
-    plotOptions: {
-        bar: {
-            horizontal: !0
-        }
-    },
-    dataLabels: {
-        enabled: !1
-    },
-    series: [{
-        data: [380, 430, 450, 475]
-    }],
-    colors: barChartColors,
-    grid: {
-        borderColor: "#f1f1f1"
-    },
-    xaxis: {
-        categories: ["Continental", "GoodYear", "CEAT", "Toyo Tires"]
-    }
-}, (chart = new ApexCharts(document.querySelector("#bar_chart"), options)).render());
+
+
 var mixedChartColors = getChartColorsArray("mixed_chart");
 mixedChartColors && (options = {
     chart: {

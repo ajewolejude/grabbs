@@ -8,6 +8,7 @@ import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -95,5 +96,9 @@ public class CommissionService {
 
     public List<Commission> getByTyreIdAndState(Long tyre_id, String state) {
         return commissionRepository.getByTyreIdAndStateOrderByCreatedDateDesc(tyre_id, state);
+    }
+
+    public List<Commission> getByState(String state) {
+        return commissionRepository.getByState(state);
     }
 }
