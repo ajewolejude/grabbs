@@ -47,8 +47,8 @@ public class DashboardService {
         dashboardData.setNumberOfTyres(numberOfTyres);
 
         List<Object[]>  list = getTop4BrandsWithHighestDecommissionedState();
-        int[] seriesData = new int[4];
-        String[] categories = new String[4];
+        int[] seriesData = new int[list.size()];
+        String[] categories = new String[list.size()];
         for (int i = 0; i < list.size(); i++) {
             Object[] objects =  list.get(i);
             categories[i] = (String) objects[0];
