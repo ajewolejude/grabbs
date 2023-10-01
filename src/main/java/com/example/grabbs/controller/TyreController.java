@@ -1,9 +1,11 @@
 package com.example.grabbs.controller;
 
 import com.example.grabbs.model.Attachment;
+import com.example.grabbs.model.Brand;
 import com.example.grabbs.model.Truck;
 import com.example.grabbs.model.Tyre;
 import com.example.grabbs.service.AttachmentService;
+import com.example.grabbs.service.BrandService;
 import com.example.grabbs.service.TyreService;
 import com.example.grabbs.service.UserServiceImpl;
 import javassist.NotFoundException;
@@ -29,9 +31,11 @@ public class TyreController {
     @Autowired
     private UserServiceImpl userService;
 
-
     @Autowired
     private TyreService tyreService;
+
+    @Autowired
+    private BrandService brandService;
 
     @Autowired
     private AttachmentService attachmentService;
@@ -51,6 +55,8 @@ public class TyreController {
 
     @GetMapping("/add")
     public String createTyreForm(Model model) {
+        List<Brand> brands = brandService.getAllBrandsByTypeAndState("Truck","active");
+        model.addAttribute("brands", brands);
         model.addAttribute("tyre", new Tyre());
         model.addAttribute("template", "layout");
         model.addAttribute("title", "Add new Tyre");

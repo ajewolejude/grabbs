@@ -51,8 +51,6 @@ public class DecommissionController {
 
     @GetMapping("/add/{tyre_id}")
     public String createTyreForm(@PathVariable Long tyre_id, Model model) {
-        List<User> users = userService.getAllUsers();
-
         List<Commission> commission = commissionService.getByTyreIdAndState(tyre_id, "COMPLETED");
         Decommission decommission = new Decommission();
         decommission.setTyre(commission.get(0).getTyre());
@@ -63,7 +61,6 @@ public class DecommissionController {
         model.addAttribute("commission", commission.get(0));
         model.addAttribute("tyres", tyres);
         model.addAttribute("trucks", trucks);
-        model.addAttribute("users", users);
         model.addAttribute("template", "layout");
         model.addAttribute("title", "Decommission a new tyre");
         model.addAttribute("item", "Decommission");
@@ -109,6 +106,7 @@ public class DecommissionController {
         try {
             // Set created date to the current date and time
             decommission.setCreatedDate(LocalDateTime.now());
+            decommission.setResponsibleOfficer(userService.getCurrentUserEmail());
 
             // Save the tyre entity to the database
             Decommission decommission1 = decommissionService.save(decommission);

@@ -24,93 +24,75 @@
 	<!-- ============================================================== -->
 	<div layout:fragment="content">
 		<div class="main-content">
+
 			<div class="page-content">
 				<div class="container-fluid">
+
 					<!-- start page title -->
 					<div th:replace="page-title :: topnavbar(${title},${item},${title})"></div>
 					<!-- end page title -->
 					<div class="row">
-						<div class="col-12">
+						<div class="col-6 offset-3">
 							<div class="card">
 								<div class="card-body border-bottom">
 									<div class="d-flex align-items-center">
-										<h5 class="mb-0 card-title flex-grow-1">Tyre List</h5>
-										<div class="flex-shrink-0">
-											<a type="button" class="btn btn-primary waves-effect waves-light"
-											   href="/tyre/add">Add New Tyre</a>
-										</div>
+										<h5 class="mb-0 card-title flex-grow-1">Brand Details</h5>
 									</div>
 								</div>
 								<div class="card-body">
-									<table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
-										<thead>
-										<tr>
-											<th>No</th>
-											<th>S/N</th>
-											<th>TAK ID</th>
-											<th>Brand</th>
-											<th>Size</th>
-											<th>Date</th>
-											<th>Position</th>
-											<th>Odometer</th>
-											<th>Status</th>
-											<th>Action</th>
-										</tr>
-										</thead>
-										<tbody>
-										<!-- Use Thymeleaf to iterate over the tyres -->
-										<tr th:each="tyre, iterStat : ${tyres}">
-											<td th:text="${iterStat.count}"></td>
-											<td th:text="${tyre.serialNumber}"></td>
-											<td th:text="${tyre.takId}"></td>
-											<td th:text="${tyre.brand}"></td>
-											<td th:text="${tyre.size}"></td>
-											<td th:text="${tyre.purchaseDate}"></td>
-											<td th:text="${tyre.position}"></td>
-											<td th:text="${tyre.odometer}"></td>
-											<td >
-												<span class="badge badge-soft-danger" th:if="${tyre.state == 'DECOMMISSIONED'}">DECOMMISSIONED</span>
-												<span class="badge badge-soft-primary" th:if="${tyre.state == 'COMMISSIONING'}">COMMISSIONING</span>
-												<span class="badge badge-soft-info" th:if="${tyre.state == 'COMMISSIONED'}">COMMISSIONED</span>
-												<span class="badge badge-soft-dark" th:if="${tyre.state == 'DECOMMISSIONING'}">DECOMMISSIONING</span>
-												<span class="badge badge-soft-warning" th:if="${tyre.state == 'UNDER MAINTENANCE'}">UNDER MAINTENANCE</span>
-												<span class="badge badge-soft-success" th:if="${tyre.state == 'AVAILABLE'}">AVAILABLE</span>
-												<span class="badge badge-soft-secondary" th:if="${tyre.state == 'TO PROCURE'}">TO PROCURE</span>
-											</td>
-											<td>
-												<div class="btn-group">
-													<button class="btn btn-secondary dropdown-toggle" type="button"
-															id="defaultDropdown" data-bs-toggle="dropdown" data-bs-auto-close="true"
-															aria-expanded="false">
-														Actions <i class="mdi mdi-chevron-down"></i>
-													</button>
-													<ul class="dropdown-menu" aria-labelledby="defaultDropdown">
-														<li><a class="dropdown-item"  th:href="@{'/tyre/view/' + ${tyre.id}}">View</a></li>
-														<li><a class="dropdown-item"  th:href="@{'/tyre/edit/' + ${tyre.id}}">Edit</a></li>
-														<div class="dropdown-divider"></div>
-														<li><a class="dropdown-item" th:href="@{'/tyre/delete/' + ${tyre.id}}">Delete</a></li>
-													</ul>
-												</div>
+									<h4 class="card-title mb-8">Brand Information</h4>
 
-											</td>
-										</tr>
-										</tbody>
-									</table>
+									<div class="table-responsive">
+										<table class="table table-nowrap mb-0">
+											<tbody>
+											<tr>
+												<th scope="row">Brand Name</th>
+												<td th:text="${brand.brandName}"></td>
+											</tr>
+											<tr>
+												<th scope="row">Brand Type</th>
+												<td th:text="${brand.type}"></td>
+											</tr>
+
+											<tr>
+												<th scope="row">Comments:</th>
+												<td th:text="${brand.comments}"></td>
+											</tr>
+											<tr>
+												<th scope="row">State:</th>
+												<td >
+													<span class="badge badge-soft-success" th:if="${brand.state == 'active'}">active</span>
+													<span class="badge badge-soft-warning" th:if="${brand.state == 'inactive'}">inactive</span>
+												</td>
+											</tr>
+											<tr>
+												<th scope="row">Created Date:</th>
+												<td th:text="${#temporals.format(brand.createdDate, 'dd/MM/yyyy HH:mm')}"></td>
+											</tr>
+											</tbody>
+										</table>
+									</div>
 								</div>
 							</div>
-						</div> <!-- end col -->
+						</div>
 					</div>
+
+					</div>
+
+
+				</div>
 					<!--  end row -->
 				</div>
 				<!-- container-fluid -->
 			</div>
 			<!-- End Page-content -->
+
 			<!-- Start footer -->
 			<div th:replace="footer :: footer"></div>
 			<!-- end footer -->
+
 		</div>
 	</div>
-
 	<!-- end main content-->
 
 	<!-- END layout-wrapper -->
@@ -136,6 +118,26 @@
 
 		<!-- Datatable init js -->
 		<script th:src="@{/assets/js/pages/datatables.init.js}"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+		<script>
+			function deleteFile(id){
+				alert('aded');
+				$.ajax({
+					url: '/api/files/delete/'+id,
+					method: 'DELETE',
+					success: function () {
+						alert('record has been deleted');
+						location.reload();
+					},
+					error: function (error) {
+						alert(error);
+					}
+				})
+			}
+
+		</script>
 	</th:block>
 
 </body>

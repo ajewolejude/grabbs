@@ -1,10 +1,8 @@
 package com.example.grabbs.controller;
 
+import com.example.grabbs.model.*;
 import com.example.grabbs.model.Truck;
-import com.example.grabbs.model.Truck;
-import com.example.grabbs.model.User;
-import com.example.grabbs.service.TruckService;
-import com.example.grabbs.service.UserServiceImpl;
+import com.example.grabbs.service.*;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +24,14 @@ import java.util.Optional;
 public class TruckController {
     @Autowired
     private UserServiceImpl userService;
+    @Autowired
+    private CommissionService commissionService;
+
+    @Autowired
+    private BrandService brandService;
+
+    @Autowired
+    private DecommissionService decommissionService;
 
 
     @Autowired
@@ -46,6 +52,8 @@ public class TruckController {
 
     @GetMapping("/add")
     public String createTruckForm(Model model) {
+        List<Brand> brands = brandService.getAllBrandsByTypeAndState("Truck","active");
+        model.addAttribute("brands", brands);
         model.addAttribute("truck", new Truck());
         model.addAttribute("template", "layout");
         model.addAttribute("title", "Add new Truck");
@@ -94,9 +102,14 @@ public class TruckController {
     public String viewTruckPage(@PathVariable Long id, Model model) {
         Optional<Truck> truckOptional = truckService.getTruckById(id);
 
+        List<Commission> previousCommissions = commissionService.getByTruckId(id);
+        List<Decommission> previousDecommissions = decommissionService.getByTruckId(id);
+
         if (truckOptional.isPresent()) {
             Truck truck = truckOptional.get();
             model.addAttribute("truck", truck);
+            model.addAttribute("previousCommissions", previousCommissions);
+            model.addAttribute("previousDecommissions", previousDecommissions);
             model.addAttribute("template", "layout");
             model.addAttribute("title", "User Profile");
             model.addAttribute("item", "User");

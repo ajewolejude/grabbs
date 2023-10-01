@@ -95,4 +95,7 @@ public class DecommissionService {
     public List<Decommission> getByState(String state) {
         return decommissionRepository.getByState(state);
     }
+    public List<Decommission> getByTruckId(Long truck_id) {
+        return decommissionRepository.getByTruckId(truck_id);
+    }
 }

@@ -123,4 +123,8 @@ public class UserServiceImpl implements UserService {
         role.setName(newRole);
         return roleRepository.save(role);
     }
+    public String getCurrentUserEmail(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return auth.getName();
+    }
 }

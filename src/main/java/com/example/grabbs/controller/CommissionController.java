@@ -1,13 +1,7 @@
 package com.example.grabbs.controller;
 
-import com.example.grabbs.model.Commission;
-import com.example.grabbs.model.Truck;
-import com.example.grabbs.model.Tyre;
-import com.example.grabbs.model.User;
-import com.example.grabbs.service.CommissionService;
-import com.example.grabbs.service.TruckService;
-import com.example.grabbs.service.TyreService;
-import com.example.grabbs.service.UserServiceImpl;
+import com.example.grabbs.model.*;
+import com.example.grabbs.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +19,9 @@ public class CommissionController {
 
     @Autowired
     private CommissionService commissionService;
+
+    @Autowired
+    private DecommissionService decommissionService;
 
     @Autowired
     private UserServiceImpl userService;
@@ -50,12 +47,10 @@ public class CommissionController {
 
     @GetMapping("/add")
     public String createTyreForm(Model model) {
-        List<User> users = userService.getAllUsers();
         List<Tyre> tyres = tyreService.findTyresByState("AVAILABLE");
         List<Truck> trucks = truckService.getAllTrucks();
         model.addAttribute("tyres", tyres);
         model.addAttribute("trucks", trucks);
-        model.addAttribute("users", users);
         model.addAttribute("commission", new Commission());
         model.addAttribute("template", "layout");
         model.addAttribute("title", "Commission a new tyre");
@@ -67,7 +62,12 @@ public class CommissionController {
     @GetMapping("/approve/{id}")
     public String approveCommissionForm(@PathVariable Long id, Model model) {
         Commission commission = commissionService.getCommissionById(id).get();
+        List<Commission> previousCommissions = commissionService.getByTruckId(commission.getTruck().getId());
+        List<Decommission> previousDecommissions = decommissionService.getByTruckId(commission.getTruck().getId());
+
         model.addAttribute("commission", commission);
+        model.addAttribute("previousDecommissions", previousDecommissions);
+        model.addAttribute("previousCommissions", previousCommissions);
         model.addAttribute("template", "layout");
         model.addAttribute("title", "Approve tyre commission");
         model.addAttribute("item", "Commission");
@@ -110,6 +110,7 @@ public class CommissionController {
 
         try {
             // Set created date to the current date and time
+            commission.setResponsibleOfficer(userService.getCurrentUserEmail());
             commission.setCreatedDate(LocalDateTime.now());
 
             // Save the tyre entity to the database
@@ -127,7 +128,6 @@ public class CommissionController {
                                    Model model) {
 
         Commission existingCommission = commissionService.getCommissionById(commission.getId()).get();
-
         if(result.hasErrors()){
             List<User> users = userService.getAllUsers();
             List<Tyre> tyres = tyreService.findTyresByState("AVAILABLE");

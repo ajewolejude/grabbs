@@ -34,9 +34,6 @@ public class Tyre {
     private String brand;
 
     @Column(nullable = false)
-    private String model;
-
-    @Column(nullable = false)
     private String size;
 
     @Column(nullable = false)
@@ -53,6 +50,9 @@ public class Tyre {
     private String position;
 
     private double odometer;
+
+    @Column(nullable = false)
+    private double expectedLifeSpanOdometer;
 
     private LocalDate commissioningDate;
 

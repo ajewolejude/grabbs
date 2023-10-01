@@ -4,9 +4,41 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b1b659cc-eec6-4571-ae2c-557dcc39955b" name="Changes" comment="fix create tyre">
+    <list default="true" id="b1b659cc-eec6-4571-ae2c-557dcc39955b" name="Changes" comment="dashboard work">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/BrandController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/model/Brand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/repository/BrandRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/service/BrandService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/brand/add.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/brand/edit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/brand/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/brand/view.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/CommissionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/CommissionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/DecommissionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/DecommissionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/TruckController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/TruckController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/TyreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/TyreController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/model/Tyre.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/model/Tyre.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/repository/CommissionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/repository/CommissionRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/repository/DecommissionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/repository/DecommissionRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/service/CommissionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/service/CommissionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/service/DecommissionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/service/DecommissionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/service/TyreService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/service/TyreService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/grabbs/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/grabbs/service/UserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/commission/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/commission/add.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/commission/approve.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/commission/approve.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/decommission/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/decommission/add.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/decommission/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/decommission/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/sidebar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/truck/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/truck/add.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/truck/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/truck/edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/truck/view.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/truck/view.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/tyre/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/tyre/add.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/tyre/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/tyre/edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/tyre/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/tyre/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/tyre/view.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/tyre/view.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +94,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/test/java" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/static/assets/js" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/templates" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -75,18 +107,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/resources/static/assets/js" />
       <recent name="$PROJECT_DIR$/src/main/resources/templates" />
+      <recent name="$PROJECT_DIR$/src/main/resources/static/assets/js" />
       <recent name="$PROJECT_DIR$/src/main/resources/templates/commission" />
       <recent name="$PROJECT_DIR$/src/main/resources" />
       <recent name="$PROJECT_DIR$/src/main/resources/templates/truck" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.example.grabbs.controller" />
+      <recent name="com.example.grabbs.dto" />
       <recent name="com.example.grabbs.service" />
       <recent name="com.example.grabbs.repository" />
       <recent name="com.example.grabbs.model" />
-      <recent name="com.example.grabbs.configuration" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.GrabbsApplication">
@@ -149,7 +181,9 @@
       <workItem from="1694512298129" duration="597000" />
       <workItem from="1695215704996" duration="23375000" />
       <workItem from="1695282166853" duration="69000" />
-      <workItem from="1695284412118" duration="7715000" />
+      <workItem from="1695284412118" duration="22992000" />
+      <workItem from="1695726558389" duration="3357000" />
+      <workItem from="1695903928136" duration="11056000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1693668088733</created>
@@ -221,7 +255,49 @@
       <option name="project" value="LOCAL" />
       <updated>1695307667553</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="fix create tyre">
+      <created>1695308619042</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1695308619042</updated>
+    </task>
+    <task id="LOCAL-00012" summary="fix create tyre">
+      <created>1695319927966</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1695319927966</updated>
+    </task>
+    <task id="LOCAL-00013" summary="fix create tyre">
+      <created>1695320337566</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1695320337566</updated>
+    </task>
+    <task id="LOCAL-00014" summary="dashboard work">
+      <created>1695689332533</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1695689332533</updated>
+    </task>
+    <task id="LOCAL-00015" summary="dashboard work">
+      <created>1695689357428</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1695689357428</updated>
+    </task>
+    <task id="LOCAL-00016" summary="dashboard work">
+      <created>1695690212531</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1695690212531</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -257,7 +333,8 @@
     <MESSAGE value="finish commission" />
     <MESSAGE value="finished commission" />
     <MESSAGE value="fix create tyre" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix create tyre" />
+    <MESSAGE value="dashboard work" />
+    <option name="LAST_COMMIT_MESSAGE" value="dashboard work" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -299,37 +376,37 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/TruckController.java</url>
-          <line>66</line>
+          <line>74</line>
           <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/TruckController.java</url>
-          <line>80</line>
+          <line>88</line>
           <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/TruckController.java</url>
-          <line>82</line>
+          <line>90</line>
           <option name="timeStamp" value="30" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/TruckController.java</url>
-          <line>61</line>
+          <line>69</line>
           <option name="timeStamp" value="31" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/TruckController.java</url>
-          <line>71</line>
+          <line>79</line>
           <option name="timeStamp" value="32" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/TruckController.java</url>
-          <line>62</line>
+          <line>70</line>
           <option name="timeStamp" value="34" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/TruckController.java</url>
-          <line>76</line>
+          <line>84</line>
           <option name="timeStamp" value="35" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -399,22 +476,22 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/TruckController.java</url>
-          <line>114</line>
+          <line>127</line>
           <option name="timeStamp" value="51" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/TruckController.java</url>
-          <line>118</line>
+          <line>131</line>
           <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/TruckController.java</url>
-          <line>119</line>
+          <line>132</line>
           <option name="timeStamp" value="53" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/CommissionController.java</url>
-          <line>118</line>
+          <line>119</line>
           <option name="timeStamp" value="57" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -459,27 +536,27 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/TyreController.java</url>
-          <line>63</line>
+          <line>69</line>
           <option name="timeStamp" value="82" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/TyreController.java</url>
-          <line>92</line>
+          <line>98</line>
           <option name="timeStamp" value="83" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/TyreController.java</url>
-          <line>101</line>
+          <line>107</line>
           <option name="timeStamp" value="84" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/TyreController.java</url>
-          <line>107</line>
+          <line>113</line>
           <option name="timeStamp" value="85" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/TyreController.java</url>
-          <line>93</line>
+          <line>99</line>
           <option name="timeStamp" value="89" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -489,7 +566,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/CommissionController.java</url>
-          <line>116</line>
+          <line>117</line>
           <option name="timeStamp" value="110" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -544,17 +621,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/TyreController.java</url>
-          <line>83</line>
+          <line>89</line>
           <option name="timeStamp" value="130" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/TyreController.java</url>
-          <line>97</line>
+          <line>103</line>
           <option name="timeStamp" value="132" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/TyreController.java</url>
-          <line>98</line>
+          <line>104</line>
           <option name="timeStamp" value="133" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -624,42 +701,42 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/DecommissionController.java</url>
-          <line>62</line>
+          <line>60</line>
           <option name="timeStamp" value="161" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/DecommissionController.java</url>
-          <line>63</line>
+          <line>61</line>
           <option name="timeStamp" value="162" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/DecommissionController.java</url>
-          <line>55</line>
+          <line>53</line>
           <option name="timeStamp" value="163" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/DecommissionController.java</url>
-          <line>110</line>
+          <line>107</line>
           <option name="timeStamp" value="164" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/DecommissionController.java</url>
-          <line>105</line>
+          <line>102</line>
           <option name="timeStamp" value="166" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/DecommissionController.java</url>
-          <line>187</line>
+          <line>185</line>
           <option name="timeStamp" value="169" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/DecommissionController.java</url>
-          <line>191</line>
+          <line>189</line>
           <option name="timeStamp" value="170" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/DecommissionController.java</url>
-          <line>198</line>
+          <line>196</line>
           <option name="timeStamp" value="171" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -692,14 +769,59 @@
           <line>150</line>
           <option name="timeStamp" value="181" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/rest/DashboardRestController.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="184" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/service/DashboardService.java</url>
+          <line>120</line>
+          <option name="timeStamp" value="194" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/service/DashboardService.java</url>
+          <line>83</line>
+          <option name="timeStamp" value="198" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/CommissionController.java</url>
+          <line>67</line>
+          <option name="timeStamp" value="199" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/BrandController.java</url>
+          <line>71</line>
+          <option name="timeStamp" value="200" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/BrandController.java</url>
+          <line>73</line>
+          <option name="timeStamp" value="201" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/BrandController.java</url>
+          <line>86</line>
+          <option name="timeStamp" value="202" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/BrandController.java</url>
+          <line>87</line>
+          <option name="timeStamp" value="203" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/grabbs/controller/DecommissionController.java</url>
-          <line>74</line>
+          <line>71</line>
           <properties class="com.example.grabbs.controller.DecommissionController" method="approveCommissionForm">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="168" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/main/resources/static/assets/js/pages/apexcharts.init.js</url>
+          <line>16</line>
+          <option name="timeStamp" value="182" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

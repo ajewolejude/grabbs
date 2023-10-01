@@ -7,6 +7,14 @@
 	<title>Dashboard | Skote - Admin & Dashboard Template</title>
 </head>
 <th:block layout:fragment="pagecss">
+	<!-- DataTables -->
+	<link th:href="@{/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css}" rel="stylesheet" type="text/css" />
+	<link th:href="@{/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css}" rel="stylesheet"
+		  type="text/css" />
+
+	<!-- Responsive datatable examples -->
+	<link th:href="@{/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css}" rel="stylesheet"
+		  type="text/css" />
 
 </th:block>
 <body>
@@ -274,7 +282,6 @@
 											<th>No</th>
 											<th>S/N</th>
 											<th>Brand</th>
-											<th>Model</th>
 											<th>Size</th>
 											<th>Date</th>
 											<th>Position</th>
@@ -289,7 +296,6 @@
 											<td th:text="${iterStat.count}"></td>
 											<td th:text="${tyre.serialNumber}"></td>
 											<td th:text="${tyre.brand}"></td>
-											<td th:text="${tyre.model}"></td>
 											<td th:text="${tyre.size}"></td>
 											<td th:text="${tyre.purchaseDate}"></td>
 											<td th:text="${tyre.position}"></td>
@@ -343,6 +349,27 @@
 	<!-- END layout-wrapper -->
 
 	<th:block layout:fragment="script">
+
+
+		<!-- Required datatable js -->
+		<script th:src="@{/assets/libs/datatables.net/js/jquery.dataTables.min.js}"></script>
+		<script th:src="@{/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js}"></script>
+		<!-- Buttons examples -->
+		<script th:src="@{/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js}"></script>
+		<script th:src="@{/assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js}"></script>
+		<script th:src="@{/assets/libs/jszip/jszip.min.js}"></script>
+		<script th:src="@{/assets/libs/pdfmake/build/pdfmake.min.js}"></script>
+		<script th:src="@{/assets/libs/pdfmake/build/vfs_fonts.js}"></script>
+		<script th:src="@{/assets/libs/datatables.net-buttons/js/buttons.html5.min.js}"></script>
+		<script th:src="@{/assets/libs/datatables.net-buttons/js/buttons.print.min.js}"></script>
+		<script th:src="@{/assets/libs/datatables.net-buttons/js/buttons.colVis.min.js}"></script>
+
+		<!-- Responsive examples -->
+		<script th:src="@{/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js}"></script>
+		<script th:src="@{/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js}"></script>
+
+		<!-- Datatable init js -->
+		<script th:src="@{/assets/js/pages/datatables.init.js}"></script>
 
 
 		<script th:inline="javascript">

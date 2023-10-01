@@ -56,7 +56,7 @@
 
 
 										<div th:if="${param.error}">
-											<div class="alert alert-danger">Invalid Email or Password</div>
+											<div class="alert alert-danger">Try again later.</div>
 										</div>
 
 										<div class="mb-3">
@@ -77,14 +77,8 @@
 											<label for="brand" class="form-label">Brand</label>
 											<select class="form-select" id="brand" name="brand" required>
 												<option value="" selected disabled>Select a tyre brand</option>
-												<option value="Michelin">Michelin</option>
-												<option value="Bridgestone">Bridgestone</option>
-												<option value="Goodyear">Goodyear</option>
-												<option value="Pirelli">Pirelli</option>
-												<option value="Continental">Continental</option>
-												<option value="CEAT">CEAT</option>
-												<option value="Toyo Tires">Toyo Tires</option>
-												<!-- Add more popular tyre makes as needed -->
+												<option th:each="brand : ${brands}" th:value="${brand.brandName}" th:text="${brand.brandName}"></option>
+												<!-- Add more popular truck makes as needed -->
 											</select>
 											<p th:errors="*{brand}" class="text-danger" th:if="${#fields.hasErrors('brand')}"></p>
 										</div>
@@ -114,10 +108,30 @@
 											<label for="position" class="form-label">Tyre Position</label>
 											<select class="form-select" id="position" name="position" required>
 												<option value="" selected disabled>Select a tyre position</option>
-												<option value="Front Left">Front Left</option>
-												<option value="Front Right">Front Right</option>
-												<option value="Rear Left">Rear Left</option>
-												<option value="Rear Right">Rear Right</option>
+												<option value="LS">LS</option>
+												<option value="RS">RS</option>
+												<option value="D1OL">D1OL</option>
+												<option value="D1IL">D1IL</option>
+												<option value="D1IR">D1IR</option>
+												<option value="D1OR">D1OR</option>
+												<option value="D2OL">D2OL</option>
+												<option value="D2IL">D2IL</option>
+												<option value="D2IR">D2IR</option>
+												<option value="D2OR">D2OR</option>
+												<option value="T1OL">T1OL</option>
+												<option value="T1IL">T1IL</option>
+												<option value="T1IR">T1IR</option>
+												<option value="T1OR">T1OR</option>
+												<option value="T2OL">T2OL</option>
+												<option value="T2IL">T2IL</option>
+												<option value="T2IR">T2IR</option>
+												<option value="T2OR">T2OR</option>
+												<option value="T3OL">T3OL</option>
+												<option value="T3IL">T3IL</option>
+												<option value="T3IR">T3IR</option>
+												<option value="T3OR">T3OR</option>
+												<option value="Spare">Spare1</option>
+												<option value="Spare">Spare2</option>
 												<!-- Add more tyre positions as needed -->
 											</select>
 											<p th:errors="*{position}" class="text-danger" th:if="${#fields.hasErrors('position')}"></p>

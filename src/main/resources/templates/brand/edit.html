@@ -15,9 +15,6 @@
 	<link th:href="@{/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css}" rel="stylesheet"
 		type="text/css" />
 
-	<!-- Plugins css -->
-	<link th:href="@{/assets/libs/dropzone/min/dropzone.min.css}" rel="stylesheet" type="text/css" />
-
 </th:block>
 
 <body>
@@ -27,108 +24,94 @@
 	<!-- ============================================================== -->
 	<div layout:fragment="content">
 		<div class="main-content">
+
 			<div class="page-content">
 				<div class="container-fluid">
+
 					<!-- start page title -->
 					<div th:replace="page-title :: topnavbar(${title},${item},${title})"></div>
 					<!-- end page title -->
-
-					<!--  end row -->
 					<div class="row">
 						<div class="col-6 offset-3">
 							<div class="card">
 								<div class="card-body border-bottom">
 									<div class="d-flex align-items-center">
-										<h5 class="mb-0 card-title flex-grow-1">Commission a Tyre</h5>
+										<h5 class="mb-0 card-title flex-grow-1">Brand Details</h5>
 										<div class="flex-shrink-0">
 											<a type="button" class="btn btn-primary waves-effect waves-light"
-											   href="/commission/" >Commission List</a>
+											   href="/brand/" >Brand List</a>
 										</div>
 									</div>
 								</div>
 								<div class="card-body">
-									<form class="needs-validation" method="post" role="form" th:action="@{/commission/create}" th:object="${commission}">
+									<form class="needs-validation" method="post" role="form" th:action="@{/brand/update}" th:object="${brand}">
 										<div th:if="${param.success}">
 											<div class="alert alert-info alert-dismissible fade show" role="alert">
-												You have successfully added a new commission!
+												You have successfully updated this brand!
 												<button type="button" class="btn-close" data-bs-dismiss="alert"
 														aria-label="Close"></button>
 											</div>
 										</div>
 
-										<!-- Add Commission form fields here -->
-										<!-- Replace 'truck' fields with 'commission' fields -->
+										<div class="mb-3">
+											<input hidden type="text" class="form-control" id="id" name="id" th:field="*{id}" required>
+										</div>
 
 
 										<div class="mb-3">
-											<label for="tyre" class="form-label">Tyre</label>
-											<select class="form-select" id="tyre" name="tyre.id" required>
-												<option value="" selected disabled>Select a tyre</option>
-												<option th:each="tyre : ${tyres}" th:value="${tyre.id}" th:text="${tyre.takId}"></option>
+											<label for="brandName" class="form-label">Brand Name</label>
+											<input type="text" class="form-control" id="brandName" name="brandName" th:field="*{brandName}" placeholder="Enter TAK Identification Number" required>
+											<p th:errors="*{brandName}" class="text-danger" th:if="${#fields.hasErrors('brandName')}"></p>
+										</div>
+
+
+										<div class="mb-3">
+											<label for="type" class="form-label">Type</label>
+											<select class="form-select" id="type" name="type" th:field="*{type}" required>
+												<option value="" selected disabled>Select a brand brand</option>
+												<option value="Tyre">Tyre</option>
+												<option value="Truck">Truck</option>
 											</select>
-											<p th:errors="*{tyre.id}" class="text-danger" th:if="${#fields.hasErrors('tyre.id')}"></p>
+											<p th:errors="*{type}" class="text-danger" th:if="${#fields.hasErrors('type')}"></p>
 										</div>
 
 
+
+
 										<div class="mb-3">
-											<label for="truck" class="form-label">Truck</label>
-											<select class="form-select" id="truck" name="truck.id" required>
-												<option value="" selected disabled>Select a truck</option>
-												<option th:each="truck : ${trucks}" th:value="${truck.id}" th:text="${truck.takId}"></option>
+											<label for="state" class="form-label">Status</label>
+											<select class="form-select" id="state" name="state" th:field="*{state}" required>
+												<option value="" selected disabled>Select a brand status</option>
+												<option value="AVAILABLE">AVAILABLE</option>
+												<option value="COMMISSIONED">COMMISSIONED</option>
+												<option value="UNDER MAINTENANCE">UNDER MAINTENANCE</option>
+												<option value="DECOMMISSIONED">DECOMMISSIONED</option>
+												<option value="TO PROCURE">TO PROCURE</option>
 											</select>
-											<p th:errors="*{truck.id}" class="text-danger" th:if="${#fields.hasErrors('truck.id')}"></p>
-										</div>
-
-										<div class="mb-3">
-											<label for="reasonForCommissioning" class="form-label">Reason for Commissioning</label>
-											<textarea type="text" class="form-control" id="reasonForCommissioning" name="reasonForCommissioning" th:field="*{reasonForCommissioning}" placeholder="Enter reason for commissioning" required></textarea>
-											<p th:errors="*{reasonForCommissioning}" class="text-danger" th:if="${#fields.hasErrors('reasonForCommissioning')}"></p>
+											<p th:errors="*{state}" class="text-danger" th:if="${#fields.hasErrors('state')}"></p>
 										</div>
 
 
 										<div class="mb-3">
-											<label for="dateOfCommissioning" class="form-label">Commissioning Date</label>
-											<input type="date" class="form-control" id="dateOfCommissioning" name="dateOfCommissioning" th:field="*{dateOfCommissioning}" placeholder="Enter commissioning date" required>
-											<p th:errors="*{dateOfCommissioning}" class="text-danger" th:if="${#fields.hasErrors('dateOfCommissioning')}"></p>
+											<label for="comments" class="form-label">Comments</label>
+											<textarea type="text" class="form-control" id="comments" name="comments" th:field="*{comments}" placeholder="Enter comments"></textarea>
+											<p th:errors="*{comments}" class="text-danger" th:if="${#fields.hasErrors('comments')}"></p>
 										</div>
 
 
-										<div class="mb-3">
-											<label for="odometer" class="form-label">Odometer</label>
-											<input type="number" min="0" class="form-control" id="odometer" name="odometer" th:field="*{odometer}" placeholder="Enter odometer reading" required>
-											<p th:errors="*{odometer}" class="text-danger" th:if="${#fields.hasErrors('odometer')}"></p>
-										</div>
 
-										<div class="mb-3">
-											<label for="initialComments" class="form-label">Comments</label>
-											<textarea type="text"  class="form-control" id="initialComments" name="initialComments" th:field="*{initialComments}" placeholder="Enter comments"></textarea>
-											<p th:errors="*{initialComments}" class="text-danger" th:if="${#fields.hasErrors('initialComments')}"></p>
-										</div>
-
-
-										<!-- Add other Commission fields here -->
+										<!-- Add more fields for other properties -->
+										<!-- For example, VIN, Make, Model, Brand, Year, Odometer, etc. -->
 
 										<div class="mt-4 d-grid">
-											<button class="btn btn-primary waves-effect waves-light" type="submit">Submit Commission</button>
+											<button class="btn btn-primary waves-effect waves-light" type="submit">Edit Brand</button>
 										</div>
 									</form>
 								</div>
 							</div>
-						</div>
+						</div> <!-- end col -->
 					</div>
-
-
-
-				</div>
-				<!-- container-fluid -->
-			</div>
-			<!-- End Page-content -->
-			<!-- Start footer -->
-			<div th:replace="footer :: footer"></div>
-			<!-- end footer -->
-		</div>
-	</div>
-
+					<!--  end row -->
 	<!-- end main content-->
 
 	<!-- END layout-wrapper -->
@@ -154,8 +137,6 @@
 
 		<!-- Datatable init js -->
 		<script th:src="@{/assets/js/pages/datatables.init.js}"></script>
-		<!-- Plugins js -->
-		<script th:src="@{/assets/libs/dropzone/min/dropzone.min.js}"></script>
 	</th:block>
 
 </body>

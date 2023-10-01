@@ -51,7 +51,6 @@ public class TyreService {
                 .orElseThrow(() -> new NotFoundException("Tyre not found with id: " + tyre.getId()));
 
         existingTyre.setBrand(tyre.getBrand());
-        existingTyre.setModel(tyre.getModel());
         existingTyre.setSize(tyre.getSize());
         existingTyre.setTreadDepth(tyre.getTreadDepth());
         existingTyre.setManufactureDate(tyre.getManufactureDate());
@@ -59,6 +58,7 @@ public class TyreService {
         existingTyre.setPurchasePrice(tyre.getPurchasePrice());
         existingTyre.setPosition(tyre.getPosition());
         existingTyre.setOdometer(tyre.getOdometer());
+        existingTyre.setExpectedLifeSpanOdometer(tyre.getExpectedLifeSpanOdometer());
         existingTyre.setTakId(tyre.getTakId());
         existingTyre.setCommissioningDate(tyre.getCommissioningDate());
         existingTyre.setDecommissioningDate(tyre.getDecommissioningDate());

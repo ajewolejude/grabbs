@@ -37,6 +37,7 @@ public class CommissionService {
         // Step 3: Save the updated entity back to the database
         tyreService.update(existingTyre);
         commission.setTyre(existingTyre);
+        commission.setTyre(existingTyre);
         commission.setTruck(existingTruck);
         commission.setState("SUBMITTED");
         return commissionRepository.save(commission);
@@ -94,8 +95,13 @@ public class CommissionService {
         commissionRepository.save(commission);
     }
 
+
     public List<Commission> getByTyreIdAndState(Long tyre_id, String state) {
         return commissionRepository.getByTyreIdAndStateOrderByCreatedDateDesc(tyre_id, state);
+    }
+
+    public List<Commission> getByTruckId(Long truck_id) {
+        return commissionRepository.getByTruckId(truck_id);
     }
 
     public List<Commission> getByState(String state) {

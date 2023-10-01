@@ -91,12 +91,9 @@
 
 										<div class="mb-3">
 											<label for="brand" class="form-label">Brand</label>
-											<select class="form-select" id="brand" name="brand" th:field="*{brand}"required>
+											<select class="form-select" id="brand" name="brand" required>
 												<option value="" selected disabled>Select a truck brand</option>
-												<option value="Ford">Ford</option>
-												<option value="Chevrolet">Chevrolet</option>
-												<option value="Toyota">Toyota</option>
-												<option value="Dodge">Dodge</option>
+												<option th:each="brand : ${brands}" th:value="${brand.brandName}" th:text="${brand.brandName}"></option>
 												<!-- Add more popular truck makes as needed -->
 											</select>
 											<p th:errors="*{brand}" class="text-danger" th:if="${#fields.hasErrors('brand')}"></p>
@@ -160,39 +157,6 @@
 					</div>
 					<!--  end row -->
 
-					<!-- start file upload -->
-					<div class="row">
-						<div class="col-6 offset-3">
-							<div class="card">
-								<div class="card-body">
-
-									<h4 class="card-title">Truck Files</h4>
-									<p class="card-title-desc">You can upload all the files relating to this truck here...
-									</p>
-
-									<div>
-										<form action="#" class="dropzone">
-											<div class="fallback">
-												<input name="file" type="file" multiple="multiple">
-											</div>
-											<div class="dz-message needsclick">
-												<div class="mb-3">
-													<i class="display-4 text-muted bx bxs-cloud-upload"></i>
-												</div>
-
-												<h4>Drop files here or click to upload.</h4>
-											</div>
-										</form>
-									</div>
-
-									<div class="text-center mt-4">
-										<button type="button" class="btn btn-primary waves-effect waves-light">Upload</button>
-									</div>
-								</div>
-							</div>
-						</div> <!-- end col -->
-					</div>
-					<!--  end file upload -->
 				</div>
 				<!-- container-fluid -->
 			</div>

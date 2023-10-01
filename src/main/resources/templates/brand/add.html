@@ -17,7 +17,6 @@
 
 	<!-- Plugins css -->
 	<link th:href="@{/assets/libs/dropzone/min/dropzone.min.css}" rel="stylesheet" type="text/css" />
-
 </th:block>
 
 <body>
@@ -32,94 +31,82 @@
 					<!-- start page title -->
 					<div th:replace="page-title :: topnavbar(${title},${item},${title})"></div>
 					<!-- end page title -->
-
-					<!--  end row -->
 					<div class="row">
 						<div class="col-6 offset-3">
 							<div class="card">
 								<div class="card-body border-bottom">
 									<div class="d-flex align-items-center">
-										<h5 class="mb-0 card-title flex-grow-1">Commission a Tyre</h5>
+										<h5 class="mb-0 card-title flex-grow-1">Brands</h5>
 										<div class="flex-shrink-0">
 											<a type="button" class="btn btn-primary waves-effect waves-light"
-											   href="/commission/" >Commission List</a>
+											   href="/brand/" >Brand List</a>
 										</div>
 									</div>
 								</div>
 								<div class="card-body">
-									<form class="needs-validation" method="post" role="form" th:action="@{/commission/create}" th:object="${commission}">
+									<form class="needs-validation" method="post" role="form" th:action="@{/brand/create}" th:object="${brand}"
+										  enctype="multipart/form-data">
 										<div th:if="${param.success}">
 											<div class="alert alert-info alert-dismissible fade show" role="alert">
-												You have successfully added a new commission!
+												You have successfully added a new tyre brand!
 												<button type="button" class="btn-close" data-bs-dismiss="alert"
 														aria-label="Close"></button>
 											</div>
 										</div>
 
-										<!-- Add Commission form fields here -->
-										<!-- Replace 'truck' fields with 'commission' fields -->
+
+										<div th:if="${param.error}">
+											<div class="alert alert-danger">Try again later</div>
+										</div>
+
+										<div class="mb-3">
+											<label for="brandName" class="form-label">Brand Name</label>
+											<input type="text" class="form-control" id="brandName" name="brandName" th:field="*{brandName}" placeholder="Enter brand name" required>
+											<p th:errors="*{brandName}" class="text-danger" th:if="${#fields.hasErrors('brandName')}"></p>
+										</div>
+
 
 
 										<div class="mb-3">
-											<label for="tyre" class="form-label">Tyre</label>
-											<select class="form-select" id="tyre" name="tyre.id" required>
-												<option value="" selected disabled>Select a tyre</option>
-												<option th:each="tyre : ${tyres}" th:value="${tyre.id}" th:text="${tyre.takId}"></option>
+											<label for="type" class="form-label">Brand Type</label>
+											<select class="form-select" id="type" name="type" required>
+												<option value="" selected disabled>Select a brand type</option>
+												<option value="Tyre">Tyre</option>
+												<option value="Truck">Truck</option>
 											</select>
-											<p th:errors="*{tyre.id}" class="text-danger" th:if="${#fields.hasErrors('tyre.id')}"></p>
+											<p th:errors="*{type}" class="text-danger" th:if="${#fields.hasErrors('type')}"></p>
 										</div>
 
 
 										<div class="mb-3">
-											<label for="truck" class="form-label">Truck</label>
-											<select class="form-select" id="truck" name="truck.id" required>
-												<option value="" selected disabled>Select a truck</option>
-												<option th:each="truck : ${trucks}" th:value="${truck.id}" th:text="${truck.takId}"></option>
+											<label for="state" class="form-label">Status</label>
+											<select class="form-select" id="state" name="state" required>
+												<option value="" selected disabled>Select status</option>
+												<option value="active">active</option>
+												<option value="inactive">inactive</option>
 											</select>
-											<p th:errors="*{truck.id}" class="text-danger" th:if="${#fields.hasErrors('truck.id')}"></p>
+											<p th:errors="*{state}" class="text-danger" th:if="${#fields.hasErrors('state')}"></p>
 										</div>
 
-										<div class="mb-3">
-											<label for="reasonForCommissioning" class="form-label">Reason for Commissioning</label>
-											<textarea type="text" class="form-control" id="reasonForCommissioning" name="reasonForCommissioning" th:field="*{reasonForCommissioning}" placeholder="Enter reason for commissioning" required></textarea>
-											<p th:errors="*{reasonForCommissioning}" class="text-danger" th:if="${#fields.hasErrors('reasonForCommissioning')}"></p>
-										</div>
 
 
 										<div class="mb-3">
-											<label for="dateOfCommissioning" class="form-label">Commissioning Date</label>
-											<input type="date" class="form-control" id="dateOfCommissioning" name="dateOfCommissioning" th:field="*{dateOfCommissioning}" placeholder="Enter commissioning date" required>
-											<p th:errors="*{dateOfCommissioning}" class="text-danger" th:if="${#fields.hasErrors('dateOfCommissioning')}"></p>
+											<label for="comments" class="form-label">Comments</label>
+											<textarea type="text"  class="form-control" id="comments" name="comments" th:field="*{comments}" placeholder="Enter comments"></textarea>
+											<p th:errors="*{comments}" class="text-danger" th:if="${#fields.hasErrors('comments')}"></p>
 										</div>
 
-
-										<div class="mb-3">
-											<label for="odometer" class="form-label">Odometer</label>
-											<input type="number" min="0" class="form-control" id="odometer" name="odometer" th:field="*{odometer}" placeholder="Enter odometer reading" required>
-											<p th:errors="*{odometer}" class="text-danger" th:if="${#fields.hasErrors('odometer')}"></p>
-										</div>
-
-										<div class="mb-3">
-											<label for="initialComments" class="form-label">Comments</label>
-											<textarea type="text"  class="form-control" id="initialComments" name="initialComments" th:field="*{initialComments}" placeholder="Enter comments"></textarea>
-											<p th:errors="*{initialComments}" class="text-danger" th:if="${#fields.hasErrors('initialComments')}"></p>
-										</div>
-
-
-										<!-- Add other Commission fields here -->
-
+										<br>
 										<div class="mt-4 d-grid">
-											<button class="btn btn-primary waves-effect waves-light" type="submit">Submit Commission</button>
+											<button class="btn btn-primary waves-effect waves-light" type="submit">Add Brand</button>
 										</div>
 									</form>
 								</div>
 							</div>
-						</div>
+						</div> <!-- end col -->
 					</div>
+					<!--  end row -->
 
-
-
-				</div>
 				<!-- container-fluid -->
 			</div>
 			<!-- End Page-content -->
@@ -156,6 +143,62 @@
 		<script th:src="@{/assets/js/pages/datatables.init.js}"></script>
 		<!-- Plugins js -->
 		<script th:src="@{/assets/libs/dropzone/min/dropzone.min.js}"></script>
+		<script>
+			$(document).ready(function () {
+				$('#myDropzone').submit(function (e) {
+					e.preventDefault(); // Prevent the default form submission
+
+					var formData = new FormData();
+					var files = $('#fileInput')[0].files; // Get selected files from file input
+
+					for (var i = 0; i < files.length; i++) {
+						formData.append('files', files[i]); // Use 'files' as the parameter name
+					}
+
+					// Optionally, you can add other form data fields if needed
+					formData.append('kind', 'tyre'); // Add 'kind' field
+
+					$.ajax({
+						type: 'POST',
+						url: '/api/upload',
+						data: formData,
+						processData: false,
+						contentType: false,
+						success: function (data) {
+							// Handle success response
+							displayUploadResults(data);
+						},
+						error: function (error) {
+							// Handle error response
+							console.log("error: ", error);
+							console.error(error);
+						}
+					});
+				});
+
+				function displayUploadResults(data) {
+					var resultsDiv = $('#uploadResults');
+					resultsDiv.empty(); // Clear previous results
+
+					if (data.length > 0) {
+						resultsDiv.append('<p>Uploaded files:</p>');
+						var ul = $('<ul>');
+
+						$.each(data, function (index, fileName) {
+							ul.append($('<li>').text(fileName));
+						});
+
+						resultsDiv.append(ul);
+					} else {
+						resultsDiv.append('<p>No files uploaded.</p>');
+					}
+				}
+			});
+
+
+		</script>
+
+
 	</th:block>
 
 </body>

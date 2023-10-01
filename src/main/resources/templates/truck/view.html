@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{'layouts/' + ${template}}"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
 	<title th:text="${title} +' | Skote - Admin & Dashboard Template'"> </title>
@@ -31,8 +31,149 @@
 					<!-- start page title -->
 					<div th:replace="page-title :: topnavbar(${title},${item},${title})"></div>
 					<!-- end page title -->
+
 					<div class="row">
-						<div class="col-6 offset-3">
+						<div class="col-8 ">
+							<div class="row">
+
+								<div class="col-12 ">
+									<div class="card">
+										<div class="card-body border-bottom">
+											<div class="d-flex align-items-center">
+												<h5 class="mb-0 card-title flex-grow-1">Commission Records</h5>
+											</div>
+										</div>
+										<div class="card-body">
+											<div class="table-responsive">
+												<table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
+													<thead>
+													<tr>
+														<th>No</th>
+														<th>Tyre</th>
+														<th>Truck</th>
+														<th>Officer</th>
+														<th>Commission Date</th>
+														<th>Odometer</th>
+														<th>Status</th>
+														<th>Action</th>
+													</tr>
+													</thead>
+													<tbody>
+													<!-- Use Thymeleaf to iterate over the tyres -->
+													<tr th:each="commission, iterStat : ${previousCommissions}">
+														<td th:text="${iterStat.count}"></td>
+														<td th:text="${commission.truck.takId}"></td>
+														<td th:text="${commission.tyre.takId}"></td>
+														<td th:text="${commission.responsibleOfficer}"></td>
+														<td th:text="${commission.dateOfCommissioning}"></td>
+														<td th:text="${commission.odometer}"></td>
+														<td >
+															<span class="badge badge-soft-danger" th:if="${commission.state == 'CANCELLED'}">CANCELLED</span>
+															<span class="badge  badge-soft-warning" th:if="${commission.state == 'SUBMITTED'}">SUBMITTED</span>
+															<span class="badge badge-soft-info" th:if="${commission.state == 'COMPLETED'}">COMPLETED</span>
+															<span class="badge badge-soft-success" th:if="${commission.state == 'APPROVED'}"> APPROVED</span>
+														</td>
+														<td th:if="${commission.state != 'CANCELLED'}">
+															<div class="btn-group">
+																<button class="btn btn-secondary dropdown-toggle" type="button"
+																		id="defaultDropdown" data-bs-toggle="dropdown" data-bs-auto-close="true"
+																		aria-expanded="false">
+																	Actions <i class="mdi mdi-chevron-down"></i>
+																</button>
+																<ul class="dropdown-menu" aria-labelledby="defaultDropdown">
+																	<li><a class="dropdown-item"  th:href="@{'/commission/view/' + ${commission.id}}">View</a></li>
+																	<li sec:authorize="hasAnyRole('ADMIN','HOO')">
+																		<a class="dropdown-item" th:if="${commission.state == 'SUBMITTED'}" th:href="@{'approve/' + ${commission.id}}">Approve</a>
+																		<a class="dropdown-item" th:if="${commission.state == 'APPROVED'}" th:href="@{'complete/' + ${commission.id}}">Complete</a>
+																	</li>
+
+																	<li><a class="dropdown-item"  th:href="@{'cancel/' + ${commission.id}}">Cancel</a></li>
+
+																</ul>
+															</div>
+
+														</td>
+
+													</tr>
+													</tbody>
+												</table>
+											</div>
+
+										</div>
+									</div>
+								</div> <!-- end col -->
+							</div>
+							<div class="row">
+
+								<div class="col-12 ">
+									<div class="card">
+										<div class="card-body border-bottom">
+											<div class="d-flex align-items-center">
+												<h5 class="mb-0 card-title flex-grow-1">Decommission Records</h5>
+											</div>
+										</div>
+										<div class="card-body">
+											<div class="table-responsive">
+												<table id="datatable-buttons-1" class="table table-bordered dt-responsive nowrap w-100">
+													<thead>
+													<tr>
+														<th>No</th>
+														<th>Tyre</th>
+														<th>Truck</th>
+														<th>Officer</th>
+														<th>Decommission Date</th>
+														<th>Odometer</th>
+														<th>Status</th>
+														<th>Action</th>
+													</tr>
+													</thead>
+													<tbody>
+													<!-- Use Thymeleaf to iterate over the tyres -->
+													<tr th:each="decommission, iterStat : ${previousDecommissions}">
+														<td th:text="${iterStat.count}"></td>
+														<td th:text="${decommission.truck.takId}"></td>
+														<td th:text="${decommission.tyre.takId}"></td>
+														<td th:text="${decommission.responsibleOfficer}"></td>
+														<td th:text="${decommission.dateOfDecommissioning}"></td>
+														<td th:text="${decommission.odometer}"></td>
+														<td >
+															<span class="badge badge-soft-danger" th:if="${decommission.state == 'CANCELLED'}">CANCELLED</span>
+															<span class="badge  badge-soft-warning" th:if="${decommission.state == 'SUBMITTED'}">SUBMITTED</span>
+															<span class="badge badge-soft-info" th:if="${decommission.state == 'COMPLETED'}">COMPLETED</span>
+															<span class="badge badge-soft-success" th:if="${decommission.state == 'APPROVED'}"> APPROVED</span>
+														</td>
+														<td th:if="${decommission.state != 'CANCELLED'}">
+															<div class="btn-group">
+																<button class="btn btn-secondary dropdown-toggle" type="button"
+																		id="defaultDropdown1" data-bs-toggle="dropdown" data-bs-auto-close="true"
+																		aria-expanded="false">
+																	Actions <i class="mdi mdi-chevron-down"></i>
+																</button>
+																<ul class="dropdown-menu" aria-labelledby="defaultDropdown1">
+																	<li><a class="dropdown-item"  th:href="@{'/decommission/view/' + ${decommission.id}}">View</a></li>
+																	<li sec:authorize="hasAnyRole('ADMIN','HOO')">
+																		<a class="dropdown-item" th:if="${decommission.state == 'SUBMITTED'}" th:href="@{'approve/' + ${decommission.id}}">Approve</a>
+																		<a class="dropdown-item" th:if="${decommission.state == 'APPROVED'}" th:href="@{'complete/' + ${decommission.id}}">Complete</a>
+																	</li>
+
+																	<li><a class="dropdown-item"  th:href="@{'cancel/' + ${decommission.id}}">Cancel</a></li>
+
+																</ul>
+															</div>
+
+														</td>
+
+													</tr>
+													</tbody>
+												</table>
+											</div>
+
+										</div>
+									</div>
+								</div> <!-- end col -->
+							</div>
+						</div> <!-- end col -->
+						<div class="col-4">
 							<div class="card">
 								<div class="card-body border-bottom">
 									<div class="d-flex align-items-center">
@@ -104,8 +245,10 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> <!-- end col -->
 					</div>
+					<!--  end row -->
+
 
 				</div>
 					<!--  end row -->

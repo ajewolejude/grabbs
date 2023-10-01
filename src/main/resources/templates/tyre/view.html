@@ -58,10 +58,6 @@
 												<td th:text="${tyre.brand}"></td>
 											</tr>
 											<tr>
-												<th scope="row">Model:</th>
-												<td th:text="${tyre.model}"></td>
-											</tr>
-											<tr>
 												<th scope="row">Size:</th>
 												<td th:text="${tyre.size}"></td>
 											</tr>
@@ -156,10 +152,10 @@
 											<tr th:each="file : ${attachments}">
 												<td>[[${file.filename}]]</td>
 												<td><a th:href="@{'/api/files/download/' + ${file.keyName}}">Download</a></td>
-												<td>
-													<button onclick="deleteFile(${file.id});" id="btnDelete"
-													   title="Delete this file" class="fa-regular fa-trash-can icon-dark btn-delete"> Delete</button>
-												</td>
+<!--												<td>-->
+<!--													<button onclick="deleteFile(${file.id});" id="btnDelete"-->
+<!--													   title="Delete this file" class="fa-regular fa-trash-can icon-dark btn-delete"> Delete</button>-->
+<!--												</td>-->
 											</tr>
 											</tbody>
 										</table>
