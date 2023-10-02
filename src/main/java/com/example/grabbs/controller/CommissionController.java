@@ -62,8 +62,8 @@ public class CommissionController {
     @GetMapping("/approve/{id}")
     public String approveCommissionForm(@PathVariable Long id, Model model) {
         Commission commission = commissionService.getCommissionById(id).get();
-        List<Commission> previousCommissions = commissionService.getByTruckId(commission.getTruck().getId());
-        List<Decommission> previousDecommissions = decommissionService.getByTruckId(commission.getTruck().getId());
+        List<Commission> previousCommissions = commissionService.getByTruckIdOrderByCreatedDateDesc(commission.getTruck().getId());
+        List<Decommission> previousDecommissions = decommissionService.getByTruckIdOrderByCreatedDateDesc(commission.getTruck().getId());
 
         model.addAttribute("commission", commission);
         model.addAttribute("previousDecommissions", previousDecommissions);
@@ -124,10 +124,11 @@ public class CommissionController {
     }
 
     @PostMapping("/approve")
-    public String approveCommission(@ModelAttribute("commission") Commission commission, BindingResult result,
+    public String approveCommission(@ModelAttribute("commission") Commission commission, @RequestParam String action,  BindingResult result,
                                    Model model) {
 
         Commission existingCommission = commissionService.getCommissionById(commission.getId()).get();
+
         if(result.hasErrors()){
             List<User> users = userService.getAllUsers();
             List<Tyre> tyres = tyreService.findTyresByState("AVAILABLE");
@@ -140,17 +141,37 @@ public class CommissionController {
             return "commission/approve";
         }
 
-        try {
-            // Save the tyre entity to the database
-            existingCommission.setApprovalComments(commission.getApprovalComments());
-            existingCommission.setApprovalDate(LocalDateTime.now());
-            commissionService.approve(existingCommission);
-            return "redirect:/commission/?approved";
-        } catch (Exception e) {
-            return "commission/approve";
-            //return new ResponseEntity<>("Error creating tyre", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        // Process the form based on the value of the 'action' parameter
+        if ("reject".equals(action)) {
+            // Handle reject button action
 
+            try {
+                // Save the tyre entity to the database
+                existingCommission.setApprovalComments(commission.getApprovalComments());
+                existingCommission.setRejectionDate(LocalDateTime.now());
+                commissionService.reject(existingCommission);
+                return "redirect:/commission/?rejected";
+            } catch (Exception e) {
+                return "commission/complete";
+                //return new ResponseEntity<>("Error creating tyre", HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+
+        } else {
+            // Handle approve button action
+
+            try {
+                // Save the tyre entity to the database
+                existingCommission.setApprovalComments(commission.getApprovalComments());
+                existingCommission.setApprovalDate(LocalDateTime.now());
+                commissionService.approve(existingCommission);
+                return "redirect:/commission/?approved";
+            } catch (Exception e) {
+                return "commission/approve";
+                //return new ResponseEntity<>("Error creating tyre", HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+        }
     }
 
     @PostMapping("/complete")
@@ -212,6 +233,23 @@ public class CommissionController {
             existingCommission.setCancellationDate(LocalDateTime.now());
             commissionService.cancel(existingCommission);
             return "redirect:/commission/?canceled";
+        } catch (Exception e) {
+            return "commission/complete";
+            //return new ResponseEntity<>("Error creating tyre", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+    @GetMapping("/reject/{id}")
+    public String rejectCommission(@PathVariable Long id, @ModelAttribute("commission") Commission commission) {
+
+        Commission existingCommission = commissionService.getCommissionById(id).get();
+
+        try {
+            // Save the tyre entity to the database
+            existingCommission.setApprovalComments(commission.getApprovalComments());
+            existingCommission.setRejectionDate(LocalDateTime.now());
+            //commissionService.reject(existingCommission);
+            return "redirect:/commission/?rejected";
         } catch (Exception e) {
             return "commission/complete";
             //return new ResponseEntity<>("Error creating tyre", HttpStatus.INTERNAL_SERVER_ERROR);

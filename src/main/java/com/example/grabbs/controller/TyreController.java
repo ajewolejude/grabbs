@@ -55,7 +55,7 @@ public class TyreController {
 
     @GetMapping("/add")
     public String createTyreForm(Model model) {
-        List<Brand> brands = brandService.getAllBrandsByTypeAndState("Truck","active");
+        List<Brand> brands = brandService.getAllBrandsByTypeAndState("Tyre","active");
         model.addAttribute("brands", brands);
         model.addAttribute("tyre", new Tyre());
         model.addAttribute("template", "layout");

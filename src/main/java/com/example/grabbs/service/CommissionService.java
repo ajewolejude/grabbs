@@ -44,7 +44,7 @@ public class CommissionService {
     }
 
     public List<Commission> getAllCommissions() {
-        return commissionRepository.findAll();
+        return commissionRepository.findAllByOrderByCreatedDateDesc();
     }
 
     public Optional<Commission> getCommissionById(Long id) {
@@ -79,6 +79,7 @@ public class CommissionService {
         Tyre existingTyre = tyreService.findTyreById(commission.getTyre().getId()).get();
         // Step 2: Update the state attribute
         existingTyre.setState("COMMISSIONED");
+        existingTyre.setOdometer(commission.getTruck().getOdometer());
 
         tyreService.update(existingTyre);
         commission.setTyre(existingTyre);
@@ -95,6 +96,15 @@ public class CommissionService {
         commissionRepository.save(commission);
     }
 
+    public void reject(Commission commission) throws NotFoundException {
+        Tyre existingTyre = tyreService.findTyreById(commission.getTyre().getId()).get();
+        existingTyre.setState("AVAILABLE");
+        // Step 3: Save the updated entity back to the database
+        tyreService.update(existingTyre);
+        commission.setState("REJECTED");
+        commissionRepository.save(commission);
+    }
+
 
     public List<Commission> getByTyreIdAndState(Long tyre_id, String state) {
         return commissionRepository.getByTyreIdAndStateOrderByCreatedDateDesc(tyre_id, state);
@@ -102,6 +112,10 @@ public class CommissionService {
 
     public List<Commission> getByTruckId(Long truck_id) {
         return commissionRepository.getByTruckId(truck_id);
+    }
+
+    public List<Commission> getByTruckIdOrderByCreatedDateDesc(Long truck_id) {
+        return commissionRepository.getByTruckIdOrderByCreatedDateDesc(truck_id);
     }
 
     public List<Commission> getByState(String state) {

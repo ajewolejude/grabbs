@@ -130,13 +130,6 @@
 											<p th:errors="*{dateOfDecommissioning}" class="text-danger" th:if="${#fields.hasErrors('dateOfDecommissioning')}"></p>
 										</div>
 
-
-										<div class="mb-3">
-											<label for="odometer" class="form-label">Odometer</label>
-											<input type="number" min="0" class="form-control" id="odometer" name="odometer" th:field="*{odometer}" placeholder="Enter odometer reading" required>
-											<p th:errors="*{odometer}" class="text-danger" th:if="${#fields.hasErrors('odometer')}"></p>
-										</div>
-
 										<div class="mb-3">
 											<label for="initialComments" class="form-label">Comments</label>
 											<textarea type="text"  class="form-control" id="initialComments" name="initialComments" th:field="*{initialComments}" placeholder="Enter comments"></textarea>

@@ -205,6 +205,16 @@
 												<th scope="row">Cancellation Date:</th>
 												<td th:text="${#temporals.format(decommission.cancellationDate, 'dd/MM/yyyy HH:mm')}"></td>
 											</tr>
+
+											<tr th:if="${decommission.state == 'REJECTED'}">
+												<th scope="row">Rejection Comments:</th>
+												<td th:text="${decommission.approvalComments}"></td>
+											</tr>
+
+											<tr th:if="${decommission.state == 'REJECTED'}">
+												<th scope="row">Rejection Date:</th>
+												<td th:text="${#temporals.format(decommission.rejectionDate, 'dd/MM/yyyy HH:mm')}"></td>
+											</tr>
 											</tbody>
 										</table>
 									</div>

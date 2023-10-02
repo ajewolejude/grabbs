@@ -111,8 +111,8 @@ public class TruckController {
             model.addAttribute("previousCommissions", previousCommissions);
             model.addAttribute("previousDecommissions", previousDecommissions);
             model.addAttribute("template", "layout");
-            model.addAttribute("title", "User Profile");
-            model.addAttribute("item", "User");
+            model.addAttribute("title", "View Truck");
+            model.addAttribute("item", "View");
             return "truck/view";
         } else {
             // Handle case where truck with given ID is not found
@@ -123,6 +123,9 @@ public class TruckController {
 
     @GetMapping("/edit/{id}")
     public String showEditTruckPage(@PathVariable Long id, Model model) {
+
+        List<Brand> brands = brandService.getAllBrandsByTypeAndState("Truck","active");
+        model.addAttribute("brands", brands);
         Optional<Truck> truck = truckService.getTruckById(id);
 
         if (truck.isPresent()) {

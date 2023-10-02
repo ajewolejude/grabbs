@@ -41,7 +41,7 @@ public class DecommissionService {
     }
 
     public List<Decommission> getAllDecommissions() {
-        return decommissionRepository.findAll();
+        return decommissionRepository.findAllByOrderByCreatedDateDesc();
     }
 
     public Optional<Decommission> getDecommissionById(Long id) {
@@ -76,6 +76,7 @@ public class DecommissionService {
         Tyre existingTyre = tyreService.findTyreById(decommission.getTyre().getId()).get();
         // Step 2: Update the state attribute
         existingTyre.setState("UNDER MAINTENANCE");
+        existingTyre.setOdometer(decommission.getTruck().getOdometer());
 
         tyreService.update(existingTyre);
         decommission.setTyre(existingTyre);
@@ -92,10 +93,24 @@ public class DecommissionService {
         decommissionRepository.save(decommission);
     }
 
+
+    public void reject(Decommission decommission) throws NotFoundException {
+        Tyre existingTyre = tyreService.findTyreById(decommission.getTyre().getId()).get();
+        existingTyre.setState("COMMISSIONED");
+        // Step 3: Save the updated entity back to the database
+        tyreService.update(existingTyre);
+        decommission.setState("REJECTED");
+        decommissionRepository.save(decommission);
+    }
+
+
     public List<Decommission> getByState(String state) {
         return decommissionRepository.getByState(state);
     }
     public List<Decommission> getByTruckId(Long truck_id) {
         return decommissionRepository.getByTruckId(truck_id);
+    }
+    public List<Decommission> getByTruckIdOrderByCreatedDateDesc(Long truck_id) {
+        return decommissionRepository.getByTruckIdOrderByCreatedDateDesc(truck_id);
     }
 }

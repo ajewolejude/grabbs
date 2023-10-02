@@ -29,7 +29,7 @@ public class TruckService{
     }
 
     public List<Truck> getAllTrucks() {
-        return truckRepository.findAll();
+        return truckRepository.findAllByOrderByCreatedDateDesc();
     }
 
     public Optional<Truck> getTruckById(Long id) {
@@ -53,7 +53,6 @@ public class TruckService{
         existingTruck.setTruckType(truck.getTruckType());
         existingTruck.setLicensePlateNumber(truck.getLicensePlateNumber());
         existingTruck.setVin(truck.getVin());
-        existingTruck.setModel(truck.getModel());
         existingTruck.setBrand(truck.getBrand());
         existingTruck.setManufactureDate(truck.getManufactureDate());
         existingTruck.setPurchaseDate(truck.getPurchaseDate());

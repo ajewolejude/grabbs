@@ -69,7 +69,7 @@ public class DecommissionController {
 
 
     @GetMapping("/approve/{id}")
-    public String approveCommissionForm(@PathVariable Long id, Model model) {
+    public String approveDecommissionForm(@PathVariable Long id, Model model) {
         Decommission decommission = decommissionService.getDecommissionById(id).get();
         model.addAttribute("decommission", decommission);
         model.addAttribute("template", "layout");
@@ -79,7 +79,7 @@ public class DecommissionController {
     }
 
     @GetMapping("/complete/{id}")
-    public String completeCommissionForm(@PathVariable Long id, Model model) {
+    public String completeDecommissionForm(@PathVariable Long id, Model model) {
         Decommission decommission = decommissionService.getDecommissionById(id).get();
         model.addAttribute("decommission", decommission);
         model.addAttribute("template", "layout");
@@ -119,48 +119,71 @@ public class DecommissionController {
     }
 
     @PostMapping("/approve")
-    public String approveCommission(@ModelAttribute("decommission") Decommission decommission, BindingResult result,
+    public String approveCommission(@ModelAttribute("decommission") Decommission decommission,  @RequestParam String action, BindingResult result,
                                    Model model) {
 
-        Decommission existingCommission = decommissionService.getDecommissionById(decommission.getId()).get();
+        Decommission existingDecommission = decommissionService.getDecommissionById(decommission.getId()).get();
 
         if(result.hasErrors()){
             List<User> users = userService.getAllUsers();
             List<Tyre> tyres = tyreService.findTyresByState("AVAILABLE");
             model.addAttribute("tyres", tyres);
             model.addAttribute("users", users);
-            model.addAttribute("decommission", existingCommission);
+            model.addAttribute("decommission", existingDecommission);
             model.addAttribute("template", "layout");
             model.addAttribute("title", "Decommission a new tyre");
             model.addAttribute("item", "Decommission");
             return "decommission/approve";
         }
 
-        try {
-            // Save the tyre entity to the database
-            existingCommission.setApprovalComments(decommission.getApprovalComments());
-            existingCommission.setApprovalDate(LocalDateTime.now());
-            decommissionService.approve(existingCommission);
-            return "redirect:/decommission/?approved";
-        } catch (Exception e) {
-            return "decommission/approve";
-            //return new ResponseEntity<>("Error creating tyre", HttpStatus.INTERNAL_SERVER_ERROR);
+        // Process the form based on the value of the 'action' parameter
+        if ("reject".equals(action)) {
+            // Handle reject button action
+
+            try {
+                // Save the tyre entity to the database
+                existingDecommission.setRejectionDate(LocalDateTime.now());
+                decommissionService.reject(existingDecommission);
+                return "redirect:/decommission/?canceled";
+            } catch (Exception e) {
+                return "decommission/complete";
+                //return new ResponseEntity<>("Error creating tyre", HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+
+        } else {
+            // Handle approve button action
+
+            try {
+                // Save the tyre entity to the database
+                existingDecommission.setApprovalComments(decommission.getApprovalComments());
+                existingDecommission.setApprovalDate(LocalDateTime.now());
+                decommissionService.approve(existingDecommission);
+                return "redirect:/decommission/?approved";
+            } catch (Exception e) {
+                return "decommission/approve";
+                //return new ResponseEntity<>("Error creating tyre", HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
         }
+
+
+
 
     }
 
     @PostMapping("/complete")
-    public String completeCommission(@ModelAttribute("decommission") Decommission decommission, BindingResult result,
+    public String completeDecommission(@ModelAttribute("decommission") Decommission decommission, BindingResult result,
                                    Model model) {
 
-        Decommission existingCommission = decommissionService.getDecommissionById(decommission.getId()).get();
+        Decommission existingDecommission = decommissionService.getDecommissionById(decommission.getId()).get();
 
         if(result.hasErrors()){
             List<User> users = userService.getAllUsers();
             List<Tyre> tyres = tyreService.findTyresByState("AVAILABLE");
             model.addAttribute("tyres", tyres);
             model.addAttribute("users", users);
-            model.addAttribute("decommission", existingCommission);
+            model.addAttribute("decommission", existingDecommission);
             model.addAttribute("template", "layout");
             model.addAttribute("title", "Decommission a new tyre");
             model.addAttribute("item", "Decommission");
@@ -169,9 +192,9 @@ public class DecommissionController {
 
         try {
             // Save the tyre entity to the database
-            existingCommission.setCompletionComments(decommission.getCompletionComments());
-            existingCommission.setCompletionDate(LocalDateTime.now());
-            decommissionService.complete(existingCommission);
+            existingDecommission.setCompletionComments(decommission.getCompletionComments());
+            existingDecommission.setCompletionDate(LocalDateTime.now());
+            decommissionService.complete(existingDecommission);
             return "redirect:/decommission/?completed";
         } catch (Exception e) {
             return "decommission/complete";
@@ -182,7 +205,7 @@ public class DecommissionController {
 
 
     @GetMapping("/view/{id}")
-    public String viewCommissionPage(@PathVariable Long id, Model model) {
+    public String viewDecommissionPage(@PathVariable Long id, Model model) {
         Optional<Decommission> decommissionOptional = decommissionService.getDecommissionById(id);
 
         if (decommissionOptional.isPresent()) {
@@ -199,14 +222,14 @@ public class DecommissionController {
 
     }
     @GetMapping("/cancel/{id}")
-    public String cancelCommission(@PathVariable Long id) {
+    public String cancelDecommission(@PathVariable Long id) {
 
-        Decommission existingCommission = decommissionService.getDecommissionById(id).get();
+        Decommission existingDecommission = decommissionService.getDecommissionById(id).get();
 
         try {
             // Save the tyre entity to the database
-            existingCommission.setCancellationDate(LocalDateTime.now());
-            decommissionService.cancel(existingCommission);
+            existingDecommission.setCancellationDate(LocalDateTime.now());
+            decommissionService.cancel(existingDecommission);
             return "redirect:/decommission/?canceled";
         } catch (Exception e) {
             return "decommission/complete";
@@ -215,5 +238,22 @@ public class DecommissionController {
 
     }
 
+
+    @GetMapping("/reject/{id}")
+    public String rejectDecommission(@PathVariable Long id) {
+
+        Decommission existingDecommission = decommissionService.getDecommissionById(id).get();
+
+        try {
+            // Save the tyre entity to the database
+            existingDecommission.setRejectionDate(LocalDateTime.now());
+            decommissionService.reject(existingDecommission);
+            return "redirect:/decommission/?canceled";
+        } catch (Exception e) {
+            return "decommission/complete";
+            //return new ResponseEntity<>("Error creating tyre", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
 
 }

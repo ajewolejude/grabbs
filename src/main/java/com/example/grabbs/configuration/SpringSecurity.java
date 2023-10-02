@@ -38,6 +38,11 @@ public class SpringSecurity extends WebSecurityConfigurerAdapter {
                                 .antMatchers("/auth/login").permitAll()
                                 .antMatchers("/user/").hasAnyRole("ADMIN", "HOO")
                                 .antMatchers("/").authenticated()
+                                .antMatchers("/commission/**").authenticated()
+                                .antMatchers("/tyre/**").authenticated()
+                                .antMatchers("/truck/**").authenticated()
+                                .antMatchers("/brand/**").authenticated()
+                                .antMatchers("/decommission/**").authenticated()
                                 .antMatchers("/user/**").authenticated()
                 )
                 .formLogin(form -> form

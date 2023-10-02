@@ -25,7 +25,7 @@ public class TyreService {
 
 
     public List<Tyre> getAllTyres() {
-        return tyreRepository.findAll();
+        return tyreRepository.findAllByOrderByCreatedDateDesc();
     }
 
     public Optional<Tyre> findTyreById(Long id) {
@@ -82,7 +82,7 @@ public class TyreService {
     }
 
     public List<Tyre> getTyresByState(String state) {
-        return tyreRepository.getTyresByState(state);
+        return tyreRepository.getTyresByStateOrderByCreatedDateDesc(state);
     }
 
     public List<Tyre> findByStateOrderByBrandDesc(String state) {

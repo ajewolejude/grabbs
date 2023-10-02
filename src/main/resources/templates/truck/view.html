@@ -49,8 +49,8 @@
 													<thead>
 													<tr>
 														<th>No</th>
-														<th>Tyre</th>
 														<th>Truck</th>
+														<th>Tyre</th>
 														<th>Officer</th>
 														<th>Commission Date</th>
 														<th>Odometer</th>
@@ -83,11 +83,11 @@
 																<ul class="dropdown-menu" aria-labelledby="defaultDropdown">
 																	<li><a class="dropdown-item"  th:href="@{'/commission/view/' + ${commission.id}}">View</a></li>
 																	<li sec:authorize="hasAnyRole('ADMIN','HOO')">
-																		<a class="dropdown-item" th:if="${commission.state == 'SUBMITTED'}" th:href="@{'approve/' + ${commission.id}}">Approve</a>
-																		<a class="dropdown-item" th:if="${commission.state == 'APPROVED'}" th:href="@{'complete/' + ${commission.id}}">Complete</a>
+																		<a class="dropdown-item" th:if="${commission.state == 'SUBMITTED'}" th:href="@{'/commission/approve/' + ${commission.id}}">Approve</a>
+																		<a class="dropdown-item" th:if="${commission.state == 'APPROVED'}" th:href="@{'/commission/complete/' + ${commission.id}}">Complete</a>
 																	</li>
 
-																	<li><a class="dropdown-item"  th:href="@{'cancel/' + ${commission.id}}">Cancel</a></li>
+																	<li><a class="dropdown-item"  th:if="${commission.state != 'COMPLETED' && commission.state != 'REJECTED'}" th:href="@{'/commission/cancel/' + ${commission.id}}">Cancel</a></li>
 
 																</ul>
 															</div>
@@ -118,8 +118,8 @@
 													<thead>
 													<tr>
 														<th>No</th>
-														<th>Tyre</th>
 														<th>Truck</th>
+														<th>Tyre</th>
 														<th>Officer</th>
 														<th>Decommission Date</th>
 														<th>Odometer</th>
@@ -152,11 +152,11 @@
 																<ul class="dropdown-menu" aria-labelledby="defaultDropdown1">
 																	<li><a class="dropdown-item"  th:href="@{'/decommission/view/' + ${decommission.id}}">View</a></li>
 																	<li sec:authorize="hasAnyRole('ADMIN','HOO')">
-																		<a class="dropdown-item" th:if="${decommission.state == 'SUBMITTED'}" th:href="@{'approve/' + ${decommission.id}}">Approve</a>
-																		<a class="dropdown-item" th:if="${decommission.state == 'APPROVED'}" th:href="@{'complete/' + ${decommission.id}}">Complete</a>
+																		<a class="dropdown-item" th:if="${decommission.state == 'SUBMITTED'}" th:href="@{'/decommission/approve/' + ${decommission.id}}">Approve</a>
+																		<a class="dropdown-item" th:if="${decommission.state == 'APPROVED'}" th:href="@{'/decommission/complete/' + ${decommission.id}}">Complete</a>
 																	</li>
 
-																	<li><a class="dropdown-item"  th:href="@{'cancel/' + ${decommission.id}}">Cancel</a></li>
+																	<li><a class="dropdown-item"  th:href="@{'/decommission/cancel/' + ${decommission.id}}">Cancel</a></li>
 
 																</ul>
 															</div>
@@ -226,8 +226,8 @@
 											<tr>
 												<th scope="row">Status:</th>
 												<td>
-													<span class="badge badge-soft-danger" th:if="${truck.state == 'DECOMMISSIONED'}">DECOMMISSIONED</span>
-													<span class="badge badge-soft-info" th:if="${truck.state == 'COMMISSIONED'}">COMMISSIONED</span>
+													<span class="badge badge-soft-danger" th:if="${truck.state == 'NON-OPERATIONAL'}">NON-OPERATIONAL</span>
+													<span class="badge badge-soft-info" th:if="${truck.state == 'OPERATIONAL'}">OPERATIONAL</span>
 													<span class="badge badge-soft-warning" th:if="${truck.state == 'UNDER MAINTENANCE'}">UNDER MAINTENANCE</span>
 													<span class="badge badge-soft-success" th:if="${truck.state == 'AVAILABLE'}"> AVAILABLE</span>
 												</td>

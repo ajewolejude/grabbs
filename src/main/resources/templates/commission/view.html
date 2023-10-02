@@ -205,6 +205,16 @@
 												<th scope="row">Cancellation Date:</th>
 												<td th:text="${#temporals.format(commission.cancellationDate, 'dd/MM/yyyy HH:mm')}"></td>
 											</tr>
+
+											<tr th:if="${commission.state == 'REJECTED'}">
+												<th scope="row">Rejection Comments:</th>
+												<td th:text="${commission.approvalComments}"></td>
+											</tr>
+
+											<tr th:if="${commission.state == 'REJECTED'}">
+												<th scope="row">Rejection Date:</th>
+												<td th:text="${#temporals.format(commission.rejectionDate, 'dd/MM/yyyy HH:mm')}"></td>
+											</tr>
 											</tbody>
 										</table>
 									</div>

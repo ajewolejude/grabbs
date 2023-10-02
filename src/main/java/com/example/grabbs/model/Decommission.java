@@ -58,4 +58,6 @@ public class Decommission {
     private LocalDateTime completionDate;
 
     private LocalDateTime cancellationDate;
+
+    private LocalDateTime rejectionDate;
 }

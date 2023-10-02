@@ -85,13 +85,6 @@
 
 
 										<div class="mb-3">
-											<label for="model" class="form-label">Model</label>
-											<input type="text" class="form-control" id="model" name="model" th:field="*{model}" placeholder="Enter model" required>
-											<p th:errors="*{model}" class="text-danger" th:if="${#fields.hasErrors('model')}"></p>
-										</div>
-
-
-										<div class="mb-3">
 											<label for="size" class="form-label">Tyre Size</label>
 											<select class="form-select" id="size" name="size" required>
 												<option value="" selected disabled>Select a tyre size</option>
@@ -141,7 +134,7 @@
 
 										<div class="mb-3">
 											<label for="treadDepth" class="form-label">Tread Depth</label>
-											<input type="number" min="0" class="form-control" id="treadDepth" name="model" th:field="*{treadDepth}" placeholder="Enter tread depth" required>
+											<input type="number" min="0" class="form-control" id="treadDepth" name="treadDepth" th:field="*{treadDepth}" placeholder="Enter tread depth" required>
 											<p th:errors="*{treadDepth}" class="text-danger" th:if="${#fields.hasErrors('treadDepth')}"></p>
 										</div>
 
@@ -161,9 +154,16 @@
 
 										<div class="mb-3">
 											<label for="odometer" class="form-label">Odometer</label>
-											<input type="number" min="0" class="form-control" id="odometer" name="odometer" th:field="*{odometer}" placeholder="Enter odometer reading" required>
+											<input type="number" min="0" class="form-control" id="odometer" name="odometer" th:field="*{odometer}" placeholder="Enter odometer reading">
 											<p th:errors="*{odometer}" class="text-danger" th:if="${#fields.hasErrors('odometer')}"></p>
 										</div>
+
+
+										<div class="mb-3">
+											<label for="expectedLifeSpanOdometer" class="form-label">Expected Lifecycle Odometer</label>
+											<input type="number" min="0" class="form-control" id="expectedLifeSpanOdometer" name="expectedLifeSpanOdometer" th:field="*{expectedLifeSpanOdometer}" placeholder="Enter expected lifecycle odometer reading" required>
+											<p th:errors="*{expectedLifeSpanOdometer}" class="text-danger" th:if="${#fields.hasErrors('expectedLifeSpanOdometer')}"></p>
+
 
 										<div class="mb-3">
 											<label for="state" class="form-label">Status</label>
@@ -193,10 +193,9 @@
 										</p>
 
 										<div class="mb-3">
-											<input id="files" type="file" name="files" multiple="multiple" />
+											<input id="files" type="file" class="form-control form-control-md" name="files" multiple="multiple" />
 											<p th:errors="*{file}" class="text-danger" th:if="${#fields.hasErrors('file')}"></p>
 										</div>
-
 										<div class="mt-4 d-grid">
 											<button class="btn btn-primary waves-effect waves-light" type="submit">Add Tyre</button>
 										</div>

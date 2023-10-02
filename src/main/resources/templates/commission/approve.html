@@ -113,11 +113,11 @@
 																<ul class="dropdown-menu" aria-labelledby="defaultDropdown">
 																	<li><a class="dropdown-item"  th:href="@{'/commission/view/' + ${commission.id}}">View</a></li>
 																	<li sec:authorize="hasAnyRole('ADMIN','HOO')">
-																		<a class="dropdown-item" th:if="${commission.state == 'SUBMITTED'}" th:href="@{'approve/' + ${commission.id}}">Approve</a>
-																		<a class="dropdown-item" th:if="${commission.state == 'APPROVED'}" th:href="@{'complete/' + ${commission.id}}">Complete</a>
+																		<a class="dropdown-item" th:if="${commission.state == 'SUBMITTED'}" th:href="@{'/commission/approve/' + ${commission.id}}">Approve</a>
+																		<a class="dropdown-item" th:if="${commission.state == 'APPROVED'}" th:href="@{'/commission/complete/' + ${commission.id}}">Complete</a>
 																	</li>
 
-																	<li><a class="dropdown-item"  th:href="@{'cancel/' + ${commission.id}}">Cancel</a></li>
+																	<li><a class="dropdown-item"  th:href="@{'/commission/cancel/' + ${commission.id}}">Cancel</a></li>
 
 																</ul>
 															</div>
@@ -182,11 +182,11 @@
 																<ul class="dropdown-menu" aria-labelledby="defaultDropdown1">
 																	<li><a class="dropdown-item"  th:href="@{'/decommission/view/' + ${decommission.id}}">View</a></li>
 																	<li sec:authorize="hasAnyRole('ADMIN','HOO')">
-																		<a class="dropdown-item" th:if="${decommission.state == 'SUBMITTED'}" th:href="@{'approve/' + ${decommission.id}}">Approve</a>
-																		<a class="dropdown-item" th:if="${decommission.state == 'APPROVED'}" th:href="@{'complete/' + ${decommission.id}}">Complete</a>
+																		<a class="dropdown-item" th:if="${decommission.state == 'SUBMITTED'}" th:href="@{'/decommission/approve/' + ${decommission.id}}">Approve</a>
+																		<a class="dropdown-item" th:if="${decommission.state == 'APPROVED'}" th:href="@{'/decommission/complete/' + ${decommission.id}}">Complete</a>
 																	</li>
 
-																	<li><a class="dropdown-item"  th:href="@{'cancel/' + ${decommission.id}}">Cancel</a></li>
+																	<li><a class="dropdown-item"  th:href="@{'/decommission/cancel/' + ${decommission.id}}">Cancel</a></li>
 
 																</ul>
 															</div>
@@ -249,7 +249,7 @@
 													<td th:text="${commission.responsibleOfficer}"></td>
 												</tr>
 												<tr>
-													<th scope="row">Initial Comments:</th>
+													<th scope="row">TO Comments:</th>
 													<td th:text="${commission.initialComments}"></td>
 												</tr>
 												<tr>
@@ -273,7 +273,7 @@
 										<br>
 
 										<div class="mb-3">
-											<label for="approvalComments" class="form-label">Approval Comments</label>
+											<label for="approvalComments" class="form-label">HOO Comments</label>
 											<textarea type="text" required class="form-control" id="approvalComments" name="approvalComments" th:field="*{approvalComments}" placeholder="Enter comments"></textarea>
 											<p th:errors="*{approvalComments}" class="text-danger" th:if="${#fields.hasErrors('approvalComments')}"></p>
 										</div>
@@ -283,9 +283,13 @@
 										<!-- Add more fields for other properties -->
 										<!-- For example, VIN, Make, Model, Brand, Year, Odometer, etc. -->
 
-										<div class="mt-4 d-grid">
-											<button class="btn btn-primary waves-effect waves-light" type="submit">Approve</button>
+										<div class="text-center mt-3">
+											<button name="action" value="reject" type="submit"  class="btn btn-danger waves-effect waves-light ml-2" >Reject</button>
+											<button name="action" value="approve" type="submit" class="btn btn-primary waves-effect waves-light ml-2">Approve</button>
 										</div>
+<!--										<div class="mt-4 d-grid">-->
+<!--											<button class="btn btn-primary waves-effect waves-light" type="submit">Approve</button>-->
+<!--										</div>-->
 									</form>
 								</div>
 							</div>

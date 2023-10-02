@@ -59,4 +59,6 @@ public class Commission {
     private LocalDateTime completionDate;
 
     private LocalDateTime cancellationDate;
+
+    private LocalDateTime rejectionDate;
 }

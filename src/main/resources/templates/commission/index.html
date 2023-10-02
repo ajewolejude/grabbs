@@ -141,6 +141,13 @@
 													aria-label="Close"></button>
 										</div>
 									</div>
+									<div th:if="${param.rejected}">
+										<div class="alert alert-info alert-dismissible fade show" role="alert">
+											You have successfully rejected a commission request!
+											<button type="button" class="btn-close" data-bs-dismiss="alert"
+													aria-label="Close"></button>
+										</div>
+									</div>
 									<table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
 										<thead>
 										<tr>
@@ -164,6 +171,7 @@
 											<td th:text="${commission.dateOfCommissioning}"></td>
 											<td th:text="${commission.odometer}"></td>
 											<td >
+												<span class="badge badge-soft-danger" th:if="${commission.state == 'REJECTED'}">REJECTED</span>
 												<span class="badge badge-soft-danger" th:if="${commission.state == 'CANCELLED'}">CANCELLED</span>
 												<span class="badge  badge-soft-warning" th:if="${commission.state == 'SUBMITTED'}">SUBMITTED</span>
 												<span class="badge badge-soft-info" th:if="${commission.state == 'COMPLETED'}">COMPLETED</span>

@@ -91,7 +91,7 @@
 
 										<div class="mb-3">
 											<label for="brand" class="form-label">Brand</label>
-											<select class="form-select" id="brand" name="brand" required>
+											<select class="form-select" id="brand" name="brand" th:field="*{brand}"  required>
 												<option value="" selected disabled>Select a truck brand</option>
 												<option th:each="brand : ${brands}" th:value="${brand.brandName}" th:text="${brand.brandName}"></option>
 												<!-- Add more popular truck makes as needed -->
@@ -129,9 +129,9 @@
 											<select class="form-select" id="state" name="state" th:field="*{state}" required>
 												<option value="" selected disabled>Select a truck status</option>
 												<option value="AVAILABLE">AVAILABLE</option>
-												<option value="COMMISSIONED">COMMISSIONED</option>
+												<option value="OPERATIONAL">OPERATIONAL</option>
 												<option value="UNDER MAINTENANCE">UNDER MAINTENANCE</option>
-												<option value="DECOMMISSIONED">DECOMMISSIONED</option>
+												<option value="NON-OPERATIONAL">NON-OPERATIONAL</option>
 											</select>
 											<p th:errors="*{state}" class="text-danger" th:if="${#fields.hasErrors('state')}"></p>
 										</div>

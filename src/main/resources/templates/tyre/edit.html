@@ -82,12 +82,6 @@
 										</div>
 
 
-										<div class="mb-3">
-											<label for="model" class="form-label">Model</label>
-											<input type="text" class="form-control" id="model" name="model" th:field="*{model}" placeholder="Enter model" required>
-											<p th:errors="*{model}" class="text-danger" th:if="${#fields.hasErrors('model')}"></p>
-										</div>
-
 
 										<div class="mb-3">
 											<label for="size" class="form-label">Tyre Size</label>
@@ -139,14 +133,14 @@
 
 										<div class="mb-3">
 											<label for="treadDepth" class="form-label">Tread Depth</label>
-											<input type="number" min="0" class="form-control" id="treadDepth" name="model" th:field="*{treadDepth}" placeholder="Enter tread depth" required>
+											<input type="number" min="0" class="form-control" id="treadDepth" name="treadDepth" th:field="*{treadDepth}" placeholder="Enter tread depth" required>
 											<p th:errors="*{treadDepth}" class="text-danger" th:if="${#fields.hasErrors('treadDepth')}"></p>
 										</div>
 
 
 										<div class="mb-3">
 											<label for="purchaseDate" class="form-label">Purchase Date</label>
-											<input type="date" class="form-control" id="purchaseDate" name="manufactureDate" th:field="*{purchaseDate}" placeholder="Enter purchase date" required>
+											<input type="date" class="form-control" id="purchaseDate" name="purchaseDate" th:field="*{purchaseDate}" placeholder="Enter purchase date" required>
 											<p th:errors="*{purchaseDate}" class="text-danger" th:if="${#fields.hasErrors('purchaseDate')}"></p>
 										</div>
 
@@ -186,7 +180,7 @@
 
 
 										<!-- Add more fields for other properties -->
-										<!-- For example, VIN, Make, Model, Brand, Year, Odometer, etc. -->
+										<!-- For example, VIN, Make, Brand, Year, Odometer, etc. -->
 
 										<div class="mt-4 d-grid">
 											<button class="btn btn-primary waves-effect waves-light" type="submit">Edit Tyre</button>
