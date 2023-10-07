@@ -6,15 +6,7 @@
 <head>
 	<title>Dashboard | Skote - Admin & Dashboard Template</title>
 </head>
-<th:block layout:fragment="pagecss">
-	<!-- DataTables -->
-	<link th:href="@{/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css}" rel="stylesheet" type="text/css" />
-	<link th:href="@{/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css}" rel="stylesheet"
-		  type="text/css" />
-
-	<!-- Responsive datatable examples -->
-	<link th:href="@{/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css}" rel="stylesheet"
-		  type="text/css" />
+<th:block layout:fragment="pageccss">
 
 </th:block>
 <body>
@@ -44,8 +36,8 @@
 												<p>Grabbs Plus Dashboard</p>
 
 												<ul class="ps-3 mb-0">
-													<li class="py-1" id="noOfTruck">100 Trucks</li>
-													<li class="py-1" id="noOfTyre">400 Tyres</li>
+													<li class="py-1" id="noOfTruck"> - Trucks</li>
+													<li class="py-1" id="noOfTyre"> - Tyres</li>
 												</ul>
 											</div>
 										</div>
@@ -231,28 +223,28 @@
 												<div class="mt-4">
 													<p class="mb-2 text-truncate"><i
 															class="mdi mdi-circle text-primary me-1"></i> Available </p>
-													<h5 id="noOfAvailable">150</h5>
+													<h5 id="noOfAvailable">-</h5>
 												</div>
 											</div>
 											<div class="col-3">
 												<div class="mt-4">
 													<p class="mb-2 text-truncate"><i
 															class="mdi mdi-circle text-success me-1"></i> Commissioned </p>
-													<h5 id="noOfCommissioned">163</h5>
+													<h5 id="noOfCommissioned">-</h5>
 												</div>
 											</div>
 											<div class="col-3">
 												<div class="mt-4">
 													<p class="mb-2 text-truncate"><i
 															class="mdi mdi-circle text-danger me-1"></i> Decommissioned </p>
-													<h5 id="noOfDecommissioned">32</h5>
+													<h5 id="noOfDecommissioned">-</h5>
 												</div>
 											</div>
 											<div class="col-3">
 												<div class="mt-4">
 													<p class="mb-2 text-truncate"><i
 															class="mdi mdi-circle text-info me-1"></i> Under Maintenance </p>
-													<h5 id="noOfUnderMaintenance">100</h5>
+													<h5 id="noOfUnderMaintenance">-</h5>
 												</div>
 											</div>
 										</div>
@@ -349,8 +341,6 @@
 	<!-- END layout-wrapper -->
 
 	<th:block layout:fragment="script">
-
-
 		<!-- Required datatable js -->
 		<script th:src="@{/assets/libs/datatables.net/js/jquery.dataTables.min.js}"></script>
 		<script th:src="@{/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js}"></script>
@@ -370,6 +360,13 @@
 
 		<!-- Datatable init js -->
 		<script th:src="@{/assets/js/pages/datatables.init.js}"></script>
+
+		<!-- dashboard init -->
+		<script th:src="@{/assets/js/pages/saas-dashboard.init.js}"></script>
+
+
+		<script th:src="@{/assets/libs/apexcharts/apexcharts.min.js}"></script>
+
 
 
 		<script th:inline="javascript">
@@ -472,12 +469,6 @@
 				});
 			});
 		</script>
-		<script th:src="@{/assets/libs/apexcharts/apexcharts.min.js}"></script>
-		<!-- dashboard init -->
-		<script th:src="@{/assets/js/pages/saas-dashboard.init.js}"></script>
-
-		<!-- apexcharts init -->
-		<script th:src="@{/assets/js/pages/apexcharts.init.js}"></script>
 
 	</th:block>
 

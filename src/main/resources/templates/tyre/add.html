@@ -163,7 +163,7 @@
 											<label for="expectedLifeSpanOdometer" class="form-label">Expected Lifecycle Odometer</label>
 											<input type="number" min="0" class="form-control" id="expectedLifeSpanOdometer" name="expectedLifeSpanOdometer" th:field="*{expectedLifeSpanOdometer}" placeholder="Enter expected lifecycle odometer reading" required>
 											<p th:errors="*{expectedLifeSpanOdometer}" class="text-danger" th:if="${#fields.hasErrors('expectedLifeSpanOdometer')}"></p>
-
+										</div>
 
 										<div class="mb-3">
 											<label for="state" class="form-label">Status</label>

@@ -1,13 +1,7 @@
 package com.example.grabbs.controller;
 
-import com.example.grabbs.model.Attachment;
-import com.example.grabbs.model.Brand;
-import com.example.grabbs.model.Truck;
-import com.example.grabbs.model.Tyre;
-import com.example.grabbs.service.AttachmentService;
-import com.example.grabbs.service.BrandService;
-import com.example.grabbs.service.TyreService;
-import com.example.grabbs.service.UserServiceImpl;
+import com.example.grabbs.model.*;
+import com.example.grabbs.service.*;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,6 +30,9 @@ public class TyreController {
 
     @Autowired
     private BrandService brandService;
+
+    @Autowired
+    private ActionService actionService;
 
     @Autowired
     private AttachmentService attachmentService;
@@ -128,7 +125,7 @@ public class TyreController {
             model.addAttribute("tyre", tyre);
             model.addAttribute("attachments", attachments);
             model.addAttribute("template", "layout");
-            model.addAttribute("title", "Tyre");
+            model.addAttribute("title", "View Tyre - "+ tyre.getTakId());
             model.addAttribute("item", "View");
             return "tyre/view";
         } else {
@@ -142,7 +139,10 @@ public class TyreController {
     public String showEditTyrePage(@PathVariable Long id, Model model) {
         Optional<Tyre> tyre = tyreService.findTyreById(id);
 
+
         if (tyre.isPresent()) {
+            List<Brand> brands = brandService.getAllBrandsByTypeAndState("Tyre","active");
+            model.addAttribute("brands", brands);
             model.addAttribute("tyre", tyre.get());
             model.addAttribute("template", "layout");
             model.addAttribute("title", "Tyre");
@@ -158,8 +158,6 @@ public class TyreController {
     @PostMapping("/update")
     public String updateTyre(@ModelAttribute Tyre tyre, BindingResult result,
                              Model model) throws NotFoundException {
-        tyreService.update(tyre);
-
         Tyre existingTyreByVin = tyreService.findTyreBySerialNumber(tyre.getSerialNumber());
 
 
@@ -197,6 +195,34 @@ public class TyreController {
             //return new ResponseEntity<>("Error creating tyre", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
+    @PostMapping("/action")
+    public String createAction(@Valid @ModelAttribute("action") Action action) {
+
+        try {
+            // Set created date to the current date and time
+            action.setResponsibleOfficer(userService.getCurrentUserEmail());
+            action.setCreatedDate(LocalDateTime.now());
+
+            System.out.println(action);
+            // Save the action entity to the database
+            actionService.save(action);
+            Tyre tyre = tyreService.findTyreById(action.getTyre().getId()).get();
+            double newExpectedLifecycle = Double.sum(tyre.getExpectedLifeSpanOdometer(), action.getExpectedLifeSpanIncreaseOdometer());
+            tyre.setExpectedLifeSpanOdometer(newExpectedLifecycle);
+            tyreService.update(tyre);
+            if("Patching".equals(action.getType())){
+                return "redirect:/truck/view/" +action.getTruck().getId() + "?patched";
+            }else{
+                return "redirect:/truck/view/" +action.getTruck().getId() + "?regrooved";
+            }
+        } catch (Exception e) {
+            return "truck/view";
+            //return new ResponseEntity<>("Error creating action", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
 
 

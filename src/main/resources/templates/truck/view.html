@@ -23,7 +23,104 @@
 	<!-- Start right Content here -->
 	<!-- ============================================================== -->
 	<div layout:fragment="content">
+
 		<div class="main-content">
+
+			<!-- Large modal example -->
+			<div class="modal fade" id="actionHistoryModal" tabindex="-1" role="dialog"
+				 aria-labelledby="myLargeModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="myLargeModalLabel">Action Records</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+									aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="table-responsive">
+								<table class="table table-bordered dt-responsive nowrap w-100" id="actionTable">
+									<thead>
+									<tr>
+										<th>S/N</th>
+										<th>Action Type</th>
+										<th>Odometer</th>
+										<th>Actual PSI</th>
+										<th>Rec. PSI</th>
+										<th>Odo. Inc.</th>
+										<th>Date</th>
+										<!-- Add more table headers as needed -->
+									</tr>
+									</thead>
+									<tbody id="actionTableBody">
+									<!-- Table rows will be dynamically added here using JavaScript -->
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="modal fade" id="actionModal" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="modal-title"></h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<form class="needs-validation" method="post" role="form" th:action="@{/tyre/action}" th:object="${action}">
+						<div class="modal-body">
+								<div th:if="${param.error}">
+									<div class="alert alert-danger">Try again later</div>
+								</div>
+
+
+
+							<div class="mb-3">
+								<input hidden type="number" class="form-control" id="odometerBeforeAction" name="odometerBeforeAction" th:value="${truck.odometer}" th:field="*{odometerBeforeAction}" required>
+								<input hidden type="text" class="form-control" id="type" name="type" th:field="*{type}" placeholder="Enter type" required>
+								<input hidden type="text" class="form-control" id="tyre_id" name="tyre_id" th:field="*{tyre}" value="patch" placeholder="Enter tyre id" required>
+								<input hidden type="text" class="form-control" id="truck_id" name="truck_id" th:field="*{truck}" value="patch" placeholder="Enter truck id" required>
+							</div>
+
+							<div class="mb-3">
+									<label for="expectedLifeSpanIncreaseOdometer" class="form-label">Expected Odometer LifeCycle Increase</label>
+									<input type="number"  min="0" class="form-control" id="expectedLifeSpanIncreaseOdometer" name="expectedLifeSpanIncreaseOdometer" th:field="*{expectedLifeSpanIncreaseOdometer}" placeholder="Enter the odometer increase" required>
+									<p th:errors="*{expectedLifeSpanIncreaseOdometer}" class="text-danger" th:if="${#fields.hasErrors('expectedLifeSpanIncreaseOdometer')}"></p>
+								</div>
+
+								<div class="mb-3">
+									<label for="actualPSI" class="form-label">Actual. PSI.</label>
+									<input type="number"  min="0" class="form-control" id="actualPSI" name="actualPSI" th:field="*{actualPSI}" placeholder="Enter Actual PSI" required>
+									<p th:errors="*{actualPSI}" class="text-danger" th:if="${#fields.hasErrors('actualPSI')}"></p>
+								</div>
+
+								<div class="mb-3">
+									<label for="recPSI" class="form-label">Rec. PSI.</label>
+									<input type="number"  min="0" class="form-control" id="recPSI" name="recPSI" th:field="*{recPSI}" placeholder="Enter Recommended PSI" required>
+									<p th:errors="*{recPSI}" class="text-danger" th:if="${#fields.hasErrors('recPSI')}"></p>
+								</div>
+
+								<div class="mb-3">
+									<label for="comments" class="form-label">Comments</label>
+									<textarea type="text"  class="form-control" id="comments" name="comments" th:field="*{comments}" placeholder="Enter comments"></textarea>
+									<p th:errors="*{comments}" class="text-danger" th:if="${#fields.hasErrors('comments')}"></p>
+								</div>
+
+
+							<!-- Add other fields as needed -->
+						</div>
+						<div class="modal-footer">
+							<button type="button" id="closeModalButton" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+							<button class="btn btn-primary waves-effect waves-light" type="submit" >Submit</button>
+						</div>
+
+						</form>
+					</div>
+				</div>
+			</div>
+
 
 			<div class="page-content">
 				<div class="container-fluid">
@@ -34,6 +131,100 @@
 
 					<div class="row">
 						<div class="col-8 ">
+							<div class="row">
+
+								<div class="col-12 ">
+									<div class="card">
+										<div class="card-body border-bottom">
+											<div class="d-flex align-items-center">
+												<h5 class="mb-0 card-title flex-grow-1">Assigned Tyres</h5>
+												<div class="flex-shrink-0">
+													<a type="button" class="btn btn-primary waves-effect waves-light"
+													   href="/commission/add">Commission a new tyre</a>
+												</div>
+											</div>
+										</div>
+										<div class="card-body">
+											<div th:if="${param.patched}">
+												<div class="alert alert-info alert-dismissible fade show" role="alert">
+													You have successfully patched a tyre!
+													<button type="button" class="btn-close" data-bs-dismiss="alert"
+															aria-label="Close"></button>
+												</div>
+											</div>
+											<div th:if="${param.regrooved}">
+												<div class="alert alert-info alert-dismissible fade show" role="alert">
+													You have successfully re-grooved a tyre!
+													<button type="button" class="btn-close" data-bs-dismiss="alert"
+															aria-label="Close"></button>
+												</div>
+											</div>
+											<div>
+												<table id="datatable-buttons-2" class="table table-bordered dt-responsive nowrap w-100">
+													<thead>
+													<tr>
+														<th>No</th>
+														<th>TAK ID</th>
+														<th>Brand</th>
+														<th>Size</th>
+														<th>Position</th>
+														<th>Odometer</th>
+														<th>LifeSpan (Odo.) </th>
+														<th>Action</th>
+													</tr>
+													</thead>
+													<tbody>
+													<!-- Use Thymeleaf to iterate over the tyres -->
+													<tr th:each="tyre, iterStat : ${tyres}">
+														<td th:text="${iterStat.count}"></td>
+														<td th:text="${tyre.takId}"></td>
+														<td th:text="${tyre.brand}"></td>
+														<td th:text="${tyre.size}"></td>
+														<td th:text="${tyre.position}"></td>
+														<td th:text="${tyre.odometer}"></td>
+														<td th:text="${tyre.expectedLifeSpanOdometer}"></td>
+														<td>
+															<div class="btn-group">
+																<button class="btn btn-secondary dropdown-toggle" type="button"
+																		id="defaultDropdown3" data-bs-toggle="dropdown" data-bs-auto-close="true"
+																		aria-expanded="false">
+																	Actions <i class="mdi mdi-chevron-down"></i>
+																</button>
+																<ul class="dropdown-menu" aria-labelledby="defaultDropdown3">
+																	<li><a class="dropdown-item"  th:href="@{'/tyre/view/' + ${tyre.id}}">View</a></li>
+																	<li sec:authorize="hasAnyRole('ADMIN','HOO')">
+																		<a class="dropdown-item btn btn-primary waves-effect waves-light"
+																		   data-bs-toggle="modal" data-bs-target="#actionModal"
+																		   th:attr="onclick='populatePatchModal(\'' + ${tyre.id} + '\', \'' + ${truck.odometer} + '\', \'' + ${tyre.takId} + '\', \'' + ${truck.id} + '\')'">Patch</a>
+																	</li>
+																	<li sec:authorize="hasAnyRole('ADMIN','HOO')">
+																		<a class="dropdown-item btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#actionModal"
+																		   th:attr="onclick='populateRegrooveModal(\'' + ${tyre.id} + '\', \'' + ${truck.odometer} + '\', \'' + ${tyre.takId} + '\', \'' + ${truck.id} + '\')'">Regroove</a>
+																	</li>
+																	<div class="dropdown-divider"></div>
+																	<li>
+																		<a class="dropdown-item btn btn-primary waves-effect waves-light"
+																		   data-bs-toggle="modal" data-bs-target="#actionHistoryModal"
+																		   th:attr="onclick='populateActionHistoryModal(\'' + ${tyre.id} + '\', \'' + ${tyre.brand} + '\', \'' + ${tyre.takId} + '\')'">
+																		View Actions
+																	</a>
+																	</li>
+																	<li><a class="dropdown-item"  th:href="@{'/decommission/add/' + ${tyre.id}}">Decommission</a></li>
+
+																</ul>
+															</div>
+
+														</td>
+
+													</tr>
+													</tbody>
+												</table>
+											</div>
+
+										</div>
+									</div>
+								</div> <!-- end col -->
+							</div>
 							<div class="row">
 
 								<div class="col-12 ">
@@ -68,6 +259,7 @@
 														<td th:text="${commission.dateOfCommissioning}"></td>
 														<td th:text="${commission.odometer}"></td>
 														<td >
+															<span class="badge badge-soft-danger" th:if="${commission.state == 'REJECTED'}">REJECTED</span>
 															<span class="badge badge-soft-danger" th:if="${commission.state == 'CANCELLED'}">CANCELLED</span>
 															<span class="badge  badge-soft-warning" th:if="${commission.state == 'SUBMITTED'}">SUBMITTED</span>
 															<span class="badge badge-soft-info" th:if="${commission.state == 'COMPLETED'}">COMPLETED</span>
@@ -104,7 +296,6 @@
 								</div> <!-- end col -->
 							</div>
 							<div class="row">
-
 								<div class="col-12 ">
 									<div class="card">
 										<div class="card-body border-bottom">
@@ -137,6 +328,7 @@
 														<td th:text="${decommission.dateOfDecommissioning}"></td>
 														<td th:text="${decommission.odometer}"></td>
 														<td >
+															<span class="badge badge-soft-danger" th:if="${decommission.state == 'REJECTED'}">REJECTED</span>
 															<span class="badge badge-soft-danger" th:if="${decommission.state == 'CANCELLED'}">CANCELLED</span>
 															<span class="badge  badge-soft-warning" th:if="${decommission.state == 'SUBMITTED'}">SUBMITTED</span>
 															<span class="badge badge-soft-info" th:if="${decommission.state == 'COMPLETED'}">COMPLETED</span>
@@ -288,6 +480,102 @@
 
 		<!-- Datatable init js -->
 		<script th:src="@{/assets/js/pages/datatables.init.js}"></script>
+
+
+		<script th:inline="javascript">
+
+			$(document).ready(function() {
+				$('#closeModalButton').on('click', function() {
+					clearModalContent();
+				});
+
+				// Function to clear modal content
+				function clearModalContent() {
+					// Assuming you have elements with IDs 'modalField1', 'modalField2', etc.
+					$('#tyre_id').val('');
+					$('#odometerBeforeAction').val('');
+					$('#type').val('');
+					$('#expectedLifeSpanIncreaseOdometer').val('');
+					$('#actualPSI').val('');
+					$('#recPSI').val('');
+					$('#comments').val('');
+					// Add more lines for other modal fields
+
+					// Alternatively, you can clear all fields inside the modal form
+					// $('#myModalForm').trigger('reset');
+				}
+			});
+
+
+			function populatePatchModal(id, truckOdometer, takId, truckId) {
+				// Update the modal content with the selected tyre data
+				document.getElementById('modal-title').innerText = "Patch Tyre";
+				document.getElementById('tyre_id').value = id;
+				document.getElementById('odometerBeforeAction').value = truckOdometer;
+				document.getElementById('truck_id').value = truckId;
+				document.getElementById('type').value = "Patching";
+				console.log("takId: ", takId)
+			}
+
+			function populateRegrooveModal(id, truckOdometer, takId, truckId) {
+				// Update the modal content with the selected tyre data
+				document.getElementById('modal-title').innerText = "Re-groove Tyre";
+				document.getElementById('tyre_id').value = id;
+				document.getElementById('odometerBeforeAction').value = truckOdometer;
+				document.getElementById('truck_id').value = truckId;
+				document.getElementById('type').value = "Regrooving";
+				console.log("takId: ", takId)
+			}
+
+			function populateActionHistoryModal(id, brand, takId) {
+				var actionTable = $('#actionTable').DataTable();
+
+				// Use AJAX to fetch tyre data from the server
+				$.ajax({
+					url: '/api/tyre/' + id + "/actions",  // Replace with your actual endpoint
+					method: 'GET',
+					dataType: 'json',
+					success: function (actionsData) {
+						// Assuming you have a 'tyreData' object with 'actions'
+						console.log("here: ");
+						console.log("actions: ", actionsData);
+						document.getElementById('myLargeModalLabel').innerText = 'Action Records for Tyre ' + brand + ' ' + takId;
+
+						// Clear existing data in the DataTable
+						actionTable.clear();
+
+						var serialNumber = 1;
+						// Iterate over actions and dynamically generate table rows
+						actionsData.forEach(function (action) {
+							var row = [
+								serialNumber++,
+								action.type,
+								action.odometerBeforeAction,
+								action.actualPSI,
+								action.recPSI,
+								action.expectedLifeSpanIncreaseOdometer,
+								action.createdDate.substring(0, 10),
+								// Add more columns as needed
+							];
+							// Add the new row to DataTable
+							actionTable.row.add(row);
+						});
+
+						// Draw the DataTable to reflect the changes
+						actionTable.draw();
+
+						// Open the modal
+						$('#actionHistoryModal').modal('show');
+					},
+					error: function (error) {
+						console.error('failure:');
+						console.error('Error fetching tyre data:', error);
+					}
+				});
+			}
+
+		</script>
+
 	</th:block>
 
 </body>

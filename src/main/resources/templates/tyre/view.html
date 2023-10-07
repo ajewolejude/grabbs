@@ -85,6 +85,12 @@
 												<th scope="row">Odometer:</th>
 												<td th:text="${tyre.odometer}"></td>
 											</tr>
+											<tr>
+												<th scope="row">Expected Lifecycle Odometer:</th>
+												<td th:text="${tyre.expectedLifeSpanOdometer}"></td>
+											</tr>
+
+
 											<tr th:if="${tyre.state == 'COMMISSIONING'}">
 												<th scope="row">Commissioning Date:</th>
 												<td th:text="${tyre.commissioningDate}"></td>

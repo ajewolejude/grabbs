@@ -39,7 +39,7 @@
 										<h5 class="font-size-14 mb-0">Submitted</h5>
 									</div>
 									<div class="text-muted mt-4">
-										<span id="numberOfSubmitted">10</span>
+										<span id="numberOfSubmitted">-</span>
 									</div>
 								</div>
 							</div>
@@ -58,7 +58,7 @@
 										<h5 class="font-size-14 mb-0">Approved</h5>
 									</div>
 									<div class="text-muted mt-4">
-										<span id="numberOfApproved">10</span>
+										<span id="numberOfApproved">-</span>
 
 									</div>
 								</div>
@@ -78,7 +78,7 @@
 										<h5 class="font-size-14 mb-0">Completed</h5>
 									</div>
 									<div class="text-muted mt-4">
-										<span id="numberOfCompleted" >4</span>
+										<span id="numberOfCompleted" >-</span>
 
 
 									</div>
@@ -98,7 +98,7 @@
 										<h5 class="font-size-14 mb-0">Cancelled</h5>
 									</div>
 									<div class="text-muted mt-4">
-										<span id="numberOfCancelled" >4</span>
+										<span id="numberOfCancelled" >-</span>
 
 
 									</div>
@@ -362,14 +362,6 @@
 	<!-- END layout-wrapper -->
 
 	<th:block layout:fragment="script">
-		<script th:src="@{/assets/libs/apexcharts/apexcharts.min.js}"></script>
-		<!-- dashboard init -->
-		<script th:src="@{/assets/js/pages/saas-dashboard.init.js}"></script>
-
-		<!-- apexcharts init -->
-		<script th:src="@{/assets/js/pages/apexcharts.init.js}"></script>
-
-
 		<!-- Required datatable js -->
 		<script th:src="@{/assets/libs/datatables.net/js/jquery.dataTables.min.js}"></script>
 		<script th:src="@{/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js}"></script>
@@ -390,11 +382,10 @@
 		<!-- Datatable init js -->
 		<script th:src="@{/assets/js/pages/datatables.init.js}"></script>
 
-
 		<script th:inline="javascript">
 			$(document).ready(function() {
 				$.ajax({
-					url: '/dashboard-rest/commission',
+					url: '/dashboard-rest/decommission',
 					type: 'GET',
 					success: function(data) {
 						// Update the frontend with fetched data

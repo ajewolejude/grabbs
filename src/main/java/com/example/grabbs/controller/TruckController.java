@@ -102,16 +102,18 @@ public class TruckController {
     public String viewTruckPage(@PathVariable Long id, Model model) {
         Optional<Truck> truckOptional = truckService.getTruckById(id);
 
-        List<Commission> previousCommissions = commissionService.getByTruckId(id);
-        List<Decommission> previousDecommissions = decommissionService.getByTruckId(id);
+        List<Commission> previousCommissions = commissionService.getByTruckIdOrderByCreatedDateDesc(id);
+        List<Decommission> previousDecommissions = decommissionService.getByTruckIdOrderByCreatedDateDesc(id);
 
         if (truckOptional.isPresent()) {
             Truck truck = truckOptional.get();
+            model.addAttribute("tyres", truck.getTyres());
             model.addAttribute("truck", truck);
+            model.addAttribute("action", new Action());
             model.addAttribute("previousCommissions", previousCommissions);
             model.addAttribute("previousDecommissions", previousDecommissions);
             model.addAttribute("template", "layout");
-            model.addAttribute("title", "View Truck");
+            model.addAttribute("title", "View Truck - " + truck.getTakId());
             model.addAttribute("item", "View");
             return "truck/view";
         } else {

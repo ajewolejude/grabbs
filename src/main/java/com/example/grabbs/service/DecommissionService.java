@@ -74,9 +74,18 @@ public class DecommissionService {
     }
     public void complete(Decommission decommission) throws NotFoundException {
         Tyre existingTyre = tyreService.findTyreById(decommission.getTyre().getId()).get();
+
         // Step 2: Update the state attribute
         existingTyre.setState("UNDER MAINTENANCE");
+
+        //set the odometer when it was decommissioned
         existingTyre.setOdometer(decommission.getTruck().getOdometer());
+
+        //set the truck to null in the tyre
+        existingTyre.setTruck(null);
+
+        //remove the tyre from truck model
+        truckService.unassignTyre(decommission.getTruck().getId(), existingTyre);
 
         tyreService.update(existingTyre);
         decommission.setTyre(existingTyre);

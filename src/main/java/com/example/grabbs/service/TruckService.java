@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -64,6 +66,31 @@ public class TruckService{
         return truckRepository.save(existingTruck);
     }
 
+    public Truck assignTyre( Long truck_id, Tyre tyre) throws NotFoundException {
+        Truck existingTruck = truckRepository.findById(truck_id)
+                .orElseThrow(() -> new NotFoundException("Truck not found with id: " + truck_id));
+        List<Tyre> tyreList = existingTruck.getTyres();
+        tyreList.add(tyre);
+        existingTruck.setTyres(tyreList);
+
+        return truckRepository.save(existingTruck);
+    }
+
+    public Truck unassignTyre( Long truck_id, Tyre tyreToRemove) throws NotFoundException {
+        Truck existingTruck = truckRepository.findById(truck_id)
+                .orElseThrow(() -> new NotFoundException("Truck not found with id: " + truck_id));
+        List<Tyre> tyreInTruckList = existingTruck.getTyres();
+        // Using removeIf with a lambda expression
+        tyreInTruckList.removeIf(tyreInTruck ->
+                Objects.equals(tyreInTruck.getTakId(), tyreToRemove.getTakId()) &&
+                        Objects.equals(tyreInTruck.getSerialNumber(), tyreToRemove.getSerialNumber()));
+
+
+        existingTruck.setTyres(tyreInTruckList);
+
+        return truckRepository.save(existingTruck);
+    }
+
     public void delete(Long id) {
         if (!truckRepository.existsById(id)) {
             throw new IllegalArgumentException("Truck with ID " + id + " does not exist.");
@@ -81,4 +108,7 @@ public class TruckService{
     }
 
 
+    public Optional<Truck> findTruckById(Long id) {
+        return truckRepository.findById(id);
+    }
 }

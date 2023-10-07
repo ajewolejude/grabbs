@@ -6,14 +6,6 @@
 	<title th:text="${title} +' | Skote - Admin & Dashboard Template'"> </title>
 </head>
 <th:block layout:fragment="pagecss">
-	<!-- DataTables -->
-	<link th:href="@{/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css}" rel="stylesheet" type="text/css" />
-	<link th:href="@{/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css}" rel="stylesheet"
-		type="text/css" />
-
-	<!-- Responsive datatable examples -->
-	<link th:href="@{/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css}" rel="stylesheet"
-		type="text/css" />
 
 </th:block>
 
@@ -24,6 +16,42 @@
 	<!-- ============================================================== -->
 	<div layout:fragment="content">
 		<div class="main-content">
+
+			<!-- Large modal example -->
+			<div class="modal fade" id="actionHistoryModal" tabindex="-1" role="dialog"
+				 aria-labelledby="myLargeModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="myLargeModalLabel">Action Records</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+									aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="table-responsive">
+								<table class="table table-bordered dt-responsive nowrap w-100" id="actionTable">
+									<thead>
+									<tr>
+										<th>S/N</th>
+										<th>Action Type</th>
+										<th>Odometer</th>
+										<th>Actual PSI</th>
+										<th>Rec. PSI</th>
+										<th>Odo. Inc.</th>
+										<th>Date</th>
+										<!-- Add more table headers as needed -->
+									</tr>
+									</thead>
+									<tbody id="actionTableBody">
+									<!-- Table rows will be dynamically added here using JavaScript -->
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
 			<div class="page-content">
 				<div class="container-fluid">
 					<!-- start page title -->
@@ -88,7 +116,13 @@
 														<li><a class="dropdown-item"  th:href="@{'/tyre/view/' + ${tyre.id}}">View</a></li>
 														<li><a class="dropdown-item"  th:href="@{'/tyre/edit/' + ${tyre.id}}">Edit</a></li>
 														<div class="dropdown-divider"></div>
-														<li><a class="dropdown-item" th:href="@{'/tyre/delete/' + ${tyre.id}}">Delete</a></li>
+														<li>
+															<a class="dropdown-item btn btn-primary waves-effect waves-light"
+															   data-bs-toggle="modal" data-bs-target="#actionHistoryModal"
+															   th:attr="onclick='populateActionHistoryModal(\'' + ${tyre.id} + '\', \'' + ${tyre.brand} + '\', \'' + ${tyre.takId} + '\')'">
+																View Actions
+															</a>
+														</li>
 													</ul>
 												</div>
 
@@ -136,6 +170,59 @@
 
 		<!-- Datatable init js -->
 		<script th:src="@{/assets/js/pages/datatables.init.js}"></script>
+
+		<script th:inline="javascript">
+
+			$(document).ready(function() {});
+
+
+			function populateActionHistoryModal(id, brand, takId) {
+				var actionTable = $('#actionTable').DataTable();
+
+				// Use AJAX to fetch tyre data from the server
+				$.ajax({
+					url: '/api/tyre/' + id + "/actions",  // Replace with your actual endpoint
+					method: 'GET',
+					dataType: 'json',
+					success: function (actionsData) {
+						// Assuming you have a 'tyreData' object with 'actions'
+						console.log("here: ");
+						console.log("actions: ", actionsData);
+						document.getElementById('myLargeModalLabel').innerText = 'Action Records for Tyre ' + brand + ' ' + takId;
+
+						// Clear existing data in the DataTable
+						actionTable.clear();
+
+						var serialNumber = 1;
+						// Iterate over actions and dynamically generate table rows
+						actionsData.forEach(function (action) {
+							var row = [
+								serialNumber++,
+								action.type,
+								action.odometerBeforeAction,
+								action.actualPSI,
+								action.recPSI,
+								action.expectedLifeSpanIncreaseOdometer,
+								action.createdDate.substring(0, 10),
+								// Add more columns as needed
+							];
+							// Add the new row to DataTable
+							actionTable.row.add(row);
+						});
+
+						// Draw the DataTable to reflect the changes
+						actionTable.draw();
+
+						// Open the modal
+						$('#actionHistoryModal').modal('show');
+					},
+					error: function (error) {
+						console.error('failure:');
+						console.error('Error fetching tyre data:', error);
+					}
+				});
+			}
+		</script>
 	</th:block>
 
 </body>

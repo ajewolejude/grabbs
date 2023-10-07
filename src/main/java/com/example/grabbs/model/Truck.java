@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -53,6 +54,9 @@ public class Truck
     private String state;
 
     private String comments;
+
+    @OneToMany(mappedBy = "truck", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Tyre> tyres;
 
     @Column(nullable=false)
     private LocalDateTime createdDate;

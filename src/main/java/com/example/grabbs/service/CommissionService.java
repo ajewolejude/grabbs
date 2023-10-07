@@ -77,11 +77,16 @@ public class CommissionService {
     }
     public void complete(Commission commission) throws NotFoundException {
         Tyre existingTyre = tyreService.findTyreById(commission.getTyre().getId()).get();
+
+
         // Step 2: Update the state attribute
         existingTyre.setState("COMMISSIONED");
         existingTyre.setOdometer(commission.getTruck().getOdometer());
-
+        existingTyre.setTruck(commission.getTruck());
         tyreService.update(existingTyre);
+
+        //assign tyre to truck in database
+        truckService.assignTyre(commission.getTruck().getId(), existingTyre);
         commission.setTyre(existingTyre);
         commission.setState("COMPLETED");
         commissionRepository.save(commission);

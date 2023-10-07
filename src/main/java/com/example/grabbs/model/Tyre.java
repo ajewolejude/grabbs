@@ -63,6 +63,14 @@ public class Tyre {
     @Column(nullable = false)
     private String state;
 
+
+    @ManyToOne
+    @JoinColumn(name = "truck_id")
+    private Truck truck;
+
+    @OneToMany(mappedBy = "tyre", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Action> actions;
+
     @Column(nullable=false)
     private LocalDateTime createdDate;
 

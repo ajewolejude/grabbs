@@ -166,7 +166,8 @@
 													<span class="badge badge-soft-danger" th:if="${decommission.state == 'CANCELLED'}">CANCELLED</span>
 													<span class="badge  badge-soft-warning" th:if="${decommission.state == 'SUBMITTED'}">SUBMITTED</span>
 													<span class="badge badge-soft-info" th:if="${decommission.state == 'COMPLETED'}">COMPLETED</span>
-													<span class="badge badge-soft-success" th:if="${decommission.state == 'APPROVED'}"> APPROVED</span>
+													<span class="badge badge-soft-success" th:if="${decommission.state == 'APPROVED'}">APPROVED</span>
+													<span class="badge badge-soft-danger" th:if="${decommission.state == 'REJECTED'}">REJECTED</span>
 												</td>
 											</tr>
 

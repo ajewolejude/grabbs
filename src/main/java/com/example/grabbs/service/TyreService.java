@@ -1,5 +1,6 @@
 package com.example.grabbs.service;
 
+import com.example.grabbs.model.Action;
 import com.example.grabbs.model.Tyre;
 import com.example.grabbs.repository.TyreRepository;
 import javassist.NotFoundException;
@@ -87,5 +88,9 @@ public class TyreService {
 
     public List<Tyre> findByStateOrderByBrandDesc(String state) {
         return tyreRepository.findByStateOrderByBrandDesc(state);
+    }
+
+    public List<Action> getActionsForTyre(Long id) {
+        return tyreRepository.findById(id).get().getActions();
     }
 }
